@@ -32,7 +32,7 @@ void init_buttons() { //NEED TO CHECK BUTTON PINS
 
 //global variables
 
-enum state_enum {Intro, PresentingSequence, Game, Lost, Win} state; // enum to describe state of system
+enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
 
 void main(){
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
