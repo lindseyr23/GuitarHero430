@@ -1,4 +1,4 @@
-#include <msp430.h> 
+#include <msp430.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include "rgb_interface.h"
@@ -131,7 +131,7 @@ void init_wdt(void)
     IE1 |= WDTIE;            // Enable WDT interrupt
 }
 
-//void ripple_notes()   not working when called into watchdog
+//void ripple_notes()   //not working when called into watchdog
 //{
 //    g_led1 = g_led2;
 //    g_led2 = g_led3;
@@ -276,12 +276,12 @@ void __attribute__ ((interrupt(WDT_VECTOR))) watchdog_timer (void)
              TA1CCR2 = 0; //spaces between note
              TA1CCR0 = 0; //update to new note
 
-             //reset
-//             green_next  = 0;
-//             red_next    = 0;
-//             yellow_next = 0;
-//             blue_next   = 0;
-//             orange_next = 0;
+             reset;
+             green_next  = 0;
+             red_next    = 0;
+             yellow_next = 0;
+             blue_next   = 0;
+             orange_next = 0;
              TA0CCR0 = 4000; //update to duration
          }
      //   next_note(green_next, red_next, yellow_next, blue_next, orange_next);
