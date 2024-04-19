@@ -47,8 +47,8 @@ void rgb_init_spi(void){ //initialize serial bus to drive RGB
     //COPI on p1.2, SCLK on p1.4
 //    P1SEL = BIT2 + BIT4;
 //    P1SEL2 = BIT2 + BIT4;
-    P1SEL = BIT5 + BIT7;
-    P1SEL2 = BIT5 + BIT7;
+    P1SEL |= BIT5 + BIT7;
+    P1SEL2 |= BIT5 + BIT7;
 
 	//implements SPI on B0 port
     UCB0CTL1=UCSWRST; //disable serial interface. reset take offline

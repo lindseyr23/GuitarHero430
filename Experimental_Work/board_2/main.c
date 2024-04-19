@@ -8,6 +8,7 @@
  */
 
 #define Q 10
+#define buffer 2
 
 
 
@@ -18,6 +19,14 @@ int yellow_colors[]= {0,0,0,1,0,0,0,1,0};
 int blue_colors[]  = {0,0,0,0,1,0,1,0,0};
 int orange_colors[]= {0,0,0,0,0,1,0,0,0};
 int songDuration[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+
+
+int green_colors_song1[] = {1,1,1,0,0,0,0,0,0};
+int red_colors_song1[]   = {0,0,0,1,1,1,0,0,1};
+int yellow_colors_song1[]= {0,0,0,0,0,0,0,1,0};
+int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0};
+int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0};
+int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
 extern const uint8_t green;
 extern const uint8_t red;
@@ -81,7 +90,6 @@ int o_led7;
 
 int button_press_detected;
 int strummer;
-
 int counter = 0;
 
 
@@ -101,7 +109,8 @@ int next = 0;
 extern int ready_for_next; //flag to be ready for next
 int note_change; // flag that note change occured
 int shift_leds_flag;
-
+int play_song1;
+int play_song2;
 void next_note(int green_next, int red_next, int yellow_next, int blue_next, int orange_next)
 {
     rgb_send_start();
@@ -201,32 +210,51 @@ void shift_leds(){
 
 int main(void)
 {
+    play_song1 = 0;
+    play_song2 = 0;
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
     rgb_init_spi();
     init_buttons();
     init_timerA();
 
-    state = Game;
+    state = Intro;
     shift_leds_flag = 0;
 
     _enable_interrupts();
 
     PlaySound(green_colors, red_colors, yellow_colors, blue_colors, orange_colors, songDuration, songLength);
 
+    // Set pin 2.7 to output to communicate accept_input
+    P2DIR |= BIT7;
+    // Set pin 2.1 to input to receive play_song1
+    P2DIR &= ~BIT1;
+    // Set pin 1.3 to input to receive play_song2
+    P1DIR &= ~BIT3;
+
     MusicInit();
-    PlaySong(1);
         //ways to change difficulty could be no need to change song array maybe?
         // if easy: next_note(green_next, red_next, yellow_next, 0, 0);
         // else if hard: next_note(green_next, red_next, yellow_next, blue_next, orange_next);
 
     while (1){
-        next_note(green_next, red_next, yellow_next, blue_next, orange_next);
-        if(shift_leds_flag){
-            shift_leds();
-            shift_leds_flag = 0;
+        if (state == Game){
+            next_note(green_next, red_next, yellow_next, blue_next, orange_next);
+            if(shift_leds_flag){
+                shift_leds();
+                shift_leds_flag = 0;
+            }
         }
-
+        else if (state == Intro){
+            if (play_song1 == 1){
+                state == Game;
+                // have code to assign the LEDs to the correct values here
+            }
+            else if (play_song2 == 1){
+                state == Game;
+                // have code to assign the LEDs to the correct values here
+            }
+        }
     }
 
 }
@@ -238,9 +266,69 @@ __interrupt void Timer_A(void)
     if (state == Game)
     {
         counter ++;
+        if (counter == songDuration[current_note] - buffer){
+            P2OUT |= BIT7; // send out message accept_input
+        }
+        if (counter == buffer){
+            P2OUT &= ~BIT7; // stop message accept_input
+        }
         if (counter > songDuration[current_note]){
             shift_leds_flag = 1;
             counter = 0;
         }
     }
+}
+
+// ISR for the inputs
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=PORT2_VECTOR
+__interrupt void playsong1(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
+#else
+#error Compiler not supported!
+#endif
+{
+        if(P2IFG & BIT1)//checks port 2.1 (playsong1)
+        {
+            if(P2IES & BIT1) { // falling edge detected - turning sound off
+                play_song1 = 0;
+                StopSong();
+                P2IES &= ~BIT1; // change edge to rising (button release)
+            } else {// rising edge detected - turning sound on
+                play_song1 = 1;
+                PlaySong(1);
+                P2IES |= BIT1;
+            }
+            P2IFG &= ~BIT1; // clear interrupt flag
+        }
+
+    __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
+}
+
+
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=PORT1_VECTOR
+__interrupt void playsong2(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
+#else
+#error Compiler not supported!
+#endif
+{
+        if(P1IFG & BIT3)//checks port 1.3 (play song2)
+        {
+            if(P1IES & BIT3){
+                play_song2 = 0;
+                StopSong();
+                P1IES &= ~BIT3; // change edge to rising (button release)
+            } else {// rising edge detected - turning sound on
+                play_song2 = 1;
+                PlaySong(2);
+                P1IES |= BIT3;
+            }
+            P1IFG &= ~BIT3; // clear interrupt flag
+        }
+
+    __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
 }
