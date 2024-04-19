@@ -111,6 +111,7 @@ int note_change; // flag that note change occured
 int shift_leds_flag;
 int play_song1;
 int play_song2;
+int stop_song;
 void next_note(int green_next, int red_next, int yellow_next, int blue_next, int orange_next)
 {
     rgb_send_start();
@@ -208,15 +209,37 @@ void shift_leds(){
 
 }
 
+void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) output, 1.3 (play_song2) output
+
+    P2DIR |= BIT7; // Set pin 2.7 to output to communicate accept_input
+    P2DIR &= ~BIT1; // Set pin 2.1 to input to receive play_song1
+    P1DIR &= ~BIT3; // Set pin 1.3 to input to receive play_song2
+
+    // listen for low to high transition to start the songs
+    P2IES &= ~BIT1;
+    P1IES &= ~BIT3;
+    // clear any pending interrupts
+    P2IFG &=  ~BIT1;
+    P1IFG &= ~BIT3;
+    // enable interrupts for these pins
+    P2IE |= BIT1;
+    P1IE |= BIT3;
+
+    P2REN |= BIT1;
+    P2OUT |= BIT1;
+}
+
 int main(void)
 {
     play_song1 = 0;
     play_song2 = 0;
+    stop_song = 0;
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
     rgb_init_spi();
     init_buttons();
     init_timerA();
+    init_board_communication();
 
     state = Intro;
     shift_leds_flag = 0;
@@ -225,13 +248,6 @@ int main(void)
 
     PlaySound(green_colors, red_colors, yellow_colors, blue_colors, orange_colors, songDuration, songLength);
 
-    // Set pin 2.7 to output to communicate accept_input
-    P2DIR |= BIT7;
-    // Set pin 2.1 to input to receive play_song1
-    P2DIR &= ~BIT1;
-    // Set pin 1.3 to input to receive play_song2
-    P1DIR &= ~BIT3;
-
     MusicInit();
         //ways to change difficulty could be no need to change song array maybe?
         // if easy: next_note(green_next, red_next, yellow_next, 0, 0);
@@ -239,6 +255,11 @@ int main(void)
 
     while (1){
         if (state == Game){
+            if (stop_song == 1){
+                StopSong();
+                state = Intro;
+                stop_song = 0;
+            }
             next_note(green_next, red_next, yellow_next, blue_next, orange_next);
             if(shift_leds_flag){
                 shift_leds();
@@ -247,11 +268,15 @@ int main(void)
         }
         else if (state == Intro){
             if (play_song1 == 1){
-                state == Game;
+                state = Game;
+                PlaySong(1);
+                play_song1 = 0;
                 // have code to assign the LEDs to the correct values here
             }
             else if (play_song2 == 1){
-                state == Game;
+                state = Game;
+                PlaySong(2);
+                play_song2 = 0;
                 // have code to assign the LEDs to the correct values here
             }
         }
@@ -292,12 +317,10 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
         if(P2IFG & BIT1)//checks port 2.1 (playsong1)
         {
             if(P2IES & BIT1) { // falling edge detected - turning sound off
-                play_song1 = 0;
-                StopSong();
+                stop_song = 1;
                 P2IES &= ~BIT1; // change edge to rising (button release)
             } else {// rising edge detected - turning sound on
                 play_song1 = 1;
-                PlaySong(1);
                 P2IES |= BIT1;
             }
             P2IFG &= ~BIT1; // clear interrupt flag
@@ -319,12 +342,10 @@ void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
         if(P1IFG & BIT3)//checks port 1.3 (play song2)
         {
             if(P1IES & BIT3){
-                play_song2 = 0;
-                StopSong();
+                stop_song = 1;
                 P1IES &= ~BIT3; // change edge to rising (button release)
             } else {// rising edge detected - turning sound on
                 play_song2 = 1;
-                PlaySong(2);
                 P1IES |= BIT3;
             }
             P1IFG &= ~BIT3; // clear interrupt flag

@@ -4,6 +4,7 @@
 int i;
 char enter[] = "\r\n";
 char song1[] = "Play Song 1";
+char song2[] = "Play Song 2";
 char stop[] = "Stop Song";
 char trigger[] = "start\r\n";
 void ser_output(char *str);
@@ -25,6 +26,11 @@ void PlaySong(int a)
 {
     if(a == 1){
         ser_output(song1);
+        ser_output(enter);
+    }
+
+    if(a == 2){
+        ser_output(song2);
         ser_output(enter);
     }
 }

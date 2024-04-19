@@ -15,7 +15,7 @@ int red_colors[]   = {0,0,1,0,0,0,0,0,1};
 int yellow_colors[]= {0,0,0,1,0,0,0,1,0};
 int blue_colors[]  = {0,0,0,0,1,0,1,0,0};
 int orange_colors[]= {0,0,0,0,0,1,0,0,0};
-int songDuration[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+//int songDuration[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
 int songLength = sizeof(green_colors) / sizeof(green_colors[0]);
 int current_note;
@@ -23,7 +23,7 @@ int current_note;
 /*
  * Connections Necessary:
  *
- * Green Button: ;
+ * Green Button: 2.0 Red Yellow Blue Orange
  */
 
 void init_wdt(void){
@@ -47,46 +47,96 @@ void init_buttons() {
     P2IE |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // enable interrupts for these pins
 }
 
+void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) output, 1.3 (play_song2) output
+    P2DIR &= ~(BIT7); // set 2.7 to input
+    P2DIR |= BIT1; // set 2.1 to output
+    P1DIR |= BIT3; // set 1.3 to output
 
+    P2IES &= ~BIT7; // listen for low to high transition to start
+    P2IFG &=  ~BIT7; // clear any pending interrupts
+    P2IE |= BIT7; // enable interrupts for these pins
+}
 //global variables
 void set_temperature(int led1, int led2, int led3, int led4, int led5);
 
-enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
 
 int user_LED_1;
 int user_LED_2;
 int user_LED_3;
 int user_LED_4;
+int user_LED_5;
 int button_press_detected;
 int strummer;
+int score;
+int accept_input;
+int led1;
+int led2;
+int led3;
+int led4;
+int led5;
+
+// green red yellow blue orange is the order of the LEDS
+void check_input(){
+    led1 = green_colors[current_note];
+    led2 = red_colors[current_note];
+    led3 = yellow_colors[current_note];
+    led4 = blue_colors[current_note];
+    led5 = orange_colors[current_note];
+    if (led1 == user_LED_1 & led2 == user_LED_2 & led3 == user_LED_3 & led4 == user_LED_4 & led5 == user_LED_5){
+        score += 10;
+    }
+}
+
+void play_song1(int a){ // if a is 1 it starts the song, if a is 0 it stops the song
+    if(a==1){
+        P2OUT |= BIT1;
+        // Add code here to assign the colorset we are using
+    }
+    else{
+        P2OUT &= ~BIT1;
+    }
+}
+
+void play_song2(int a){
+    if(a==1){
+        P1OUT |= BIT3;
+        // Add code here to assign the colorset we are using
+    }
+    else{
+        P1OUT &= ~BIT3;
+    }
+}
+enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
+
 
 int debounce_counter = 0;
 
 void main(void){
-    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD; // stop watchdog timer
     BCSCTL1 = CALBC1_1MHZ;     // Set range
     DCOCTL = CALDCO_1MHZ;      // Set DCO step + modulation */
     BCSCTL3 |= LFXT1S_2;        // ACLK = VLO - This is also called in the init_wdt() function
     TA1CCTL2 = OUTMOD_7;
     TA1CTL = TASSEL_2 + MC_1 + TACLR; // SMCLK, upmode
-    init_wdt();
+//    init_wdt();
     rgb_init_spi(); //from rgb_interface.c
     serial_init_spi(); //from serial_comm.c
     init_buttons();
+    init_board_communication();
     current_note = 0;
+    score = 0;
+    accept_input = 0;
+
 
 
     _enable_interrupts();
 
 
     while(1){
-        set_temperature(0,user_LED_1, user_LED_2, user_LED_3, user_LED_4);
-//        if (strummer){
-//            set_temperature(0,user_LED_1, user_LED_2, user_LED_3, user_LED_4); //led only show when strummer is held down...need to think more about logic
-//        }
-//        else{
-//            set_temperature(0,0, 0, 0, 0);
-//        }
+        set_temperature(user_LED_1, user_LED_2, user_LED_3, user_LED_4, 0);
+        if (strummer & accept_input){
+            check_input();
+        }
         LPM3;
 
     }//end of while
@@ -94,136 +144,6 @@ void main(void){
 
 }//end of main
 
-//// Watchdog Timer interrupt service routine
-//#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
-//#pragma vector=WDT_VECTOR
-//__interrupt void watchdog_timer(void)
-//#elif defined(__GNUC__)
-//void __attribute__ ((interrupt(WDT_VECTOR))) watchdog_timer (void)
-//#else
-//#error Compiler not supported!
-//#endif
-//{
-//
-//    __bic_SR_register_on_exit(CPUOFF); // exit LPM3 when returning to program (clear LPM3 bits)
-//}
-
-
-
-// Watchdog Timer interrupt service routine
-// TODO: This should update the
-#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
-#pragma vector=WDT_VECTOR
-__interrupt void watchdog_timer(void)
-#elif defined(__GNUC__)
-void __attribute__ ((interrupt(WDT_VECTOR))) watchdog_timer (void)
-#else
-#error Compiler not supported!
-#endif
-{
-    if (state == Game)
-    {
-        if ((current_note < songLength))
-         {
-           TA1CCR2 = *g_note_position >> 1; //spaces between note. divide by 2
-           TA1CCR0 = *g_note_position; //update to new note
-           TA0CCR0 = *duration_position; //update to new duration
-
-         }
-         else{
-             TA1CCR2 = 0; //spaces between note
-             TA1CCR0 = 0; //update to new note
-
-             //reset
-//             green_next  = 0;
-//             red_next    = 0;
-//             yellow_next = 0;
-//             blue_next   = 0;
-//             orange_next = 0;
-             TA0CCR0 = 4000; //update to duration
-         }
-     //   next_note(green_next, red_next, yellow_next, blue_next, orange_next);
-     // Update LED positions for the next iteration
-//        g_led1 = g_led2;
-//        g_led2 = g_led3;
-//        g_led3 = g_led4;
-//        g_led4 = g_led5;
-//        g_led5 = g_led6;
-//        g_led6 = g_led7;
-//        g_led7 = green_next;
-//
-//        r_led1 = r_led2;
-//        r_led2 = r_led3;
-//        r_led3 = r_led4;
-//        r_led4 = r_led5;
-//        r_led5 = r_led6;
-//        r_led6 = r_led7;
-//        r_led7 = red_next;
-//
-//        y_led1 = y_led2;
-//        y_led2 = y_led3;
-//        y_led3 = y_led4;
-//        y_led4 = y_led5;
-//        y_led5 = y_led6;
-//        y_led6 = y_led7;
-//        y_led7 = yellow_next;
-//
-//        b_led1 = b_led2;
-//        b_led2 = b_led3;
-//        b_led3 = b_led4;
-//        b_led4 = b_led5;
-//        b_led5 = b_led6;
-//        b_led6 = b_led7;
-//        b_led7 = blue_next;
-//
-//        o_led1 = o_led2;
-//        o_led2 = o_led3;
-//        o_led3 = o_led4;
-//        o_led4 = o_led5;
-//        o_led5 = o_led6;
-//        o_led6 = o_led7;
-//        o_led7 = orange_next;
-
-    }
-
-    __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
-
-}
-
-//manages note duration
-#pragma vector=TIMER0_A0_VECTOR
-__interrupt void Timer_A(void)
-{
-    if (state == Game)
-    {
-        if ((current_note < songLength) & ready_for_next)
-        {
-        //move to new note
-        duration_position = 1 + duration_position;
-
-        g_note_position = 1 + g_note_position;
-        r_note_position = 1 + r_note_position;
-        y_note_position = 1 + y_note_position;
-        b_note_position = 1 + b_note_position;
-        o_note_position = 1 + o_note_position;
-        current_note++; //move to next note of song
-
-        } else{
-            // COULD HAVE END SONG ANIMATION? instead of looping
-            //start at beginning of song
-            g_note_position = g_note_position - current_note;
-            r_note_position = r_note_position - current_note;
-            y_note_position = y_note_position - current_note;
-            b_note_position = b_note_position - current_note;
-            o_note_position = o_note_position - current_note;
-
-            duration_position = duration_position - current_note;
-            current_note = 0; // Reset current_note to start at the first note
-        }
-    }
-
-}
-// Button interrupt service routine
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector=PORT2_VECTOR
 __interrupt void button(void)
@@ -304,7 +224,19 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
            }
            P2IFG &= ~BIT5; // clear interrupt flag for button
        }
-
+       // accept_input logic
+       if(P2IFG & BIT7)//checks port 2.7
+       {
+           if(P2IES & BIT7) { // falling edge detected - changed to 0
+               accept_input = 0;
+               P2IES &= ~BIT7; // change edge to rising
+           } else { // rising edge detected - changed to 1
+               accept_input = 1;
+               current_note++;
+               P2IES |= BIT7; // change edge back to falling (button press)
+           }
+           P2IFG &= ~BIT7; // clear interrupt flag
+       }
 
     __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
 }
