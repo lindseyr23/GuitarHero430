@@ -126,6 +126,7 @@ void main(void){
     current_note = 0;
     score = 0;
     accept_input = 0;
+    play_song1();
 
 
 
