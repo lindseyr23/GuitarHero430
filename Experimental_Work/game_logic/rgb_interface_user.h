@@ -1,8 +1,8 @@
 /*
- * rgb_interface.h
+ * rgb_interface_user.c
  *
- *  Created on: Mar 12, 2021
- *      Author: ckemere
+ *  Created on: April 13, 2024
+ *      Author: Natalia M
  */
 
 #ifndef RGB_INTERFACE_USER_H_

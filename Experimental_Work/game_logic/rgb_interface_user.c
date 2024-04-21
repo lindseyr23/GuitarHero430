@@ -1,5 +1,5 @@
 /*
- * rgb_interface.c
+ * rgb_interface_user.c
  *
  *  Created on: April 13, 2024
  *      Author: Natalia M
@@ -48,7 +48,7 @@ void rgb_init_spi(void){ //initialize serial bus to drive RGB
     P1SEL = BIT2 + BIT4;
     P1SEL2 = BIT2 + BIT4;
 
-	//implements SPI on A0 port
+    //implements SPI on A0 port
     UCA0CTL1=UCSWRST; //disable serial interface. reset take offline
     UCA0CTL0 |= UCCKPH + UCMSB + UCMST + UCSYNC;    // data cap at 1st clk edge, MSB first, master mode, synchronous
     UCA0CTL1 |= UCSSEL_2;                           // select SMCLK
