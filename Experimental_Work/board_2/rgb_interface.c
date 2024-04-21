@@ -83,7 +83,7 @@ void rgb_send_end() {
 
 //led7 is the led farthest from the cable.
 //direction of arrows on the board along G go from led1 - led7
-void set_green(int led1, int led2, int led3, int led4, int led5, int led6, int led7)
+void set_green(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7)
 {
     //change color - 1st row 7 led.
     rgb_send_frame(&green[led1], false);
@@ -95,7 +95,7 @@ void set_green(int led1, int led2, int led3, int led4, int led5, int led6, int l
     rgb_send_frame(&green[led7], false);
 }
 
-void set_red(int led1, int led2, int led3, int led4, int led5, int led6, int led7)
+void set_red(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7)
 {
     //change color - 1st row 7 led.
     rgb_send_frame(&red[led1], false);
@@ -107,7 +107,7 @@ void set_red(int led1, int led2, int led3, int led4, int led5, int led6, int led
     rgb_send_frame(&red[led7], false);
 }
 
-void set_yellow(int led1, int led2, int led3, int led4, int led5, int led6, int led7)
+void set_yellow(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7)
 {
     //change color - 1st row 7 led.
     rgb_send_frame(&yellow[led1], false);
@@ -118,7 +118,7 @@ void set_yellow(int led1, int led2, int led3, int led4, int led5, int led6, int 
     rgb_send_frame(&yellow[led6], false);
     rgb_send_frame(&yellow[led7], false);
 }
-void set_blue(int led1, int led2, int led3, int led4, int led5, int led6, int led7)
+void set_blue(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7)
 {
     //change color - 1st row 7 led.
     rgb_send_frame(&blue[led1], false);
@@ -129,7 +129,7 @@ void set_blue(int led1, int led2, int led3, int led4, int led5, int led6, int le
     rgb_send_frame(&blue[led6], false);
     rgb_send_frame(&blue[led7], false);
 }
-void set_orange(int led1, int led2, int led3, int led4, int led5, int led6, int led7)
+void set_orange(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7)
 {
     //change color - 1st row 7 led.
     rgb_send_frame(&orange[led1], false);
@@ -141,7 +141,7 @@ void set_orange(int led1, int led2, int led3, int led4, int led5, int led6, int 
     rgb_send_frame(&orange[led7], false);
 }
 
-void g_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7)
+void g_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7)
 {
     // Shift the color values among the LEDs
     //toward cable
@@ -165,11 +165,11 @@ void g_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_
     set_green(led_1,led_2,led_3,led_4,led_5,led_6,led_7);
 }
 
-void r_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7)
+void r_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7)
 {
     // Shift the color values among the LEDs
     //toward cable
-    int temp = next_seq; //led_1;
+    unsigned int temp = next_seq; //led_1;
     led_1 = led_2;
     led_2 = led_3;
     led_3 = led_4;
@@ -190,11 +190,11 @@ void r_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_
     //set_red(r_led1, r_led2, r_led3, r_led4, r_led5, r_led6, r_led7);
 }
 
-void y_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7)
+void y_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7)
 {
     // Shift the color values among the LEDs
     //toward cable
-    int temp = next_seq; //led_1;
+    unsigned int temp = next_seq; //led_1;
     led_1 = led_2;
     led_2 = led_3;
     led_3 = led_4;
@@ -214,11 +214,11 @@ void y_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_
     set_yellow(led_1,led_2,led_3,led_4,led_5,led_6,led_7);
 }
 
-void b_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7)
+void b_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7)
 {
     // Shift the color values among the LEDs
     //toward cable
-    int temp = next_seq; //led_1;
+    unsigned int temp = next_seq; //led_1;
     led_1 = led_2;
     led_2 = led_3;
     led_3 = led_4;
@@ -237,11 +237,11 @@ void b_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_
 //    led_1 = temp;
     set_blue(led_1,led_2,led_3,led_4,led_5,led_6,led_7);
 }
-void o_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7)
+void o_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7)
 {
     // Shift the color values among the LEDs
     //toward cable
-    int temp = next_seq; //led_1;
+    unsigned int temp = next_seq; //led_1;
     led_1 = led_2;
     led_2 = led_3;
     led_3 = led_4;
@@ -263,7 +263,7 @@ void o_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_
 
 
 
-void PlaySound(int *g_notes, int *r_notes, int *y_notes, int *b_notes, int *o_notes, int *duration, int length)
+void PlaySound(unsigned int *g_notes, unsigned int *r_notes, unsigned int *y_notes, unsigned int *b_notes, unsigned int *o_notes, unsigned int *duration, unsigned int length)
 {
     songLength = length;
     g_note_position = &g_notes[0]; //gets address of first note

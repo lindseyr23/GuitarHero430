@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Sun Apr 21 13:25:48 2024
+>> Linked Sun Apr 21 15:45:29 2024
 
 OUTPUT FILE NAME:   <Board2.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c896
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c8b0
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
   SFR                   00000000   00000010  00000000  00000010  RWIX
   PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
   PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
-  RAM                   00000200   00000200  00000151  000000af  RWIX
+  RAM                   00000200   00000200  000001e1  0000001f  RWIX
   INFOD                 00001000   00000040  00000000  00000040  RWIX
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  000009de  00003600  RWIX
+  FLASH                 0000c000   00003fde  000009f6  000035e8  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -44,126 +44,136 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.data      0    00000200    0000009f     UNINITIALIZED
-                  00000200    00000012     main.obj (.data:blue_colors)
-                  00000212    00000012     main.obj (.data:green_colors)
-                  00000224    00000012     main.obj (.data:orange_colors)
-                  00000236    00000012     main.obj (.data:red_colors)
-                  00000248    00000012     main.obj (.data:songDuration)
-                  0000025a    00000012     main.obj (.data:yellow_colors)
-                  0000026c    0000000c     PlaySong.obj (.data:song1)
-                  00000278    0000000c     PlaySong.obj (.data:song2)
-                  00000284    0000000a     PlaySong.obj (.data:stop)
-                  0000028e    00000006     main.obj (.data)
-                  00000294    00000004     rgb_interface.obj (.data:end_frame)
-                  00000298    00000004     rgb_interface.obj (.data:start_frame)
-                  0000029c    00000003     PlaySong.obj (.data:enter)
+.data      0    00000200    0000012d     UNINITIALIZED
+                  00000200    00000012     main.obj (.data:blue_colors_song1)
+                  00000212    00000012     main.obj (.data:blue_colors_song2)
+                  00000224    00000012     main.obj (.data:color_intro)
+                  00000236    00000012     main.obj (.data:green_colors_song1)
+                  00000248    00000012     main.obj (.data:green_colors_song2)
+                  0000025a    00000012     main.obj (.data:orange_colors_song1)
+                  0000026c    00000012     main.obj (.data:orange_colors_song2)
+                  0000027e    00000012     main.obj (.data:red_colors_song1)
+                  00000290    00000012     main.obj (.data:red_colors_song2)
+                  000002a2    00000012     main.obj (.data:songDuration_intro)
+                  000002b4    00000012     main.obj (.data:songDuration_song1)
+                  000002c6    00000012     main.obj (.data:songDuration_song2)
+                  000002d8    00000012     main.obj (.data:yellow_colors_song1)
+                  000002ea    00000012     main.obj (.data:yellow_colors_song2)
+                  000002fc    0000000c     PlaySong.obj (.data:song1)
+                  00000308    0000000c     PlaySong.obj (.data:song2)
+                  00000314    0000000a     PlaySong.obj (.data:stop)
+                  0000031e    00000004     rgb_interface.obj (.data:end_frame)
+                  00000322    00000004     main.obj (.data)
+                  00000326    00000004     rgb_interface.obj (.data:start_frame)
+                  0000032a    00000003     PlaySong.obj (.data:enter)
 
-.bss       0    000002a0    00000062     UNINITIALIZED
-                  000002a0    00000002     (.common:b_led1)
-                  000002a2    00000002     (.common:b_led2)
-                  000002a4    00000002     (.common:b_led3)
-                  000002a6    00000002     (.common:b_led4)
-                  000002a8    00000002     (.common:b_led5)
-                  000002aa    00000002     (.common:b_led6)
-                  000002ac    00000002     (.common:b_led7)
-                  000002ae    00000002     (.common:b_note_position)
-                  000002b0    00000002     (.common:current_note)
-                  000002b2    00000002     (.common:duration_position)
-                  000002b4    00000002     (.common:g_led1)
-                  000002b6    00000002     (.common:g_led2)
-                  000002b8    00000002     (.common:g_led3)
-                  000002ba    00000002     (.common:g_led4)
-                  000002bc    00000002     (.common:g_led5)
-                  000002be    00000002     (.common:g_led6)
-                  000002c0    00000002     (.common:g_led7)
-                  000002c2    00000002     (.common:g_note_position)
-                  000002c4    00000002     (.common:o_led1)
-                  000002c6    00000002     (.common:o_led2)
-                  000002c8    00000002     (.common:o_led3)
-                  000002ca    00000002     (.common:o_led4)
-                  000002cc    00000002     (.common:o_led5)
-                  000002ce    00000002     (.common:o_led6)
-                  000002d0    00000002     (.common:o_led7)
-                  000002d2    00000002     (.common:o_note_position)
-                  000002d4    00000002     (.common:orange_next)
-                  000002d6    00000002     (.common:play_song1)
-                  000002d8    00000002     (.common:play_song2)
-                  000002da    00000002     (.common:r_led1)
-                  000002dc    00000002     (.common:r_led2)
-                  000002de    00000002     (.common:r_led3)
-                  000002e0    00000002     (.common:r_led4)
-                  000002e2    00000002     (.common:r_led5)
-                  000002e4    00000002     (.common:r_led6)
-                  000002e6    00000002     (.common:r_led7)
-                  000002e8    00000002     (.common:r_note_position)
-                  000002ea    00000002     (.common:ready_for_next)
-                  000002ec    00000002     (.common:shift_leds_flag)
-                  000002ee    00000002     (.common:state)
-                  000002f0    00000002     (.common:stop_song)
-                  000002f2    00000002     (.common:y_led1)
-                  000002f4    00000002     (.common:y_led2)
-                  000002f6    00000002     (.common:y_led3)
-                  000002f8    00000002     (.common:y_led4)
-                  000002fa    00000002     (.common:y_led5)
-                  000002fc    00000002     (.common:y_led6)
-                  000002fe    00000002     (.common:y_led7)
-                  00000300    00000002     (.common:y_note_position)
+.bss       0    0000032e    00000064     UNINITIALIZED
+                  0000032e    00000002     (.common:b_led1)
+                  00000330    00000002     (.common:b_led2)
+                  00000332    00000002     (.common:b_led3)
+                  00000334    00000002     (.common:b_led4)
+                  00000336    00000002     (.common:b_led5)
+                  00000338    00000002     (.common:b_led6)
+                  0000033a    00000002     (.common:b_led7)
+                  0000033c    00000002     (.common:b_note_position)
+                  0000033e    00000002     (.common:current_note)
+                  00000340    00000002     (.common:duration_position)
+                  00000342    00000002     (.common:g_led1)
+                  00000344    00000002     (.common:g_led2)
+                  00000346    00000002     (.common:g_led3)
+                  00000348    00000002     (.common:g_led4)
+                  0000034a    00000002     (.common:g_led5)
+                  0000034c    00000002     (.common:g_led6)
+                  0000034e    00000002     (.common:g_led7)
+                  00000350    00000002     (.common:g_note_position)
+                  00000352    00000002     (.common:o_led1)
+                  00000354    00000002     (.common:o_led2)
+                  00000356    00000002     (.common:o_led3)
+                  00000358    00000002     (.common:o_led4)
+                  0000035a    00000002     (.common:o_led5)
+                  0000035c    00000002     (.common:o_led6)
+                  0000035e    00000002     (.common:o_led7)
+                  00000360    00000002     (.common:o_note_position)
+                  00000362    00000002     (.common:orange_next)
+                  00000364    00000002     (.common:play_song1)
+                  00000366    00000002     (.common:play_song2)
+                  00000368    00000002     (.common:r_led1)
+                  0000036a    00000002     (.common:r_led2)
+                  0000036c    00000002     (.common:r_led3)
+                  0000036e    00000002     (.common:r_led4)
+                  00000370    00000002     (.common:r_led5)
+                  00000372    00000002     (.common:r_led6)
+                  00000374    00000002     (.common:r_led7)
+                  00000376    00000002     (.common:r_note_position)
+                  00000378    00000002     (.common:ready_for_next)
+                  0000037a    00000002     (.common:shift_leds_flag)
+                  0000037c    00000002     (.common:songLength)
+                  0000037e    00000002     (.common:state)
+                  00000380    00000002     (.common:stop_song)
+                  00000382    00000002     (.common:y_led1)
+                  00000384    00000002     (.common:y_led2)
+                  00000386    00000002     (.common:y_led3)
+                  00000388    00000002     (.common:y_led4)
+                  0000038a    00000002     (.common:y_led5)
+                  0000038c    00000002     (.common:y_led6)
+                  0000038e    00000002     (.common:y_led7)
+                  00000390    00000002     (.common:y_note_position)
 
 .stack     0    000003b0    00000050     UNINITIALIZED
                   000003b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    00000964     
-                  0000c000    0000015c     main.obj (.text:shift_leds)
-                  0000c15c    000000d0     main.obj (.text:next_note)
-                  0000c22c    000000ce     main.obj (.text:main)
-                  0000c2fa    00000082     rgb_interface.obj (.text:set_blue)
-                  0000c37c    00000082     rgb_interface.obj (.text:set_green)
-                  0000c3fe    00000082     rgb_interface.obj (.text:set_orange)
-                  0000c480    00000082     rgb_interface.obj (.text:set_red)
-                  0000c502    00000082     rgb_interface.obj (.text:set_yellow)
-                  0000c584    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000c600    00000050     main.obj (.text:Timer_A)
-                  0000c650    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
-                  0000c69c    00000042                     : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  0000c6de    00000034     rgb_interface.obj (.text:PlaySound)
-                  0000c712    00000032     PlaySong.obj (.text:MusicInit)
-                  0000c744    00000030     main.obj (.text:init_board_communication)
-                  0000c774    0000002c     PlaySong.obj (.text:PlaySong)
-                  0000c7a0    0000002c     rts430_eabi.lib : lsl16.asm.obj (.text)
-                  0000c7cc    0000002a     main.obj (.text:playsong1)
-                  0000c7f6    0000002a     main.obj (.text:playsong2)
-                  0000c820    0000002a     rgb_interface.obj (.text:rgb_init_spi)
-                  0000c84a    00000026     main.obj (.text:init_buttons)
-                  0000c870    00000026     rgb_interface.obj (.text:rgb_send_frame)
-                  0000c896    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  0000c8b2    00000014                     : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000c8c6    00000014     main.obj (.text:init_timerA)
-                  0000c8da    00000014     PlaySong.obj (.text:ser_output)
-                  0000c8ee    00000012     PlaySong.obj (.text:StopSong)
-                  0000c900    00000012     rts430_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c912    00000012                     : memcpy.c.obj (.text:memcpy)
-                  0000c924    00000010     rgb_interface.obj (.text:rgb_send_end)
-                  0000c934    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
-                  0000c944    0000000c     rgb_interface.obj (.text:rgb_send_start)
-                  0000c950    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c958    00000006                     : exit.c.obj (.text:abort)
-                  0000c95e    00000004                     : pre_init.c.obj (.text:_system_pre_init)
-                  0000c962    00000002                     : startup.c.obj (.text:_system_post_cinit)
+.text      0    0000c000    0000097a     
+                  0000c000    0000013e     main.obj (.text:shift_leds)
+                  0000c13e    0000013a     main.obj (.text:main)
+                  0000c278    000000d0     main.obj (.text:next_note)
+                  0000c348    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0000c3c4    00000076     main.obj (.text:Timer_A)
+                  0000c43a    00000074     rgb_interface.obj (.text:set_blue)
+                  0000c4ae    00000074     rgb_interface.obj (.text:set_green)
+                  0000c522    00000074     rgb_interface.obj (.text:set_orange)
+                  0000c596    00000074     rgb_interface.obj (.text:set_red)
+                  0000c60a    00000074     rgb_interface.obj (.text:set_yellow)
+                  0000c67e    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
+                  0000c6ca    00000042                     : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0000c70c    00000032     PlaySong.obj (.text:MusicInit)
+                  0000c73e    00000030     main.obj (.text:init_board_communication)
+                  0000c76e    0000002c     PlaySong.obj (.text:PlaySong)
+                  0000c79a    0000002c     rts430_eabi.lib : lsl16.asm.obj (.text)
+                  0000c7c6    0000002a     main.obj (.text:playsong1)
+                  0000c7f0    0000002a     main.obj (.text:playsong2)
+                  0000c81a    0000002a     rgb_interface.obj (.text:rgb_init_spi)
+                  0000c844    00000028     rgb_interface.obj (.text:PlaySound)
+                  0000c86c    00000026     main.obj (.text:init_buttons)
+                  0000c892    0000001e     rgb_interface.obj (.text:rgb_send_frame)
+                  0000c8b0    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
+                  0000c8cc    00000014                     : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000c8e0    00000014     main.obj (.text:init_timerA)
+                  0000c8f4    00000014     PlaySong.obj (.text:ser_output)
+                  0000c908    00000012     rts430_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c91a    00000012                     : memcpy.c.obj (.text:memcpy)
+                  0000c92c    00000010     PlaySong.obj (.text:StopSong)
+                  0000c93c    00000010     rgb_interface.obj (.text:rgb_send_end)
+                  0000c94c    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
+                  0000c95c    0000000a     rgb_interface.obj (.text:rgb_send_start)
+                  0000c966    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000c96e    00000006                     : exit.c.obj (.text:abort)
+                  0000c974    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+                  0000c978    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.const     0    0000c964    00000028     
-                  0000c964    00000008     rgb_interface.obj (.const:blue)
-                  0000c96c    00000008     rgb_interface.obj (.const:green)
-                  0000c974    00000008     rgb_interface.obj (.const:orange)
-                  0000c97c    00000008     rgb_interface.obj (.const:red)
-                  0000c984    00000008     rgb_interface.obj (.const:yellow)
+.const     0    0000c97a    00000028     
+                  0000c97a    00000008     rgb_interface.obj (.const:blue)
+                  0000c982    00000008     rgb_interface.obj (.const:green)
+                  0000c98a    00000008     rgb_interface.obj (.const:orange)
+                  0000c992    00000008     rgb_interface.obj (.const:red)
+                  0000c99a    00000008     rgb_interface.obj (.const:yellow)
 
-.cinit     0    0000c98c    00000052     
-                  0000c98c    00000040     (.cinit..data.load) [load image, compression = lzss]
-                  0000c9cc    00000006     (__TI_handler_table)
-                  0000c9d2    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000c9d6    00000008     (__TI_cinit_table)
+.cinit     0    0000c9a2    00000054     
+                  0000c9a2    00000041     (.cinit..data.load) [load image, compression = lzss]
+                  0000c9e3    00000001     --HOLE-- [fill = 0]
+                  0000c9e4    00000006     (__TI_handler_table)
+                  0000c9ea    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000c9ee    00000008     (__TI_cinit_table)
 
 .binit     0    0000c000    00000000     
 
@@ -227,11 +237,11 @@ MODULE SUMMARY
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     1032   6         210    
-       rgb_interface.obj            810    40        10     
-       PlaySong.obj                 132    0         37     
+       main.obj                     1148   6         354    
+       rgb_interface.obj            718    40        10     
+       PlaySong.obj                 130    0         37     
     +--+----------------------------+------+---------+---------+
-       Total:                       1974   46        257    
+       Total:                       1996   46        401    
                                                             
     C:\ti\ccs1250\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430_eabi.lib
        copy_decompress_lzss.c.obj   124    0         0      
@@ -261,21 +271,21 @@ MODULE SUMMARY
        Total:                       430    22        0      
                                                             
        Stack:                       0      0         80     
-       Linker Generated:            0      82        0      
+       Linker Generated:            0      83        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 2404   150       337    
+       Grand Total:                 2426   151       481    
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000c9d6 records: 2, size/record: 4, table size: 8
-	.data: load addr=0000c98c, load size=00000040 bytes, run addr=00000200, run size=0000009f bytes, compression=lzss
-	.bss: load addr=0000c9d2, load size=00000004 bytes, run addr=000002a0, run size=00000062 bytes, compression=zero_init
+__TI_cinit_table @ 0000c9ee records: 2, size/record: 4, table size: 8
+	.data: load addr=0000c9a2, load size=00000041 bytes, run addr=00000200, run size=0000012d bytes, compression=lzss
+	.bss: load addr=0000c9ea, load size=00000004 bytes, run addr=0000032e, run size=00000064 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000c9cc records: 3, size/record: 2, table size: 6
+__TI_handler_table @ 0000c9e4 records: 3, size/record: 2, table size: 6
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -295,7 +305,7 @@ address   name
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
 00000053  BCSCTL3                       
-0000c958  C$$EXIT                       
+0000c96e  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 000010fb  CALBC1_12MHZ                  
@@ -315,7 +325,7 @@ address   name
 00000001  IE2                           
 00000002  IFG1                          
 00000003  IFG2                          
-0000c712  MusicInit                     
+0000c70c  MusicInit                     
 00000022  P1DIR                         
 00000025  P1IE                          
 00000024  P1IES                         
@@ -340,9 +350,9 @@ address   name
 00000010  P3REN                         
 0000001b  P3SEL                         
 00000043  P3SEL2                        
-0000c774  PlaySong                      
-0000c6de  PlaySound                     
-0000c8ee  StopSong                      
+0000c76e  PlaySong                      
+0000c844  PlaySound                     
+0000c92c  StopSong                      
 00000172  TA0CCR0                       
 00000174  TA0CCR1                       
 00000176  TA0CCR2                       
@@ -366,7 +376,7 @@ address   name
 000010c0  TLV_CHECKSUM                  
 000010f7  TLV_DCO_30_LEN                
 000010f6  TLV_DCO_30_TAG                
-0000c600  Timer_A                       
+0000c3c4  Timer_A                       
 0000005d  UCA0ABCTL                     
 00000062  UCA0BR0                       
 00000063  UCA0BR1                       
@@ -391,15 +401,15 @@ address   name
 00000120  WDTCTL                        
 00000400  __STACK_END                   
 00000050  __STACK_SIZE                  
-0000c9d6  __TI_CINIT_Base               
-0000c9de  __TI_CINIT_Limit              
-0000c9de  __TI_CINIT_Warm               
-0000c9cc  __TI_Handler_Table_Base       
-0000c9d2  __TI_Handler_Table_Limit      
-0000c950  __TI_ISR_TRAP                 
-0000c69c  __TI_auto_init_nobinit_nopinit
-0000c584  __TI_decompress_lzss          
-0000c900  __TI_decompress_none          
+0000c9ee  __TI_CINIT_Base               
+0000c9f6  __TI_CINIT_Limit              
+0000c9f6  __TI_CINIT_Warm               
+0000c9e4  __TI_Handler_Table_Base       
+0000c9ea  __TI_Handler_Table_Limit      
+0000c966  __TI_ISR_TRAP                 
+0000c6ca  __TI_auto_init_nobinit_nopinit
+0000c348  __TI_decompress_lzss          
+0000c908  __TI_decompress_none          
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -416,141 +426,149 @@ address   name
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
-0000c8b2  __TI_zero_init_nomemset       
+0000c8cc  __TI_zero_init_nomemset       
 ffffffff  __c_args__                    
-0000c940  __mspabi_func_epilog_1        
-0000c93e  __mspabi_func_epilog_2        
-0000c93c  __mspabi_func_epilog_3        
-0000c93a  __mspabi_func_epilog_4        
-0000c938  __mspabi_func_epilog_5        
-0000c936  __mspabi_func_epilog_6        
-0000c934  __mspabi_func_epilog_7        
-0000c7a0  __mspabi_slli                 
-0000c7c8  __mspabi_slli_1               
-0000c7b6  __mspabi_slli_10              
-0000c7b4  __mspabi_slli_11              
-0000c7b2  __mspabi_slli_12              
-0000c7b0  __mspabi_slli_13              
-0000c7ae  __mspabi_slli_14              
-0000c7ac  __mspabi_slli_15              
-0000c7c6  __mspabi_slli_2               
-0000c7c4  __mspabi_slli_3               
-0000c7c2  __mspabi_slli_4               
-0000c7c0  __mspabi_slli_5               
-0000c7be  __mspabi_slli_6               
-0000c7bc  __mspabi_slli_7               
-0000c7ba  __mspabi_slli_8               
-0000c7b8  __mspabi_slli_9               
-0000c650  __mspabi_srli                 
-0000c696  __mspabi_srli_1               
-0000c672  __mspabi_srli_10              
-0000c66e  __mspabi_srli_11              
-0000c66a  __mspabi_srli_12              
-0000c666  __mspabi_srli_13              
-0000c662  __mspabi_srli_14              
-0000c65e  __mspabi_srli_15              
-0000c692  __mspabi_srli_2               
-0000c68e  __mspabi_srli_3               
-0000c68a  __mspabi_srli_4               
-0000c686  __mspabi_srli_5               
-0000c682  __mspabi_srli_6               
-0000c67e  __mspabi_srli_7               
-0000c67a  __mspabi_srli_8               
-0000c676  __mspabi_srli_9               
-0000c896  _c_int00_noargs               
+0000c958  __mspabi_func_epilog_1        
+0000c956  __mspabi_func_epilog_2        
+0000c954  __mspabi_func_epilog_3        
+0000c952  __mspabi_func_epilog_4        
+0000c950  __mspabi_func_epilog_5        
+0000c94e  __mspabi_func_epilog_6        
+0000c94c  __mspabi_func_epilog_7        
+0000c79a  __mspabi_slli                 
+0000c7c2  __mspabi_slli_1               
+0000c7b0  __mspabi_slli_10              
+0000c7ae  __mspabi_slli_11              
+0000c7ac  __mspabi_slli_12              
+0000c7aa  __mspabi_slli_13              
+0000c7a8  __mspabi_slli_14              
+0000c7a6  __mspabi_slli_15              
+0000c7c0  __mspabi_slli_2               
+0000c7be  __mspabi_slli_3               
+0000c7bc  __mspabi_slli_4               
+0000c7ba  __mspabi_slli_5               
+0000c7b8  __mspabi_slli_6               
+0000c7b6  __mspabi_slli_7               
+0000c7b4  __mspabi_slli_8               
+0000c7b2  __mspabi_slli_9               
+0000c67e  __mspabi_srli                 
+0000c6c4  __mspabi_srli_1               
+0000c6a0  __mspabi_srli_10              
+0000c69c  __mspabi_srli_11              
+0000c698  __mspabi_srli_12              
+0000c694  __mspabi_srli_13              
+0000c690  __mspabi_srli_14              
+0000c68c  __mspabi_srli_15              
+0000c6c0  __mspabi_srli_2               
+0000c6bc  __mspabi_srli_3               
+0000c6b8  __mspabi_srli_4               
+0000c6b4  __mspabi_srli_5               
+0000c6b0  __mspabi_srli_6               
+0000c6ac  __mspabi_srli_7               
+0000c6a8  __mspabi_srli_8               
+0000c6a4  __mspabi_srli_9               
+0000c8b0  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000003b0  _stack                        
-0000c962  _system_post_cinit            
-0000c95e  _system_pre_init              
-0000c958  abort                         
-000002a0  b_led1                        
-000002a2  b_led2                        
-000002a4  b_led3                        
-000002a6  b_led4                        
-000002a8  b_led5                        
-000002aa  b_led6                        
-000002ac  b_led7                        
-000002ae  b_note_position               
-0000c964  blue                          
-00000200  blue_colors                   
-00000290  counter                       
-000002b0  current_note                  
-000002b2  duration_position             
-00000294  end_frame                     
-0000029c  enter                         
-000002b4  g_led1                        
-000002b6  g_led2                        
-000002b8  g_led3                        
-000002ba  g_led4                        
-000002bc  g_led5                        
-000002be  g_led6                        
-000002c0  g_led7                        
-000002c2  g_note_position               
-0000c96c  green                         
-00000212  green_colors                  
-0000c744  init_board_communication      
-0000c84a  init_buttons                  
-0000c8c6  init_timerA                   
-0000c22c  main                          
-0000c912  memcpy                        
-00000292  next                          
-0000c15c  next_note                     
-000002c4  o_led1                        
-000002c6  o_led2                        
-000002c8  o_led3                        
-000002ca  o_led4                        
-000002cc  o_led5                        
-000002ce  o_led6                        
-000002d0  o_led7                        
-000002d2  o_note_position               
-0000c974  orange                        
-00000224  orange_colors                 
-000002d4  orange_next                   
-000002d6  play_song1                    
-000002d8  play_song2                    
-0000c7cc  playsong1                     
-0000c7f6  playsong2                     
-000002da  r_led1                        
-000002dc  r_led2                        
-000002de  r_led3                        
-000002e0  r_led4                        
-000002e2  r_led5                        
-000002e4  r_led6                        
-000002e6  r_led7                        
-000002e8  r_note_position               
-000002ea  ready_for_next                
-0000c97c  red                           
-00000236  red_colors                    
-0000c820  rgb_init_spi                  
-0000c924  rgb_send_end                  
-0000c870  rgb_send_frame                
-0000c944  rgb_send_start                
-0000c8da  ser_output                    
-0000c2fa  set_blue                      
-0000c37c  set_green                     
-0000c3fe  set_orange                    
-0000c480  set_red                       
-0000c502  set_yellow                    
+0000c978  _system_post_cinit            
+0000c974  _system_pre_init              
+0000c96e  abort                         
+0000032e  b_led1                        
+00000330  b_led2                        
+00000332  b_led3                        
+00000334  b_led4                        
+00000336  b_led5                        
+00000338  b_led6                        
+0000033a  b_led7                        
+0000033c  b_note_position               
+0000c97a  blue                          
+00000200  blue_colors_song1             
+00000212  blue_colors_song2             
+00000224  color_intro                   
+00000322  counter                       
+0000033e  current_note                  
+00000340  duration_position             
+0000031e  end_frame                     
+0000032a  enter                         
+00000342  g_led1                        
+00000344  g_led2                        
+00000346  g_led3                        
+00000348  g_led4                        
+0000034a  g_led5                        
+0000034c  g_led6                        
+0000034e  g_led7                        
+00000350  g_note_position               
+0000c982  green                         
+00000236  green_colors_song1            
+00000248  green_colors_song2            
+0000c73e  init_board_communication      
+0000c86c  init_buttons                  
+0000c8e0  init_timerA                   
+0000c13e  main                          
+0000c91a  memcpy                        
+00000324  next                          
+0000c278  next_note                     
+00000352  o_led1                        
+00000354  o_led2                        
+00000356  o_led3                        
+00000358  o_led4                        
+0000035a  o_led5                        
+0000035c  o_led6                        
+0000035e  o_led7                        
+00000360  o_note_position               
+0000c98a  orange                        
+0000025a  orange_colors_song1           
+0000026c  orange_colors_song2           
+00000362  orange_next                   
+00000364  play_song1                    
+00000366  play_song2                    
+0000c7c6  playsong1                     
+0000c7f0  playsong2                     
+00000368  r_led1                        
+0000036a  r_led2                        
+0000036c  r_led3                        
+0000036e  r_led4                        
+00000370  r_led5                        
+00000372  r_led6                        
+00000374  r_led7                        
+00000376  r_note_position               
+00000378  ready_for_next                
+0000c992  red                           
+0000027e  red_colors_song1              
+00000290  red_colors_song2              
+0000c81a  rgb_init_spi                  
+0000c93c  rgb_send_end                  
+0000c892  rgb_send_frame                
+0000c95c  rgb_send_start                
+0000c8f4  ser_output                    
+0000c43a  set_blue                      
+0000c4ae  set_green                     
+0000c522  set_orange                    
+0000c596  set_red                       
+0000c60a  set_yellow                    
 0000c000  shift_leds                    
-000002ec  shift_leds_flag               
-0000026c  song1                         
-00000278  song2                         
-00000248  songDuration                  
-0000028e  songLength                    
-00000298  start_frame                   
-000002ee  state                         
-00000284  stop                          
-000002f0  stop_song                     
-000002f2  y_led1                        
-000002f4  y_led2                        
-000002f6  y_led3                        
-000002f8  y_led4                        
-000002fa  y_led5                        
-000002fc  y_led6                        
-000002fe  y_led7                        
-00000300  y_note_position               
-0000c984  yellow                        
-0000025a  yellow_colors                 
+0000037a  shift_leds_flag               
+000002fc  song1                         
+00000308  song2                         
+000002a2  songDuration_intro            
+000002b4  songDuration_song1            
+000002c6  songDuration_song2            
+0000037c  songLength                    
+00000326  start_frame                   
+0000037e  state                         
+00000314  stop                          
+00000380  stop_song                     
+00000382  y_led1                        
+00000384  y_led2                        
+00000386  y_led3                        
+00000388  y_led4                        
+0000038a  y_led5                        
+0000038c  y_led6                        
+0000038e  y_led7                        
+00000390  y_note_position               
+0000c99a  yellow                        
+000002d8  yellow_colors_song1           
+000002ea  yellow_colors_song2           
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -643,70 +661,78 @@ address   name
 000001b2  ADC10CTL1                     
 000001b4  ADC10MEM                      
 000001bc  ADC10SA                       
-00000200  blue_colors                   
-00000212  green_colors                  
-00000224  orange_colors                 
-00000236  red_colors                    
-00000248  songDuration                  
-0000025a  yellow_colors                 
-0000026c  song1                         
-00000278  song2                         
-00000284  stop                          
-0000028e  songLength                    
-00000290  counter                       
-00000292  next                          
-00000294  end_frame                     
-00000298  start_frame                   
-0000029c  enter                         
-000002a0  b_led1                        
-000002a2  b_led2                        
-000002a4  b_led3                        
-000002a6  b_led4                        
-000002a8  b_led5                        
-000002aa  b_led6                        
-000002ac  b_led7                        
-000002ae  b_note_position               
-000002b0  current_note                  
-000002b2  duration_position             
-000002b4  g_led1                        
-000002b6  g_led2                        
-000002b8  g_led3                        
-000002ba  g_led4                        
-000002bc  g_led5                        
-000002be  g_led6                        
-000002c0  g_led7                        
-000002c2  g_note_position               
-000002c4  o_led1                        
-000002c6  o_led2                        
-000002c8  o_led3                        
-000002ca  o_led4                        
-000002cc  o_led5                        
-000002ce  o_led6                        
-000002d0  o_led7                        
-000002d2  o_note_position               
-000002d4  orange_next                   
-000002d6  play_song1                    
-000002d8  play_song2                    
-000002da  r_led1                        
-000002dc  r_led2                        
-000002de  r_led3                        
-000002e0  r_led4                        
-000002e2  r_led5                        
-000002e4  r_led6                        
-000002e6  r_led7                        
-000002e8  r_note_position               
-000002ea  ready_for_next                
-000002ec  shift_leds_flag               
-000002ee  state                         
-000002f0  stop_song                     
-000002f2  y_led1                        
-000002f4  y_led2                        
-000002f6  y_led3                        
-000002f8  y_led4                        
-000002fa  y_led5                        
-000002fc  y_led6                        
-000002fe  y_led7                        
-00000300  y_note_position               
+00000200  blue_colors_song1             
+00000212  blue_colors_song2             
+00000224  color_intro                   
+00000236  green_colors_song1            
+00000248  green_colors_song2            
+0000025a  orange_colors_song1           
+0000026c  orange_colors_song2           
+0000027e  red_colors_song1              
+00000290  red_colors_song2              
+000002a2  songDuration_intro            
+000002b4  songDuration_song1            
+000002c6  songDuration_song2            
+000002d8  yellow_colors_song1           
+000002ea  yellow_colors_song2           
+000002fc  song1                         
+00000308  song2                         
+00000314  stop                          
+0000031e  end_frame                     
+00000322  counter                       
+00000324  next                          
+00000326  start_frame                   
+0000032a  enter                         
+0000032e  b_led1                        
+00000330  b_led2                        
+00000332  b_led3                        
+00000334  b_led4                        
+00000336  b_led5                        
+00000338  b_led6                        
+0000033a  b_led7                        
+0000033c  b_note_position               
+0000033e  current_note                  
+00000340  duration_position             
+00000342  g_led1                        
+00000344  g_led2                        
+00000346  g_led3                        
+00000348  g_led4                        
+0000034a  g_led5                        
+0000034c  g_led6                        
+0000034e  g_led7                        
+00000350  g_note_position               
+00000352  o_led1                        
+00000354  o_led2                        
+00000356  o_led3                        
+00000358  o_led4                        
+0000035a  o_led5                        
+0000035c  o_led6                        
+0000035e  o_led7                        
+00000360  o_note_position               
+00000362  orange_next                   
+00000364  play_song1                    
+00000366  play_song2                    
+00000368  r_led1                        
+0000036a  r_led2                        
+0000036c  r_led3                        
+0000036e  r_led4                        
+00000370  r_led5                        
+00000372  r_led6                        
+00000374  r_led7                        
+00000376  r_note_position               
+00000378  ready_for_next                
+0000037a  shift_leds_flag               
+0000037c  songLength                    
+0000037e  state                         
+00000380  stop_song                     
+00000382  y_led1                        
+00000384  y_led2                        
+00000386  y_led3                        
+00000388  y_led4                        
+0000038a  y_led5                        
+0000038c  y_led6                        
+0000038e  y_led7                        
+00000390  y_note_position               
 000003b0  _stack                        
 00000400  __STACK_END                   
 000010c0  TLV_CHECKSUM                  
@@ -723,88 +749,88 @@ address   name
 000010fe  CALDCO_1MHZ                   
 000010ff  CALBC1_1MHZ                   
 0000c000  shift_leds                    
-0000c15c  next_note                     
-0000c22c  main                          
-0000c2fa  set_blue                      
-0000c37c  set_green                     
-0000c3fe  set_orange                    
-0000c480  set_red                       
-0000c502  set_yellow                    
-0000c584  __TI_decompress_lzss          
-0000c600  Timer_A                       
-0000c650  __mspabi_srli                 
-0000c65e  __mspabi_srli_15              
-0000c662  __mspabi_srli_14              
-0000c666  __mspabi_srli_13              
-0000c66a  __mspabi_srli_12              
-0000c66e  __mspabi_srli_11              
-0000c672  __mspabi_srli_10              
-0000c676  __mspabi_srli_9               
-0000c67a  __mspabi_srli_8               
-0000c67e  __mspabi_srli_7               
-0000c682  __mspabi_srli_6               
-0000c686  __mspabi_srli_5               
-0000c68a  __mspabi_srli_4               
-0000c68e  __mspabi_srli_3               
-0000c692  __mspabi_srli_2               
-0000c696  __mspabi_srli_1               
-0000c69c  __TI_auto_init_nobinit_nopinit
-0000c6de  PlaySound                     
-0000c712  MusicInit                     
-0000c744  init_board_communication      
-0000c774  PlaySong                      
-0000c7a0  __mspabi_slli                 
-0000c7ac  __mspabi_slli_15              
-0000c7ae  __mspabi_slli_14              
-0000c7b0  __mspabi_slli_13              
-0000c7b2  __mspabi_slli_12              
-0000c7b4  __mspabi_slli_11              
-0000c7b6  __mspabi_slli_10              
-0000c7b8  __mspabi_slli_9               
-0000c7ba  __mspabi_slli_8               
-0000c7bc  __mspabi_slli_7               
-0000c7be  __mspabi_slli_6               
-0000c7c0  __mspabi_slli_5               
-0000c7c2  __mspabi_slli_4               
-0000c7c4  __mspabi_slli_3               
-0000c7c6  __mspabi_slli_2               
-0000c7c8  __mspabi_slli_1               
-0000c7cc  playsong1                     
-0000c7f6  playsong2                     
-0000c820  rgb_init_spi                  
-0000c84a  init_buttons                  
-0000c870  rgb_send_frame                
-0000c896  _c_int00_noargs               
-0000c8b2  __TI_zero_init_nomemset       
-0000c8c6  init_timerA                   
-0000c8da  ser_output                    
-0000c8ee  StopSong                      
-0000c900  __TI_decompress_none          
-0000c912  memcpy                        
-0000c924  rgb_send_end                  
-0000c934  __mspabi_func_epilog_7        
-0000c936  __mspabi_func_epilog_6        
-0000c938  __mspabi_func_epilog_5        
-0000c93a  __mspabi_func_epilog_4        
-0000c93c  __mspabi_func_epilog_3        
-0000c93e  __mspabi_func_epilog_2        
-0000c940  __mspabi_func_epilog_1        
-0000c944  rgb_send_start                
-0000c950  __TI_ISR_TRAP                 
-0000c958  C$$EXIT                       
-0000c958  abort                         
-0000c95e  _system_pre_init              
-0000c962  _system_post_cinit            
-0000c964  blue                          
-0000c96c  green                         
-0000c974  orange                        
-0000c97c  red                           
-0000c984  yellow                        
-0000c9cc  __TI_Handler_Table_Base       
-0000c9d2  __TI_Handler_Table_Limit      
-0000c9d6  __TI_CINIT_Base               
-0000c9de  __TI_CINIT_Limit              
-0000c9de  __TI_CINIT_Warm               
+0000c13e  main                          
+0000c278  next_note                     
+0000c348  __TI_decompress_lzss          
+0000c3c4  Timer_A                       
+0000c43a  set_blue                      
+0000c4ae  set_green                     
+0000c522  set_orange                    
+0000c596  set_red                       
+0000c60a  set_yellow                    
+0000c67e  __mspabi_srli                 
+0000c68c  __mspabi_srli_15              
+0000c690  __mspabi_srli_14              
+0000c694  __mspabi_srli_13              
+0000c698  __mspabi_srli_12              
+0000c69c  __mspabi_srli_11              
+0000c6a0  __mspabi_srli_10              
+0000c6a4  __mspabi_srli_9               
+0000c6a8  __mspabi_srli_8               
+0000c6ac  __mspabi_srli_7               
+0000c6b0  __mspabi_srli_6               
+0000c6b4  __mspabi_srli_5               
+0000c6b8  __mspabi_srli_4               
+0000c6bc  __mspabi_srli_3               
+0000c6c0  __mspabi_srli_2               
+0000c6c4  __mspabi_srli_1               
+0000c6ca  __TI_auto_init_nobinit_nopinit
+0000c70c  MusicInit                     
+0000c73e  init_board_communication      
+0000c76e  PlaySong                      
+0000c79a  __mspabi_slli                 
+0000c7a6  __mspabi_slli_15              
+0000c7a8  __mspabi_slli_14              
+0000c7aa  __mspabi_slli_13              
+0000c7ac  __mspabi_slli_12              
+0000c7ae  __mspabi_slli_11              
+0000c7b0  __mspabi_slli_10              
+0000c7b2  __mspabi_slli_9               
+0000c7b4  __mspabi_slli_8               
+0000c7b6  __mspabi_slli_7               
+0000c7b8  __mspabi_slli_6               
+0000c7ba  __mspabi_slli_5               
+0000c7bc  __mspabi_slli_4               
+0000c7be  __mspabi_slli_3               
+0000c7c0  __mspabi_slli_2               
+0000c7c2  __mspabi_slli_1               
+0000c7c6  playsong1                     
+0000c7f0  playsong2                     
+0000c81a  rgb_init_spi                  
+0000c844  PlaySound                     
+0000c86c  init_buttons                  
+0000c892  rgb_send_frame                
+0000c8b0  _c_int00_noargs               
+0000c8cc  __TI_zero_init_nomemset       
+0000c8e0  init_timerA                   
+0000c8f4  ser_output                    
+0000c908  __TI_decompress_none          
+0000c91a  memcpy                        
+0000c92c  StopSong                      
+0000c93c  rgb_send_end                  
+0000c94c  __mspabi_func_epilog_7        
+0000c94e  __mspabi_func_epilog_6        
+0000c950  __mspabi_func_epilog_5        
+0000c952  __mspabi_func_epilog_4        
+0000c954  __mspabi_func_epilog_3        
+0000c956  __mspabi_func_epilog_2        
+0000c958  __mspabi_func_epilog_1        
+0000c95c  rgb_send_start                
+0000c966  __TI_ISR_TRAP                 
+0000c96e  C$$EXIT                       
+0000c96e  abort                         
+0000c974  _system_pre_init              
+0000c978  _system_post_cinit            
+0000c97a  blue                          
+0000c982  green                         
+0000c98a  orange                        
+0000c992  red                           
+0000c99a  yellow                        
+0000c9e4  __TI_Handler_Table_Base       
+0000c9ea  __TI_Handler_Table_Limit      
+0000c9ee  __TI_CINIT_Base               
+0000c9f6  __TI_CINIT_Limit              
+0000c9f6  __TI_CINIT_Warm               
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -824,4 +850,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start          
 ffffffff  __c_args__                    
 
-[266 symbols]
+[274 symbols]

@@ -8,25 +8,32 @@
  */
 
 #define Q 10
-#define buffer 2
+#define buffer 8
+//
+unsigned int color_intro[] = {0,1,0,1,0,1,0,1,0};
+unsigned int songDuration_intro[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
+//unsigned int (*green_colors)[];
+//unsigned int (*red_colors)[];
+//unsigned int (*yellow_colors)[];
+//unsigned int (*blue_colors)[];
+//unsigned int (*orange_colors)[];
+//unsigned int (*songDuration)[];
 
+unsigned int green_colors_song1[] = {1,1,1,0,0,0,1,1,1};
+unsigned int red_colors_song1[]   = {0,0,0,1,1,1,0,0,0};
+unsigned int yellow_colors_song1[]= {0,0,0,0,0,0,0,0,0};
+unsigned int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0};
+unsigned int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0};
+unsigned int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
-//1 is on, 0 is off
-int green_colors[] = {0,1,0,0,0,0,0,0,0};
-int red_colors[]   = {0,0,1,0,0,0,0,0,1};
-int yellow_colors[]= {0,0,0,1,0,0,0,1,0};
-int blue_colors[]  = {0,0,0,0,1,0,1,0,0};
-int orange_colors[]= {0,0,0,0,0,1,0,0,0};
-int songDuration[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+unsigned int green_colors_song2[] = {0,0,0,0,0,0,0,0,0};
+unsigned int red_colors_song2[]   = {0,0,0,0,0,0,0,0,0};
+unsigned int yellow_colors_song2[]= {0,0,0,0,0,0,0,0,0};
+unsigned int blue_colors_song2[]  = {1,1,1,1,1,1,1,1,1};
+unsigned int orange_colors_song2[]= {0,0,0,0,0,0,0,0,0};
+unsigned int songDuration_song2[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
-
-int green_colors_song1[] = {1,1,1,0,0,0,0,0,0};
-int red_colors_song1[]   = {0,0,0,1,1,1,0,0,1};
-int yellow_colors_song1[]= {0,0,0,0,0,0,0,1,0};
-int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0};
-int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0};
-int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
 extern const uint8_t green;
 extern const uint8_t red;
@@ -34,8 +41,8 @@ extern const uint8_t yellow;
 extern const uint8_t blue;
 extern const uint8_t orange;
 
-int songLength = sizeof(green_colors) / sizeof(green_colors[0]);
-
+//int songLength = sizeof(&green_colors) / sizeof(green_colors[0]);
+int songLength;
 //----------------------
 int user_LED_1;
 int user_LED_2;
@@ -93,7 +100,7 @@ int strummer;
 int counter = 0;
 
 
-int current_note;
+unsigned int current_note;
 int songLength;
 //keeps track of notes in array
 int *g_note_position;
@@ -246,7 +253,17 @@ int main(void)
 
     _enable_interrupts();
 
-    PlaySound(green_colors, red_colors, yellow_colors, blue_colors, orange_colors, songDuration, songLength);
+//    green_colors = &color_intro;
+//    red_colors = &color_intro;
+//    yellow_colors =&color_intro;
+//    blue_colors = &color_intro;
+//    orange_colors = &color_intro;
+//    songDuration = &songDuration_intro;
+//    songLength = sizeof(&color_intro);
+    songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+    PlaySound(color_intro, color_intro, color_intro, color_intro, color_intro, songDuration_intro, songLength);
+
+
 
     MusicInit();
         //ways to change difficulty could be no need to change song array maybe?
@@ -257,7 +274,11 @@ int main(void)
         if (state == Game){
             if (stop_song == 1){
                 StopSong();
+                play_song1 = 0;
+                play_song2 = 0;
                 state = Intro;
+                songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+                PlaySound(color_intro, color_intro, color_intro, color_intro, color_intro, songDuration_intro, songLength);
                 stop_song = 0;
             }
             next_note(green_next, red_next, yellow_next, blue_next, orange_next);
@@ -267,12 +288,28 @@ int main(void)
             }
         }
         else if (state == Intro){
+            next_note(green_next, red_next, yellow_next, blue_next, orange_next);
+            if(shift_leds_flag){
+                shift_leds();
+                shift_leds_flag = 0;
+            }
             if (play_song1 == 1){
                 state = Game;
                 PlaySong(1);
                 counter = 0;
                 current_note = 0;
-                play_song1 = 0;
+
+
+//
+//                memcpy(green_colors, green_colors_song1, sizeof(green_colors_song1));
+//                red_colors = red_colors_song1;
+//                yellow_colors = yellow_colors_song1;
+//                blue_colors = blue_colors_song1;
+//                orange_colors = orange_colors_song1;
+//                songDuration = songDuration_song1;
+
+                songLength = sizeof(green_colors_song1) / sizeof(green_colors_song1[0]);
+                PlaySound(green_colors_song1, red_colors_song1, yellow_colors_song1, blue_colors_song1, orange_colors_song1, songDuration_song1, songLength);
                 // have code to assign the LEDs to the correct values here
             }
             else if (play_song2 == 1){
@@ -280,7 +317,16 @@ int main(void)
                 PlaySong(2);
                 counter = 0;
                 current_note = 0;
-                play_song2 = 0;
+
+//                green_colors = green_colors_song2;
+//                red_colors = red_colors_song2;
+//                yellow_colors = yellow_colors_song2;
+//                blue_colors = blue_colors_song2;
+//                orange_colors = orange_colors_song2;
+//                songDuration = songDuration_song2;
+
+                songLength = sizeof(green_colors_song2) / sizeof(green_colors_song2[0]);
+                PlaySound(green_colors_song2, red_colors_song2, yellow_colors_song2, blue_colors_song2, orange_colors_song2, songDuration_song2, songLength);
                 // have code to assign the LEDs to the correct values here
             }
         }
@@ -292,17 +338,25 @@ int main(void)
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void)
 {
-    if (state == Game)
+    if (state == Game | state == Intro)
     {
         counter ++;
-        if (counter == songDuration[current_note] - buffer){
-            P2OUT |= BIT7; // send out message accept_input
+        int curr_durr;
+        if(play_song1){
+            curr_durr = songDuration_song1[current_note];
         }
-        if (counter == buffer){
-            P2OUT &= ~BIT7; // stop message accept_input
+        else if (play_song2){
+            curr_durr = songDuration_song2[current_note];
         }
-        if (counter > songDuration[current_note]){
+        else{
+            curr_durr = songDuration_intro[current_note];
+        }
+        if (counter == 0){
+            P2OUT &= ~BIT7; // stop message increment_counter
+        }
+        if (counter > curr_durr){
             shift_leds_flag = 1;
+            P2OUT |= BIT7; // send out message increment_counter
             counter = 0;
         }
     }
