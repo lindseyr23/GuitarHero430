@@ -270,12 +270,16 @@ int main(void)
             if (play_song1 == 1){
                 state = Game;
                 PlaySong(1);
+                counter = 0;
+                current_note = 0;
                 play_song1 = 0;
                 // have code to assign the LEDs to the correct values here
             }
             else if (play_song2 == 1){
                 state = Game;
                 PlaySong(2);
+                counter = 0;
+                current_note = 0;
                 play_song2 = 0;
                 // have code to assign the LEDs to the correct values here
             }
