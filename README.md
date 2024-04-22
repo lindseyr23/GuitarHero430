@@ -6,10 +6,12 @@
 2. [Team Members](#team-members)
 3. [Materials](#materials)
 4. [Schematic](#schematic)
-5. [Setting up the LED Displays](#setting-up-the-led-displays)
+5. [File Descriptions](#file-descriptions)
+6. [Setting up the LED Displays](#setting-up-the-led-displays)
    - [LED Game Display](#led-game-display)
    - [LED User Display Setup Guide](#led-user-display-setup-guide)
-6. [Repo File Descriptions](#repo-file-descriptions)
+   - [3D-printed Strummer]()
+   - [3d-printed LED game display]()
 7. [References](#references)
 #### Note:
 Consider adding STL files or additional notes here.
@@ -36,6 +38,35 @@ This project aims to
 
 ### Schematic
 ![Schematic](./Schematic_guitarhero.png)
+
+----
+## File Descriptions
+
+### Board_1
+
+* **Game Logic:**
+  - [main.c](./Experimental_Work/game_logic/main.c): File handling the game logic.
+  - [rgb_interface_user.c](./Experimental_Work/game_logic/rgb_interface_user.c): File handling the RGB interface for user interaction.
+  - [rgb_interface_user.h](./Experimental_Work/game_logic/rgb_interface_user.h): Header file for RGB interface.
+
+* **Serial Communication:**
+  - [serial_comm.c](./Experimental_Work/game_logic/serial_comm.c): File handling serial communication.
+  - [serial_comm.h](./Experimental_Work/game_logic/serial_comm.h): Header file for serial communication.
+
+### Board 2
+
+* **Game Display Logic:**
+  - [main.c](./Experimental_Work/board_2/main.c): File handling the game logic.
+  - [rgb_interface.c](./Experimental_Work/board_2/rgb_interface.c): File handling the RGB interface.
+  - [rgb_interface.h](./Experimental_Work/board_2/rgb_interface.h): Header file for RGB interface.
+
+* **Audio:**
+  - [PlaySong.c](./Experimental_Work/board_2/PlaySong.c): File handling audio playback.
+  - [PlaySong.h](./Experimental_Work/board_2/PlaySong.h): Header file for audio playback.
+
+### Experimental_Work 
+<i>Please ignore this folder. This is code that is currently in progress. </i>
+
 
 --- 
 
@@ -109,34 +140,6 @@ This project aims to
 
 
 **ADD PICTURE OF FINISHED PRODUCT HERE**
-
-----
-## File Descriptions
-
-### Board_1
-
-* **Game Logic:**
-  - [main.c](./Experimental_Work/game_logic/main.c): File handling the game logic.
-  - [rgb_interface_user.c](./Experimental_Work/game_logic/rgb_interface_user.c): File handling the RGB interface for user interaction.
-  - [rgb_interface_user.h](./Experimental_Work/game_logic/rgb_interface_user.h): Header file for RGB interface.
-
-* **Serial Communication:**
-  - [serial_comm.c](./Experimental_Work/game_logic/serial_comm.c): File handling serial communication.
-  - [serial_comm.h](./Experimental_Work/game_logic/serial_comm.h): Header file for serial communication.
-
-### Board 2
-
-* **Game Display Logic:**
-  - [main.c](./Experimental_Work/board_2/main.c): File handling the game logic.
-  - [rgb_interface.c](./Experimental_Work/board_2/rgb_interface.c): File handling the RGB interface.
-  - [rgb_interface.h](./Experimental_Work/board_2/rgb_interface.h): Header file for RGB interface.
-
-* **Audio:**
-  - [PlaySong.c](./Experimental_Work/board_2/PlaySong.c): File handling audio playback.
-  - [PlaySong.h](./Experimental_Work/board_2/PlaySong.h): Header file for audio playback.
-
-### Experimental_Work 
-<i>Please ignore this folder. This is code that is currently in progress. </i>
 
 ---
 
