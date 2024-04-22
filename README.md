@@ -20,9 +20,10 @@ This project aims to
 
 * 2x TI LaunchPad Kit with MSP430 (MSP-EXP430G2ET)
 * SK9822 LED Strips
-* 2x 4.4k Resistors
 * Solderless Breadboard
 * Jumper wires
+* SunFounder I2C LCD1602 Module
+* 2x 4.4k Resistors
 
 ### Schematic
 <p align="center">
