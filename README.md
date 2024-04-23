@@ -24,7 +24,7 @@ This project aims to
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
-- Lindesy Russ     | ltr1@rice.edu
+- Lindsey Russ     | ltr1@rice.edu
 ---
 
 ### Materials
