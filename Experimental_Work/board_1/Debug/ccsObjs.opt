@@ -1,0 +1,8 @@
+"./i2c.obj"
+"./lcd.obj"
+"./main.obj"
+"./rgb_interface_user.obj"
+"./serial_comm.obj"
+"./ultrasonic.obj"
+"../lnk_msp430g2553.cmd"
+-llibc.a
