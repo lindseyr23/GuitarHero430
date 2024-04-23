@@ -22,7 +22,7 @@ extern int led_5;
 extern int reset;
 
 //int song;
-int current_note;
+unsigned int current_note;
 extern int songLength;
 extern int *note_position;
 extern int *g_note_position;
@@ -37,19 +37,19 @@ void rgb_send_frame(const uint8_t *frame1, bool wait_for_completion);
 void rgb_send_start();
 void rgb_send_end();
 
-void set_green(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
-void set_red(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
-void set_yellow(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
-void set_blue(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
-void set_orange(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
-void ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
+void set_green(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7);
+void set_red(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7);
+void set_yellow(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7);
+void set_blue(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7);
+void set_orange(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5, unsigned int led6, unsigned int led7);
+void ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
 
-void g_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
-void r_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
-void y_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
-void b_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
-void o_ripple(int next_seq, int led_1, int led_2, int led_3, int led_4, int led_5, int led_6, int led_7);
+void g_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
+void r_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
+void y_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
+void b_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
+void o_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
 
-void PlaySound(int *g_notes, int *r_notes, int *y_notes, int *b_notes, int *o_notes, int *duration, int length);
+void PlaySound(unsigned int *g_notes, unsigned int *r_notes, unsigned int *y_notes, unsigned int *b_notes, unsigned int *o_notes, unsigned int *duration, unsigned int length);
 
 #endif /* RGB_INTERFACE_H_ */
