@@ -24,7 +24,7 @@ This project aims to
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
-- Lindesy Russ     | ltr1@rice.edu
+- Lindsey Russ     | ltr1@rice.edu
 ---
 
 ### Materials
@@ -35,6 +35,7 @@ This project aims to
 * Solderless Breadboard
 * 2x 4.4k Resistors
 * Jumper wires
+* Enameled wire
 
 ### Schematic
 ![Schematic](./Schematic_guitarhero.png)
@@ -78,7 +79,7 @@ This project aims to
 #### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
-- **cable thing**
+- Enameled wire
 - Heat shrink tubing
 - Electrical Tape
 
@@ -97,14 +98,14 @@ This project aims to
    - Solder female connectors to the other end of the jumper wires for this LED strip.
 
 4. **Connect LED Strips:**
-   - For the remaining four strips, connect each strip to the previous one using **cablething**:
+   - For the remaining four strips, connect each strip to the previous one using enameled wire:
      - Connect G to G, C to C, D to D, and 5V to 5V.
-     - Hide the **cablething** behind the LED strips.
+     - Hide the enameled wire connections behind the LED strips.
      - Daisy-chain the five LED strips together, ending with the jumper wires side.
 
 
 5. **Secure Connections:**
-   - Use electrical tape to secure the **CableThing** behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
+   - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 
 **ADD PICTURE OF FINISHED PRODUCT HERE**

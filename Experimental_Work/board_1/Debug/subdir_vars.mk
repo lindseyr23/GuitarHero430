@@ -13,47 +13,41 @@ C_SRCS += \
 ../lcd.c \
 ../main.c \
 ../rgb_interface_user.c \
-../serial_comm.c \
-../ultrasonic.c 
+../serial_comm.c 
 
 C_DEPS += \
 ./i2c.d \
 ./lcd.d \
 ./main.d \
 ./rgb_interface_user.d \
-./serial_comm.d \
-./ultrasonic.d 
+./serial_comm.d 
 
 OBJS += \
 ./i2c.obj \
 ./lcd.obj \
 ./main.obj \
 ./rgb_interface_user.obj \
-./serial_comm.obj \
-./ultrasonic.obj 
+./serial_comm.obj 
 
 OBJS__QUOTED += \
 "i2c.obj" \
 "lcd.obj" \
 "main.obj" \
 "rgb_interface_user.obj" \
-"serial_comm.obj" \
-"ultrasonic.obj" 
+"serial_comm.obj" 
 
 C_DEPS__QUOTED += \
 "i2c.d" \
 "lcd.d" \
 "main.d" \
 "rgb_interface_user.d" \
-"serial_comm.d" \
-"ultrasonic.d" 
+"serial_comm.d" 
 
 C_SRCS__QUOTED += \
 "../i2c.c" \
 "../lcd.c" \
 "../main.c" \
 "../rgb_interface_user.c" \
-"../serial_comm.c" \
-"../ultrasonic.c" 
+"../serial_comm.c" 
 
 

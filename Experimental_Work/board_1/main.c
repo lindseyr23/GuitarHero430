@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include "rgb_interface_user.h"
 //------------------------------
 #include "lcd.h"
@@ -130,14 +131,15 @@ int main()
 {
     WDTCTL = WDTPW + WDTHOLD; // Stop watchdog
 
-    init_buttons();     
+
     rgb_init_spi(); //from rgb_interface.c
-    init_board_communication();
-    
+
     __enable_interrupt(); // enable interrupts
 
     LcdInit(); // initialize LCD display
 
+    init_buttons();
+    init_board_communication();
     current_note = 0;
     score = 0;
     char game_song_text[20]; // buffer
