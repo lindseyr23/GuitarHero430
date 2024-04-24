@@ -22,21 +22,15 @@ extern int led_5;
 extern int reset;
 
 //int song;
-int current_note;
-extern int songLength;
-//extern int *note_position;
-//extern int *g_note_position;
-//extern int *r_note_position;
-//extern int *y_note_position;
-//extern int *b_note_position;
-//extern int *o_note_position;
-//extern int *duration_position;
+extern volatile unsigned int current_note;
+extern unsigned int songLength;
+
 
 void rgb_init_spi(void);
 void rgb_send_frame(const uint8_t *frame1, bool wait_for_completion);
 void rgb_send_start();
 void rgb_send_end();
-void set_temperature(int led1, int led2, int led3, int led4, int led5);
+void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5);
 
 //void set_green(int led1, int led2, int led3, int led4, int led5, int led6, int led7);
 //void set_red(int led1, int led2, int led3, int led4, int led5, int led6, int led7);

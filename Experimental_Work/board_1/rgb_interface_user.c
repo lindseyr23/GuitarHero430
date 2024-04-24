@@ -78,7 +78,7 @@ void rgb_send_end() {
     ready_for_next = 1;//flag to be ready for next
 }
 
-void set_temperature(int led1, int led2, int led3, int led4, int led5)
+void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5)
 {
     //change color
     rgb_send_start();

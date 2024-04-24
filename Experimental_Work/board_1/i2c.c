@@ -1,3 +1,8 @@
+// Code originally from:
+// https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master
+// Then modified by Joe Young
+
+
 #include "i2c.h"
 #include "msp430g2553.h"
 
