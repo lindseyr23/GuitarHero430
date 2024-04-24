@@ -96,6 +96,7 @@ int led2;
 int led3;
 int led4;
 int led5;
+int miss_count;
 
 int song; //takes 1 for song1, 2 for song 2
 
@@ -119,7 +120,12 @@ void check_input(){
 
     if (led1 == user_LED_1 & led2 == user_LED_2 & led3 == user_LED_3 & led4 == user_LED_4 & led5 == user_LED_5){
         score += 10;
+        miss_count = 0;
     }
+    else{
+        miss_count += 1;
+    }
+
 }
 
 void play_song1(int a){ // if a is 1 it starts the song, if a is 0 it stops the song
@@ -173,6 +179,7 @@ void main(void){
     current_note = 0;
     score = 0;
     accept_input = 0;
+    miss_count = 0;
 
     _enable_interrupts();
 
@@ -202,12 +209,12 @@ void main(void){
         {
             if (user_LED_1 & user_LED_2 & user_LED_3 & user_LED_4)
             {
-                play_song1(0); //starts the song
-                play_song2(0); //starts the song
+                play_song1(0); //stops the song
+                play_song2(0); //stops the song
             }
             if (strummer){
                       check_input();
-                  }
+            }
         }
 //        else if (state == Lost)
 //        {

@@ -1,0 +1,8 @@
+"./i2c.obj"
+"./lcd.obj"
+"./main.obj"
+"./rgb_interface_user.obj"
+"./serial_comm.obj"
+"../lnk_msp430fr2433.cmd"
+-llibmath.a
+-llibc.a

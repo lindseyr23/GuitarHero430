@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS
+CG_TOOL_ROOT := C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -15,7 +15,6 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./rgb_interface_user.obj" \
 "./serial_comm.obj" \
-"./ultrasonic.obj" \
 "../lnk_msp430g2553.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -125,29 +124,29 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-young_scoreboard_template.out 
+board_1.out \
 
 EXE_OUTPUTS__QUOTED += \
-"young_scoreboard_template.out" 
+"board_1.out" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "young_scoreboard_template.out"
+	@$(MAKE) --no-print-directory -Onone "board_1.out"
 
 # Tool invocations
-young_scoreboard_template.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+board_1.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: MSP430 Linker'
-	"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/cl430" -vmsp --use_hw_mpy=none --advice:power=all --define=__MSP430G2553__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number -z -m"young_scoreboard_template.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccs1260/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib" -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="young_scoreboard_template_linkInfo.xml" --use_hw_mpy=none --rom_model -o "young_scoreboard_template.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/cl430" -vmsp --use_hw_mpy=none --advice:power=all --define=__MSP430G2553__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number -z -m"board_1.map" --heap_size=80 --stack_size=80 -i"C:/ti/ccs1250/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib" -i"C:/ti/ccs1250/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="board_1_linkInfo.xml" --use_hw_mpy=none --rom_model -o "board_1.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "i2c.obj" "lcd.obj" "main.obj" "rgb_interface_user.obj" "serial_comm.obj" "ultrasonic.obj" 
-	-$(RM) "i2c.d" "lcd.d" "main.d" "rgb_interface_user.d" "serial_comm.d" "ultrasonic.d" 
+	-$(RM) "i2c.obj" "lcd.obj" "main.obj" "rgb_interface_user.obj" "serial_comm.obj" 
+	-$(RM) "i2c.d" "lcd.d" "main.d" "rgb_interface_user.d" "serial_comm.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

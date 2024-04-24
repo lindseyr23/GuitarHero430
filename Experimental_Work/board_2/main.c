@@ -13,6 +13,15 @@
 unsigned int color_intro[] = {0,1,0,1,0,1,0,1,0};
 unsigned int songDuration_intro[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
+unsigned int red_lost[] = {1,1,1,1,1,1,1};
+unsigned int yellow_lost[] = {1,0,0,1,0,0,1};
+unsigned int blue_lost[] = {0,1,1,0,1,1,0};
+unsigned int other_color_lost[] = {0,0,0,0,0,0,0};
+unsigned int songDuration_lost[] = {Q,Q,Q,Q,Q,Q,Q};
+
+unsigned int color_win[] = {0,1,0,1,0,1,0,1,0};
+unsigned int songDuration_win[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+
 //unsigned int (*green_colors)[];
 //unsigned int (*red_colors)[];
 //unsigned int (*yellow_colors)[];
@@ -20,20 +29,33 @@ unsigned int songDuration_intro[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
 //unsigned int (*orange_colors)[];
 //unsigned int (*songDuration)[];
 
-unsigned int green_colors_song1[] = {1,1,1,0,0,0,1,1,1};
-unsigned int red_colors_song1[]   = {0,0,0,1,1,1,0,0,0};
-unsigned int yellow_colors_song1[]= {0,0,0,0,0,0,0,0,0};
-unsigned int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0};
-unsigned int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0};
-unsigned int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+//unsigned int green_colors_song1[] = {1,1,1,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,1,1,1};
+//unsigned int red_colors_song1[]   = {0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0};
+//unsigned int yellow_colors_song1[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+//unsigned int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+//unsigned int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+//unsigned int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
-unsigned int green_colors_song2[] = {0,0,0,0,0,0,0,0,0};
-unsigned int red_colors_song2[]   = {0,0,0,0,0,0,0,0,0};
-unsigned int yellow_colors_song2[]= {0,0,0,0,0,0,0,0,0};
-unsigned int blue_colors_song2[]  = {1,1,1,1,1,1,1,1,1};
-unsigned int orange_colors_song2[]= {0,0,0,0,0,0,0,0,0};
-unsigned int songDuration_song2[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+unsigned int green_colors_song1[] = {1,1,1,0,0,0,1,1,1,0,0,0,1,1,1};
+unsigned int red_colors_song1[]   = {0,0,0,1,1,1,0,0,0,1,1,1,0,0,0};
+unsigned int yellow_colors_song1[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+unsigned int blue_colors_song1[]  = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+unsigned int orange_colors_song1[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+unsigned int songDuration_song1[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q,Q};
 
+//unsigned int green_colors_song2[] = {0,0,0,0,0,0,0,0,0};
+//unsigned int red_colors_song2[]   = {0,0,0,0,0,0,0,0,0};
+//unsigned int yellow_colors_song2[]= {0,0,0,0,0,0,0,0,0};
+//unsigned int blue_colors_song2[]  = {1,1,1,1,1,1,1,1,1};
+//unsigned int orange_colors_song2[]= {0,0,0,0,0,0,0,0,0};
+//unsigned int songDuration_song2[] = {Q,Q,Q,Q,Q,Q,Q,Q,Q};
+
+unsigned int green_colors_song2[] = {0};
+unsigned int red_colors_song2[]   = {0};
+unsigned int yellow_colors_song2[]= {0};
+unsigned int blue_colors_song2[]  = {1};
+unsigned int orange_colors_song2[]= {0};
+unsigned int songDuration_song2[] = {Q};
 
 extern const uint8_t green;
 extern const uint8_t red;
@@ -149,7 +171,15 @@ void init_buttons() {
 }
 
 void shift_leds(){
-    if ((current_note < songLength-1) & ready_for_next){
+    if (state == Game & current_note >= songLength-1){
+        StopSong();
+        play_song1 = 0;
+        play_song2 = 0;
+        songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+        PlaySound(color_intro, color_intro, color_intro, color_intro, color_intro, songDuration_intro, songLength);
+        state = Win;
+    }
+    else if ((current_note < songLength-1) & ready_for_next){
         //move to new note
         duration_position = 1 + duration_position;
 
@@ -204,14 +234,16 @@ void shift_leds(){
     } else{
         // COULD HAVE END SONG ANIMATION? instead of looping
         //start at beginning of song
-        g_note_position = g_note_position - current_note;
-        r_note_position = r_note_position - current_note;
-        y_note_position = y_note_position - current_note;
-        b_note_position = b_note_position - current_note;
-        o_note_position = o_note_position - current_note;
+            g_note_position = g_note_position - current_note;
+            r_note_position = r_note_position - current_note;
+            y_note_position = y_note_position - current_note;
+            b_note_position = b_note_position - current_note;
+            o_note_position = o_note_position - current_note;
 
-        duration_position = duration_position - current_note;
-        current_note = 0; // Reset current_note to start at the first note
+            duration_position = duration_position - current_note;
+            current_note = 0; // Reset current_note to start at the first note
+
+
     }
 
 }
@@ -225,15 +257,24 @@ void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) 
     // listen for low to high transition to start the songs
     P2IES &= ~BIT1;
     P1IES &= ~BIT3;
-    // clear any pending interrupts
-    P2IFG &=  ~BIT1;
-    P1IFG &= ~BIT3;
+
     // enable interrupts for these pins
     P2IE |= BIT1;
     P1IE |= BIT3;
 
     P2REN |= BIT1;
     P2OUT |= BIT1;
+
+    P2OUT |= BIT7; // set pin2.7 to 1
+
+    // make sure it starts at low
+    P2IN &= ~BIT1;
+    P1IN &= ~BIT3;
+
+
+    // clear any pending interrupts
+    P2IFG &= ~BIT1;
+    P1IFG &= ~BIT3;
 }
 
 int main(void)
@@ -253,13 +294,6 @@ int main(void)
 
     _enable_interrupts();
 
-//    green_colors = &color_intro;
-//    red_colors = &color_intro;
-//    yellow_colors =&color_intro;
-//    blue_colors = &color_intro;
-//    orange_colors = &color_intro;
-//    songDuration = &songDuration_intro;
-//    songLength = sizeof(&color_intro);
     songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
     PlaySound(color_intro, color_intro, color_intro, color_intro, color_intro, songDuration_intro, songLength);
 
@@ -271,14 +305,20 @@ int main(void)
         // else if hard: next_note(green_next, red_next, yellow_next, blue_next, orange_next);
 
     while (1){
+        if (state == Win){
+            state = Intro;
+        }
+        if (state == Lost){
+            state = Intro;
+        }
         if (state == Game){
             if (stop_song == 1){
                 StopSong();
                 play_song1 = 0;
                 play_song2 = 0;
-                state = Intro;
                 songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
                 PlaySound(color_intro, color_intro, color_intro, color_intro, color_intro, songDuration_intro, songLength);
+                state = Lost;
                 stop_song = 0;
             }
             next_note(green_next, red_next, yellow_next, blue_next, orange_next);
@@ -300,17 +340,8 @@ int main(void)
                 current_note = 0;
 
 
-//
-//                memcpy(green_colors, green_colors_song1, sizeof(green_colors_song1));
-//                red_colors = red_colors_song1;
-//                yellow_colors = yellow_colors_song1;
-//                blue_colors = blue_colors_song1;
-//                orange_colors = orange_colors_song1;
-//                songDuration = songDuration_song1;
-
                 songLength = sizeof(green_colors_song1) / sizeof(green_colors_song1[0]);
                 PlaySound(green_colors_song1, red_colors_song1, yellow_colors_song1, blue_colors_song1, orange_colors_song1, songDuration_song1, songLength);
-                // have code to assign the LEDs to the correct values here
             }
             else if (play_song2 == 1){
                 state = Game;
@@ -318,16 +349,8 @@ int main(void)
                 counter = 0;
                 current_note = 0;
 
-//                green_colors = green_colors_song2;
-//                red_colors = red_colors_song2;
-//                yellow_colors = yellow_colors_song2;
-//                blue_colors = blue_colors_song2;
-//                orange_colors = orange_colors_song2;
-//                songDuration = songDuration_song2;
-
                 songLength = sizeof(green_colors_song2) / sizeof(green_colors_song2[0]);
                 PlaySound(green_colors_song2, red_colors_song2, yellow_colors_song2, blue_colors_song2, orange_colors_song2, songDuration_song2, songLength);
-                // have code to assign the LEDs to the correct values here
             }
         }
     }
@@ -340,6 +363,9 @@ __interrupt void Timer_A(void)
 {
     if (state == Game | state == Intro)
     {
+        if (counter == 0){
+            P2OUT |= BIT7; // stop message increment_counter
+        }
         counter ++;
         int curr_durr;
         if(play_song1){
@@ -351,12 +377,9 @@ __interrupt void Timer_A(void)
         else{
             curr_durr = songDuration_intro[current_note];
         }
-        if (counter == 0){
-            P2OUT &= ~BIT7; // stop message increment_counter
-        }
         if (counter > curr_durr){
             shift_leds_flag = 1;
-            P2OUT |= BIT7; // send out message increment_counter
+            P2OUT &= ~BIT7; // send out message increment_counter
             counter = 0;
         }
     }

@@ -58,6 +58,7 @@ int led2;
 int led3;
 int led4;
 int led5;
+int miss_count;
 
 int song; //takes 1 for song1, 2 for song 2
 int debounce_counter;
@@ -81,6 +82,10 @@ void check_input(){
 
     if (led1 == user_LED_1 & led2 == user_LED_2 & led3 == user_LED_3 & led4 == user_LED_4 & led5 == user_LED_5){
         score += 10;
+        miss_count = 0;
+    }
+    else{
+        miss_count += 1;
     }
 }
 
@@ -166,22 +171,55 @@ int main()
             LcdSetPosition(1,2);
             LcdWriteString("GuitarHero 430");
 
-            play_song1(1); //starts the song
-            song = 1;
-            state = Game;
+            if (user_LED_1) //if green is pressed
+            {
+                play_song1(1); //starts the song
+                song = 1;
+//                button_press_detected = 0; //to prevent overlap
+                state = Game;
+            }
+            else if (user_LED_4)// if blue is pressed
+            {
+                play_song2(1); //starts the song
+                song = 2;
+//                button_press_detected = 0; //to prevent overlap
+                state = Game;
+            }
+//
+//            play_song1(1); //starts the song
+//            song = 1;
+//            state = Game;
         }//end of intro
+        else if (state == Lost){
+            // Display the text
+            LcdSetPosition(2,2); //row, rect  start
+            LcdWriteString("Game Over");
+            LcdSetPosition(1,2);
+            LcdWriteString("Press to Restart");
+
+            if (user_LED_1) //if green is pressed
+            {
+                state = Intro;
+            }
+
+        }
         else if (state == Game)
                 {
                     if (user_LED_1 & user_LED_2 & user_LED_3 & user_LED_4)
                     {
-                        play_song1(0); //starts the song
-                        play_song2(0); //starts the song
+                        play_song1(0); //stops the song
+                        play_song2(0); //stops the song
                     }
 
 
                     if (strummer)
                     {
                         check_input();
+                    }
+                    if(miss_count >= 10){
+                        play_song1(0); //stops the song
+                        play_song2(0); //stops the song
+                        state = Lost;
                     }
                     snprintf(game_song_text, sizeof(game_song_text), "Score: %d", score); // format a series of data into a string
                     strcat(game_song_text, "                "); // Concatenate str2 to str1
