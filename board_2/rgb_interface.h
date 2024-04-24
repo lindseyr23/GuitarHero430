@@ -22,9 +22,9 @@ extern int led_5;
 extern int reset;
 
 //int song;
-unsigned int current_note;
-extern int songLength;
-extern int *note_position;
+extern unsigned int current_note;
+extern unsigned int songLength;
+extern unsigned int *note_position;
 //extern int *g_note_position;
 //extern int *r_note_position;
 //extern int *y_note_position;

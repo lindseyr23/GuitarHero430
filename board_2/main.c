@@ -10,10 +10,11 @@
 //#define Q 10
 #define buffer 8
 
-extern const unsigned int song1_fortunate_son[];
-//extern const unsigned int song1Length;   gets calculated later
+extern unsigned int song1_fortunate_son[];
+extern const unsigned int songLength1;//   gets calculated later
 
 unsigned int color_intro[] = {0,1,0,1,0,1,0,1,0};
+unsigned int song_2[] = {0,1,0,1,0,1,0,1,0};
 
 //note durations for each
 const unsigned int introDuration = 10;
@@ -90,9 +91,9 @@ volatile unsigned int counter = 0;
 
 
 unsigned int current_note;
-int songLength;
+unsigned int songLength;
 //keeps track of notes in array
-int *note_position;
+unsigned int *note_position;
 
 enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
 
@@ -369,9 +370,7 @@ int main(void)
                 counter = 0;
                 current_note = 0;
 
-
-//                songLength = sizeof(green_colors_song1) / sizeof(green_colors_song1[0]);
-                songLength = sizeof(song1_fortunate_son) / sizeof(song1_fortunate_son[0]);
+                songLength = songLength1;
                 PlaySound(song1_fortunate_son, songLength);
 //                PlaySound(green_colors_song1, red_colors_song1, yellow_colors_song1, blue_colors_song1, orange_colors_song1, songDuration_song1, songLength);
             }
@@ -381,8 +380,8 @@ int main(void)
                 counter = 0;
                 current_note = 0;
 
-                songLength = sizeof(song2) / sizeof(song2[0]);
-                PlaySound(song2, songLength);
+                songLength = sizeof(song_2) / sizeof(song_2[0]);
+                PlaySound(song_2, songLength);
 //                songLength = sizeof(green_colors_song2) / sizeof(green_colors_song2[0]);
 //                PlaySound(green_colors_song2, red_colors_song2, yellow_colors_song2, blue_colors_song2, orange_colors_song2, songDuration_song2, songLength);
             }
