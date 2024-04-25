@@ -1,6 +1,6 @@
 # Guitar Hero 430
-# Rice University ELEC 327 Final Project Spring '24
 
+## Rice University ELEC 327 Final Project Spring '24
 ## Table of Contents
 1. [Project Description](#project-description)
 2. [Team Members](#team-members)
