@@ -53,12 +53,15 @@ This project aims to
 
 * **Game Logic:**
   - [main.c](./Experimental_Work/game_logic/main.c): File handling the game logic.
+ 
+* **User LED Display Logic:**
   - [rgb_interface_user.c](./Experimental_Work/game_logic/rgb_interface_user.c): File handling the RGB interface for user interaction.
   - [rgb_interface_user.h](./Experimental_Work/game_logic/rgb_interface_user.h): Header file for RGB interface.
 
-* **Serial Communication:**
-  - [serial_comm.c](./Experimental_Work/game_logic/serial_comm.c): File handling serial communication.
-  - [serial_comm.h](./Experimental_Work/game_logic/serial_comm.h): Header file for serial communication.
+* **Scoreboard LCD Display Logic:**
+  - []
+  - []
+
 
 ### Board 2
 
@@ -73,15 +76,13 @@ This project aims to
 
 ### Experimental_Work 
 <i>Please ignore this folder. This is code that is currently in progress. </i>
-
-
 --- 
 
 
 ## Setting up the LED Displays
 
 ### LED Game Display
-
+![LED Game Display](.images/game_led_display.png)
 #### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
@@ -114,9 +115,9 @@ This project aims to
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 
-**ADD PICTURE OF FINISHED PRODUCT HERE**
-
 ## LED User Display Setup Guide
+![LED User Display](.images/user_led_display.png)
+
 ### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
@@ -145,11 +146,9 @@ This project aims to
 ### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
-
-**ADD PICTURE OF FINISHED PRODUCT HERE**
-
 ---
 
 ## References
 
-1. 
+1. **ADD GUITAR STRUM LINK HERE**
+2. - Modified code by Dr.Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
