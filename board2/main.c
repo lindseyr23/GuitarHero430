@@ -139,8 +139,9 @@ void shift_leds(){
         StopSong();
         play_song1 = 0;
         play_song2 = 0;
-        songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-        PlaySound(color_intro, songLength);
+//        songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+//        PlaySound(color_intro, songLength);
+        WinEffect();
         state = Win;
     }
     else if ((current_note < songLength-1) & ready_for_next){
@@ -378,38 +379,35 @@ int main(void)
 
     while (1){
         if (state == Win){
-            WinEffect();
             win_screen();
-        if (stop_song == 1){//stop song sent by board_1
-                StopSong();
-                play_song1 = 0;
-                play_song2 = 0;
-                songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-                PlaySound(color_intro, songLength);
-                state = Intro;
-                stop_song = 0;
-            }
+            if (stop_song == 1){//stop song sent by board_1
+                    StopSong();
+                    play_song1 = 0;
+                    play_song2 = 0;
+                    songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+                    PlaySound(color_intro, songLength);
+                    state = Intro;
+                    stop_song = 0;
+                }
         }
         if (state == Lost){
-            LossEffect();
             loss_screen();
-        if (stop_song == 1){//stop song sent by board_1
-                StopSong();
-                play_song1 = 0;
-                play_song2 = 0;
-                songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-                PlaySound(color_intro, songLength);
-                state = Intro;
-                stop_song = 0;
-            }
+            if (stop_song == 1){//stop song sent by board_1
+                    StopSong();
+                    play_song1 = 0;
+                    play_song2 = 0;
+                    songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+                    PlaySound(color_intro, songLength);
+                    state = Intro;
+                    stop_song = 0;
+                }
         }
         if (state == Game){
             if (stop_song == 1){
                 StopSong();
                 play_song1 = 0;
                 play_song2 = 0;
-                songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-                PlaySound(color_intro, songLength);
+                LossEffect();
                 state = Lost;
                 stop_song = 0;
             }
