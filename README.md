@@ -16,7 +16,9 @@
 7. [References](#references)
 
 ## Project Description 
-This project aims to ...
+This project aims to ecreate the experience of playing the iconic Guitar Hero using MSP430 microcontrollers. Inspired by the popular rhythm-based video game, this project combines hardware interfacing, LED visualization, audio processing, and gameplay logic to create an experience playing along with your favorite songs.
+
+Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates the Guitar Hero gameplay. One LaunchPad serves as the game controller, managing gameplay logic and capturing user input, while providing real-time feedback through an LED display. The other LaunchPad controls LED visualizations and audio output for the song.
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
@@ -25,6 +27,7 @@ This project aims to ...
 ---
 ### Materials
 
+* 2x computers 
 * 2x TI LaunchPad Kit with MSP430 (MSP-EXP430G2ET)
 * 2x 330 Ω Resistors
 * 1x SunFounder I2C LCD1602 Module
