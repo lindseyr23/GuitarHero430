@@ -105,8 +105,9 @@ unsigned int song2[] = {0,1,0,1,0,1,0,1,0};
 
 const unsigned int songLength2 = sizeof(song2) / sizeof(song2[0]);
 
-
 volatile unsigned int current_note;
+volatile unsigned int missed_note;
+volatile unsigned int streak;
 
 int user_LED_1;
 int user_LED_2;
@@ -129,58 +130,108 @@ void check_input(){
         curr_note = song1[current_note];
     }
     else if (song == 2){
-//        curr_note = song2[current_note];
+       curr_note = song2[current_note];
     }
 
         switch(curr_note) { //checks if note is correct
             case 1: //green
                 if (1 == user_LED_1 & 0 == user_LED_2 & 0 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 2://red
                 if (0 == user_LED_1 & 1 == user_LED_2 & 0 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 3: //yellow
                 if (0 == user_LED_1 & 0 == user_LED_2 & 1 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 4: //blue
                 if (0 == user_LED_1 & 0 == user_LED_2 & 0 == user_LED_3 & 1 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 5: //green/red
                 if (1 == user_LED_1 & 1 == user_LED_2 & 0 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 6: //green/yellow
                 if (1 == user_LED_1 & 0 == user_LED_2 & 1 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 7: //green/blue
                 if (1 == user_LED_1 & 0 == user_LED_2 & 0 == user_LED_3 & 1 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 8: //red/yellow
                 if (0 == user_LED_1 & 1 == user_LED_2 & 1 == user_LED_3 & 0 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
             case 9: //red/blue
                 if (0 == user_LED_1 & 1 == user_LED_2 & 0 == user_LED_3 & 1 == user_LED_4){
                     score += 10;
+                    streak++;
                 }
+                else {
+                    missed_note++;
+                    streak = 0;
+                }                
                 break;
             case 10:// yellow/blue
                 if (0 == user_LED_1 & 0 == user_LED_2 & 1 == user_LED_3 & 1 == user_LED_4){
                     score += 10;
+                    streak++;
+                }
+                else {
+                    missed_note++;
+                    streak = 0;
                 }
                 break;
         }//end of case
@@ -267,19 +318,22 @@ int main()
     init_buttons();
     init_board_communication();
     init_timerA();
+
     current_note = 0;
     score = 0;
     duration_counter = 0;
-    char game_song_text[20]; // buffer
+    char game_song_text[20]; // Buffer for display text
 
     state = Intro;
-    // Display the text
+
+    // Display introductory text on LCD
     LcdSetPosition(2,2); //row, rect  start
     LcdWriteString("Press G or B");
 
     LcdSetPosition(1,2);
     LcdWriteString("GuitarHero 430");
-    //stop game
+
+    // Stop playing any ongoing songs
     play_song1(0);
     play_song2(0);
 
@@ -287,7 +341,7 @@ int main()
     {
         if (state == Intro)
         {
-            // Display the text
+            // Display introductory text on LCD
             LcdSetPosition(2,1); //row, rect  start
             LcdWriteString(" Press G or B  ");
 
@@ -296,7 +350,7 @@ int main()
 
             if (user_LED_1) //if green is pressed
             {
-                play_song1(1); //starts the song
+                play_song1(1); //starts playing song 1
                 song = 1;
                 state = Game;
                 current_note = 0;
@@ -304,7 +358,7 @@ int main()
             }
             else if (user_LED_4)// if blue is pressed
             {
-                play_song2(1); //starts the song
+                play_song2(1); //starts playing song 2
                 song = 2;
                 state = Game;
                 current_note = 0;
@@ -313,53 +367,94 @@ int main()
         }//end of intro
         else if (state == Game)
                 {
-                    if (user_LED_1 & user_LED_2 & user_LED_3 & user_LED_4) //press all buttons to end
+                    if (user_LED_1 & user_LED_2 & user_LED_3 & user_LED_4) //press all buttons to end the game
                     {
-                        play_song1(0); //starts the song
-                        play_song2(0); //starts the song
+                        play_song1(0); //ends the song
+                        play_song2(0); //ends the song
                         state = Intro;
                     }
-
-                    if (strummer)
+                    if (strummer) // Check if the strummer is activated
                     {
                         check_input();
-//                        current_note++;
                     }
 
+                    if (streak > 6) // Reset missed_note counter if streak exceeds 6
+                    {
+                        missed_note = 0;
+                    }
+
+                    //Check if current note matches the length of the song to determine win state
                     if (((song == 1) && (current_note == songLength1)) || ((song == 2) && (current_note == songLength2))) {
                         state = Win;
                     }
+                    // Check if the missed_note counter reaches 40 to determine loss state
+                    if (missed_note == 40)
+                    {
+                        state = Lost;
+                    }
 
-                    snprintf(game_song_text, sizeof(game_song_text), "Score: %d", score); // format a series of data into a string
-                    strcat(game_song_text, "                "); // Concatenate str2 to str1
+                    // Format score into a string for display on LCD
+                    snprintf(game_song_text, sizeof(game_song_text), "Score: %d", score); // Format score into string
+                    strcat(game_song_text, "                "); // Append spaces to clear any previous text
 
 
-                    // Display the text
-                    LcdSetPosition(1,1); //row, rect  start
-                    LcdWriteString(game_song_text);
-                    LcdSetPosition(2,1); //row, rect  start
-                    LcdWriteString("                    ");//20 character space
+                    // Display score on LCD
+                    LcdSetPosition(1,1); //row, rect 
+                    LcdWriteString(game_song_text); // Write score to LCD
+                    LcdSetPosition(2,1); 
+                    LcdWriteString("                    ");// Clear the second row of LCD (20 character space)
 
                 }//end of game state
 
-                if (state == Win)
+                if (state == Lost)
                 {
-                    LcdSetPosition(1,1); //row, rect  start
+                    // Clear the LCD display
+                    LcdSetPosition(1,1); //row, rect  
                     LcdWriteString("                    ");//20 character space
-                    LcdSetPosition(2,1); //row, rect  start
+                    LcdSetPosition(2,1); //row, rect  
                     LcdWriteString("                    ");//20 character space
-                    LcdSetPosition(1,4); //row, rect  start
-                    LcdWriteString("You Rock!!!");
-                    LcdSetPosition(2,1); //row, rect  start
-                    LcdWriteString("Awesome playing!");//20 character space
 
-                    if (button_press_detected) //if green is pressed
+                    // Display "Better Luck" message on LCD
+                    LcdSetPosition(1,2); //row, rect  
+                    LcdWriteString("Better Luck");
+                    LcdSetPosition(2,2); //row, rect  
+                    LcdWriteString("Next Time!!");//20 character space
+
+                    // Check if a button press is detected to return to the Intro state
+                    if (button_press_detected) 
                     {
+                        // Reset game state and variables
                         song = 0;
                         current_note = 0;
+                        play_song1(0); //signals end of win
+                        play_song2(0); //signals end of win
                         state = Intro;
                     }
-                }
+                }//end of loss state
+                if (state == Win)
+                {
+                    // Clear the LCD display
+                    LcdSetPosition(1,1); //row, rect  
+                    LcdWriteString("                    ");//20 character space
+                    LcdSetPosition(2,1); //row, rect  
+                    LcdWriteString("                    ");//20 character space
+                    LcdSetPosition(1,4); //row, rect
+                     // Display "You Rock!!! Awesome Playing!" message on LCD  
+                    LcdWriteString("You Rock!!!");
+                    LcdSetPosition(2,1); //row, rect  start
+                    LcdWriteString("Awesome Playing!");//20 character space
+
+                    // Check if a button press is detected to return to the Intro state
+                    if (button_press_detected) //if green is pressed
+                    {
+                        // Reset game state and variables
+                        song = 0;
+                        current_note = 0;
+                        play_song1(0); //signals end of win
+                        play_song2(0); //signals end of win
+                        state = Intro;
+                    }
+                }//end of win state
 
         set_temperature(user_LED_1, user_LED_2, user_LED_3, user_LED_4, 0); //displays user input
         LPM3;
@@ -368,26 +463,6 @@ int main()
 //return 0;
 
 } //end of main
-
-
-//#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
-//#pragma vector=PORT1_VECTOR
-//__interrupt void counter(void)
-//#elif defined(__GNUC__)
-//void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
-//#else
-//#error Compiler not supported!
-//#endif
-//{
-//    // accept_input logic
-//    if(P1IFG & BIT1)//checks port 1.1
-//    {
-//        P1IFG &= ~BIT1; // clear interrupt flag
-//    }
-//
-// __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
-//}
-
 
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector=PORT2_VECTOR
@@ -404,12 +479,11 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
                 if (debounce_counter == 0){
                    button_press_detected = 1;
                     user_LED_1 = 1;
-                    //user_LED_1 = green;
-                    P2IES &= ~BIT0; // change edge to rising (button release)
+                    P2IES &= ~BIT0; //change edge to rising (button release)
                 }
             } else {// rising edge detected - button released
                 user_LED_1 = 0;
-                P2IES |= BIT0;
+                P2IES |= BIT0; // Change edge to falling (button press) 
             }
             P2IFG &= ~BIT0; // clear interrupt flag for button
         }
@@ -424,7 +498,7 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
                 }
             } else { // rising edge detected - button released
                 user_LED_2 = 0;
-                P2IES |= BIT2;
+                P2IES |= BIT2; // Change edge to falling (button press)
             }
             P2IFG &= ~BIT2; // clear interrupt flag for button
         }
@@ -438,7 +512,7 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
                }
            } else {// rising edge detected - button released
                user_LED_3 = 0;
-               P2IES |= BIT3;
+               P2IES |= BIT3; // Change edge to falling (button press)
            }
            P2IFG &= ~BIT3; // clear interrupt flag for button
        }
@@ -482,17 +556,17 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
 //       }
 
     __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
-}
+}// end of port 2 ISR
 
 
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void)
 {
-    if (state == Game | state == Intro)
+    if (state == Game | state == Intro)  // Check if the game is in Game or Intro state
     {
         duration_counter++;
         if (duration_counter > Q){
-            current_note++;
+            current_note++; //move to the next note
             duration_counter = 0;
         }
     }//end of game state

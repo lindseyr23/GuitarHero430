@@ -25,7 +25,7 @@ const uint8_t red[][4] =
 const uint8_t yellow[][4] =
 {
      {0xE0, 0, 0, 0},        // 0 - Off
-     {0xF0, 0, 10, 10}       // 1 - Yellow CHECK VALUE
+     {0xF0, 0, 10, 10}       // 1 - Yellow 
 };
 
 const uint8_t blue[][4] =
@@ -37,7 +37,7 @@ const uint8_t blue[][4] =
 const uint8_t orange[][4] =
 {
      {0xE0, 0, 0, 0},        // 0 - Off
-     {0xF0, 0, 6, 10}        // 1 - Orange CHECK VALUE
+     {0xF0, 0, 6, 10}        // 1 - Orange 
 
 };
 
@@ -80,7 +80,7 @@ void rgb_send_end() {
 
 void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5)
 {
-    //change color
+    //change color of user LED display
     rgb_send_start();
     rgb_send_frame(&green[led1], false);
     rgb_send_frame(&red[led2], false);
