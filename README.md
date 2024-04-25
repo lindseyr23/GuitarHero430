@@ -12,7 +12,8 @@
    - [LED User Display Setup Guide](#led-user-display-setup-guide)
    - [3D-printed Strummer]()
    - [3d-printed LED game display]()
-6. [References](#references)
+6. [Installation](#installation)
+7. [References](#references)
 
 ## Project Description 
 This project aims to ...
@@ -33,28 +34,37 @@ This project aims to ...
 * Enameled wire
 
 ### Required Software Packages
-* Python 3.x.x
-* Serial 3.x.x
-* python-vlc x.x.x
-* (add requirements.txt that pip installs things?)
+
+* **Code Composer Studio (CSS)**
+  - Install Code Composer Studio on two separate computers. Download it from [here](https://www.ti.com/tool/download/CCSTUDIO/12.7.0).
+  
+* **Python**
+  - This project is compatible with Python 3.11.x. Make sure you have Python 3.11.x installed on your system before installing the required packages.
+
+  To install the required Python packages, run the following command in your terminal or command prompt:
+
+
+```python
+pip install -r requirements.txt
+```
 ----
 ## File Descriptions
 
 ### Board_1
 
 * **Game Logic:**
-  - [main.c](./board1/main.c): File with game logic handling user inputs.
+  - [main.c](./board1/main.c): Handles game logic and user inputs.
  
 * **User LED Display Logic:**
-  - [rgb_interface_user.c](./board1/rgb_interface_user.c): File handling the RGB interface for user interaction.
+  - [rgb_interface_user.c](./board1/rgb_interface_user.c): Controls RGB LEDs via SPI communication.
   - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB interface.
 
 * **Scoreboard LCD Display Logic:**
-  - [i2c.c](./board1/i2c.c):
-  - [i2c.h](./board1/i2c.h):
+  - [i2c.c](./board1/i2c.c): Initializes and transmits data over the I2C bus.
+  - [i2c.h](./board1/i2c.h): Header file for I2C communication.
     
-  - [lcd.c](./board1/lcd.c):
-  - [lcd.h](./board1/lcd.h):
+  - [lcd.c](./board1/lcd.c): Implements functions for interacting with an LCD display using I2C communication.
+  - [lcd.h](./board1/lcd.h): Header file for LCD interface.
 
 ### Board 2
 
@@ -72,18 +82,18 @@ This project aims to ...
   - [Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3](./board2/Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3): Song 1
   - [](): Song 2
 
-
-### Experimental_Work 
-<i>Please ignore this folder. This is code that is currently in progress. </i>
-
 ---
+
 ## Setting up the hardware
 
 ### Schematic
 ![Schematic](./images/Schematic_guitarhero.png)
 
 ### LED Game Display Setup Guide
-<img src="./images/game_led_display.jpg" alt="LED Game Display" width="25%"/>
+<div style="text-align:center">
+  <img src="./images/game_led_display.jpg" alt="LED Game Display" width="25%"/>
+</div>
+
 
 #### Components Needed:
 - SK9822 LED strips
@@ -104,7 +114,7 @@ This project aims to ...
      - 5V (Power)
    
 3. **Attach Female Connectors:**
-   - Solder female connectors to the other end of the jumper wires for this LED strip.
+   - (if not already present) Solder female connectors to the other end of the jumper wires for this LED strip.
 
 4. **Connect LED Strips:**
    - For the remaining four strips, connect each strip to the previous one using enameled wire:
@@ -118,8 +128,9 @@ This project aims to ...
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 
 ### LED User Display Setup Guide
-<img src="./images/user_led_display.jpg" alt="LED User Display" width="25%"/>
-
+<div style="text-align:center">
+    <img src="./images/user_led_display.jpg" alt="LED User Display" width="25%">
+</div>
 
 #### Components Needed:
 - SK9822 LED strips
@@ -138,7 +149,7 @@ This project aims to ...
      - One wire for 5V (Power)
    
 3. **Attach Female Connectors:**
-   - Solder female connectors to the other end of the jumper wires.
+   - (if not already present) Solder female connectors to the other end of the jumper wires.
    
 4. **Secure Connections:**
    - Use heat shrink tubing to insulate and secure the soldered connections.
@@ -148,6 +159,25 @@ This project aims to ...
 
 #### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
+  
+---
+
+## Installation
+
+Once you have set up the boards as per the [schematic](./images/Schematic_guitarhero.png)
+
+1. **Install Code Composer Studio:**
+ - Download and install [Code Composer Studio](https://www.ti.com/tool/download/CCSTUDIO/12.7.0) on your computer.
+
+2. **Create Projects for Each Board**
+- OpenCode Composer Studio
+- Create a separate project for each board.
+- Set the target device to MSP430G2553 for each project.
+
+3. **Run receive_audio.py Script:**
+   - Run the receive_audio.py script on the same computer connected to board 2.
+
+4. **Have fun!**
 
 ---
 
