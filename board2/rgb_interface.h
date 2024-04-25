@@ -51,6 +51,9 @@ void b_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, uns
 void o_ripple(unsigned int next_seq, unsigned int led_1, unsigned int led_2, unsigned int led_3, unsigned int led_4, unsigned int led_5, unsigned int led_6, unsigned int led_7);
 
 void PlaySound(unsigned int *notes, unsigned int length);
+
+void win_screen(void);
+void loss_screen(void);
 //void PlaySound(unsigned int *g_notes, unsigned int *r_notes, unsigned int *y_notes, unsigned int *b_notes, unsigned int *o_notes, unsigned int *duration, unsigned int length);
 
 #endif /* RGB_INTERFACE_H_ */
