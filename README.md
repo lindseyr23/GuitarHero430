@@ -60,7 +60,7 @@ pip install -r requirements.txt
  
 * **User LED Display Logic:**
   - [rgb_interface_user.c](./board1/rgb_interface_user.c): Controls RGB LEDs via SPI communication.
-  - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB interface.
+  - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB user interface.
 
 * **Scoreboard LCD Display Logic:**
   - [i2c.c](./board1/i2c.c): Initializes and transmits data over the I2C bus.
@@ -71,17 +71,17 @@ pip install -r requirements.txt
 
 ### Board 2
 
-* **XXXX Logic:**
-  - [main.c](./board2/main.c): File handling 
+* **Game Audio and Visual Logic:**
+  - [main.c](./board2/main.c): Handles receiving communication from Board 1 to trigger events on the 5x7 LED screen and play MP3 files
 
 * **LED Game Display Logic:**
-  - [rgb_interface.c](./board2/rgb_interface.c): File handling 
-  - [rgb_interface.h](./board2/rgb_interface.h): Header file for
+  - [rgb_interface.c](./board2/rgb_interface.c): Controls the 5x7 LED Screen via SPI communication
+  - [rgb_interface.h](./board2/rgb_interface.h): Header file for RGB interface
 
 * **Audio:**
-  - [receive_audio.py](./board2/receive_audio.py): 
-  - [PlaySong.c](./board2/PlaySong.c): File handling 
-  - [PlaySong.h](./board2/PlaySong.h): Header file for
+  - [receive_audio.py](./board2/receive_audio.py): reads in data from the COM port to trigger the MP3 files playing and stopping
+  - [PlaySong.c](./board2/PlaySong.c): Sends out the information to the COM port using UART communication to trigger the python file
+  - [PlaySong.h](./board2/PlaySong.h): Header file for PlaySong
   - [Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3](./board2/Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3): Song 1
   - [](): Song 2
 
@@ -165,10 +165,14 @@ pip install -r requirements.txt
 
 
 ### 3D-Printed Strummer Setup Guide
-
-
+[Strumbar STL File](strumbar2b-v3.stl)
+[End Bracket STL File](endbracket-v26.stl)
 ### 3d-Printed LED game display Setup Guide
-[file](./led_display_holder.stl)
+[LED Display Holder STL File](./led_display_holder.stl)
+
+3D Print the Strumbar, 2 of the End Brackets, and  the LED Display Holder from the above STL files. The Strumbar and End Brackets may need to be resized, in which case resize them both with the same ratio, ensuring that it is large enough for a button to fit within the notch but not too large so that the strumbar is unable to reach the button. We found that a width of 3 inches worked well for the Strumbar. The brackets for the strummer can be screwed onto a PCB, or taped down to a breadboard. The notch in the strummer is where the button for strumming input should be set up.
+
+The 5x7 LED Display should be taped into the 3D Printed Display Holder, with the wires going through the notch and out the back before being connected to the MSP430.
   
 ---
 
@@ -192,6 +196,5 @@ Once you have set up the boards as per the [schematic](./images/Schematic_guitar
 ---
 
 ## References
-
-1. **ADD GUITAR STRUM LINK HERE**
+1. - Guitar Strummer stl file from https://www.bytearts.com/strumfixplus
 2. - Modified code by Dr. Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
