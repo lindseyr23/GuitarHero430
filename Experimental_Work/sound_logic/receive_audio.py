@@ -2,7 +2,7 @@ import serial
 import vlc
 from time import sleep
 
-ser = serial.Serial(port='COM4', baudrate=19200, bytesize=8, timeout=None, stopbits=serial.STOPBITS_ONE)
+ser = serial.Serial(port='COM7', baudrate=19200, bytesize=8, timeout=None, stopbits=serial.STOPBITS_ONE)
 serialString = ""
 commands = ["Play Song 1", "Stop Song", "Play Song 2"]
 curr_playing = 0
