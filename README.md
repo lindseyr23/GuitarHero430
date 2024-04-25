@@ -60,7 +60,7 @@ pip install -r requirements.txt
  
 * **User LED Display Logic:**
   - [rgb_interface_user.c](./board1/rgb_interface_user.c): Controls RGB LEDs via SPI communication.
-  - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB interface.
+  - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB user interface.
 
 * **Scoreboard LCD Display Logic:**
   - [i2c.c](./board1/i2c.c): Initializes and transmits data over the I2C bus.
@@ -71,17 +71,17 @@ pip install -r requirements.txt
 
 ### Board 2
 
-* **XXXX Logic:**
-  - [main.c](./board2/main.c): File handling 
+* **Game Audio and Visual Logic:**
+  - [main.c](./board2/main.c): Handles receiving communication from Board 1 to trigger events on the 5x7 LED screen and play MP3 files
 
 * **LED Game Display Logic:**
-  - [rgb_interface.c](./board2/rgb_interface.c): File handling 
-  - [rgb_interface.h](./board2/rgb_interface.h): Header file for
+  - [rgb_interface.c](./board2/rgb_interface.c): Controls the 5x7 LED Screen via SPI communication
+  - [rgb_interface.h](./board2/rgb_interface.h): Header file for RGB interface
 
 * **Audio:**
-  - [receive_audio.py](./board2/receive_audio.py): 
-  - [PlaySong.c](./board2/PlaySong.c): File handling 
-  - [PlaySong.h](./board2/PlaySong.h): Header file for
+  - [receive_audio.py](./board2/receive_audio.py): reads in data from the COM port to trigger the MP3 files playing and stopping
+  - [PlaySong.c](./board2/PlaySong.c): Sends out the information to the COM port using UART communication to trigger the python file
+  - [PlaySong.h](./board2/PlaySong.h): Header file for PlaySong
   - [Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3](./board2/Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3): Song 1
   - [](): Song 2
 
