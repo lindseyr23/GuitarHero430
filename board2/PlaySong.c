@@ -5,6 +5,8 @@ int i;
 char enter[] = "\r\n";
 char song1[] = "Play Song 1";
 char song2[] = "Play Song 2";
+char win[] = "Win";
+char loss[] = "Loss";
 char stop[] = "Stop Song";
 char trigger[] = "start\r\n";
 void ser_output(char *str);
@@ -126,6 +128,19 @@ void StopSong(void){
     ser_output(stop);
     ser_output(enter);
 }
+
+void WinEffect(void)
+{
+    ser_output(win);
+    ser_output(enter);
+}
+
+void LossEffect(void)
+{
+    ser_output(loss);
+    ser_output(enter);
+}
+
 void ser_output(char *str){
 while(*str != 0) {
 while (!(IFG2 & UCA0TXIFG));

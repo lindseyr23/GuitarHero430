@@ -11,5 +11,7 @@
 void PlaySong(int a);
 void MusicInit(void);
 void StopSong(void);
+void WinEffect(void);
+void LossEffect(void);
 
 #endif /* PLAYSONG_H_ */
