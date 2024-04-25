@@ -165,10 +165,12 @@ pip install -r requirements.txt
 
 
 ### 3D-Printed Strummer Setup Guide
-[file]()
+[file](strumbar2b-v3.stl)
 
 ### 3d-Printed LED game display Setup Guide
 [file](./led_display_holder.stl)
+
+The .stl files are 
   
 ---
 
