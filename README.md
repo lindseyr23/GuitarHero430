@@ -165,12 +165,14 @@ pip install -r requirements.txt
 
 
 ### 3D-Printed Strummer Setup Guide
-[file](strumbar2b-v3.stl)
-
+[Strumbar STL File](strumbar2b-v3.stl)
+[End Bracket STL File](endbracket-v26.stl)
 ### 3d-Printed LED game display Setup Guide
-[file](./led_display_holder.stl)
+[LED Display Holder STL File](./led_display_holder.stl)
 
-The .stl files are 
+3D Print the Strummer and LED Display from the above STL files. The strummer may need to be resized, in which case resize the strummer and end bracket with the same ratio. The brackets for the strummer can be screwed onto a PCB, or taped down to a breadboard. The notch in the strummer is where the button for strumming input should be set up.
+
+The 5x7 LED Display should be taped into the 3D Printed Display Holder, with the wires going through the notch and out the back before being connected to the MSP430.
   
 ---
 
