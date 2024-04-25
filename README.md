@@ -165,7 +165,7 @@ pip install -r requirements.txt
 
 
 ### 3D-Printed Strummer Setup Guide
-
+[file]()
 
 ### 3d-Printed LED game display Setup Guide
 [file](./led_display_holder.stl)
@@ -192,6 +192,5 @@ Once you have set up the boards as per the [schematic](./images/Schematic_guitar
 ---
 
 ## References
-
-1. **ADD GUITAR STRUM LINK HERE**
+1. - Guitar Strummer stl file from https://www.bytearts.com/strumfixplus
 2. - Modified code by Dr. Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
