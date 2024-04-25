@@ -5,84 +5,86 @@
 1. [Project Description](#project-description)
 2. [Team Members](#team-members)
 3. [Materials](#materials)
-4. [Schematic](#schematic)
-5. [File Descriptions](#file-descriptions)
-6. [Setting up the LED Displays](#setting-up-the-led-displays)
-   - [LED Game Display](#led-game-display)
+4. [File Descriptions](#file-descriptions)
+5. [Setting up the Hardware](#setting-up-the-hardware)
+   - [Schematic](#schematic)
+   - [LED Game Display Setup Guide](#led-game-display-setup-guide)
    - [LED User Display Setup Guide](#led-user-display-setup-guide)
    - [3D-printed Strummer]()
    - [3d-printed LED game display]()
-7. [References](#references)
-#### Note:
-Consider adding STL files or additional notes here.
-
-
+6. [References](#references)
 
 ## Project Description 
-This project aims to 
-
+This project aims to ...
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
 - Lindsey Russ     | ltr1@rice.edu
+  
 ---
-
 ### Materials
 
 * 2x TI LaunchPad Kit with MSP430 (MSP-EXP430G2ET)
+* 2x 330 Ω Resistors
+* 1x SunFounder I2C LCD1602 Module
 * SK9822 LED Strips
-* SunFounder I2C LCD1602 Module
 * Solderless Breadboard
-* 2x 4.4k Resistors
 * Jumper wires
 * Enameled wire
 
-### Required Packages
+### Required Software Packages
 * Python 3.x.x
 * Serial 3.x.x
 * python-vlc x.x.x
 * (add requirements.txt that pip installs things?)
-
-### Schematic
-![Schematic](./Schematic_guitarhero.png)
-
 ----
 ## File Descriptions
 
 ### Board_1
 
 * **Game Logic:**
-  - [main.c](./Experimental_Work/game_logic/main.c): File handling the game logic.
+  - [main.c](./board1/main.c): File with game logic handling user inputs.
  
 * **User LED Display Logic:**
-  - [rgb_interface_user.c](./Experimental_Work/game_logic/rgb_interface_user.c): File handling the RGB interface for user interaction.
-  - [rgb_interface_user.h](./Experimental_Work/game_logic/rgb_interface_user.h): Header file for RGB interface.
+  - [rgb_interface_user.c](./board1/rgb_interface_user.c): File handling the RGB interface for user interaction.
+  - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB interface.
 
 * **Scoreboard LCD Display Logic:**
-  - []
-  - []
-
+  - [i2c.c](./board1/i2c.c):
+  - [i2c.h](./board1/i2c.h):
+    
+  - [lcd.c](./board1/lcd.c):
+  - [lcd.h](./board1/lcd.h):
 
 ### Board 2
 
-* **Game Display Logic:**
-  - [main.c](./Experimental_Work/board_2/main.c): File handling the game logic.
-  - [rgb_interface.c](./Experimental_Work/board_2/rgb_interface.c): File handling the RGB interface.
-  - [rgb_interface.h](./Experimental_Work/board_2/rgb_interface.h): Header file for RGB interface.
+* **XXXX Logic:**
+  - [main.c](./board2/main.c): File handling 
+
+* **LED Game Display Logic:**
+  - [rgb_interface.c](./board2/rgb_interface.c): File handling 
+  - [rgb_interface.h](./board2/rgb_interface.h): Header file for
 
 * **Audio:**
-  - [PlaySong.c](./Experimental_Work/board_2/PlaySong.c): File handling audio playback.
-  - [PlaySong.h](./Experimental_Work/board_2/PlaySong.h): Header file for audio playback.
+  - [receive_audio.py](./board2/receive_audio.py): 
+  - [PlaySong.c](./board2/PlaySong.c): File handling 
+  - [PlaySong.h](./board2/PlaySong.h): Header file for
+  - [Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3](./board2/Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3): Song 1
+  - [](): Song 2
+
 
 ### Experimental_Work 
 <i>Please ignore this folder. This is code that is currently in progress. </i>
---- 
 
+---
+## Setting up the hardware
 
-## Setting up the LED Displays
+### Schematic
+![Schematic](./images/Schematic_guitarhero.png)
 
-### LED Game Display
-![LED Game Display](.images/game_led_display.png)
+### LED Game Display Setup Guide
+<img src="./images/game_led_display.jpg" alt="LED Game Display" width="25%"/>
+
 #### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
@@ -115,15 +117,16 @@ This project aims to
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 
-## LED User Display Setup Guide
-![LED User Display](.images/user_led_display.png)
+### LED User Display Setup Guide
+<img src="./images/user_led_display.jpg" alt="LED User Display" width="25%"/>
 
-### Components Needed:
+
+#### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
 - Heat shrink tubing
 
-### Instructions:
+#### Instructions:
 1. **Prepare the LED Strip:**
    - Cut a 5 LED long strip from the SK9822 LED strip.
    
@@ -140,10 +143,10 @@ This project aims to
 4. **Secure Connections:**
    - Use heat shrink tubing to insulate and secure the soldered connections.
 
-### Usage:
+#### Usage:
 - Connect the female connectors to the corresponding male connectors on your control board or microcontroller.
 
-### Notes:
+#### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
 ---
