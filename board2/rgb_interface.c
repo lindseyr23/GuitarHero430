@@ -271,3 +271,96 @@ void PlaySound(unsigned int *notes, unsigned int length)
     current_note = 0;
 }
 
+void win_screen(void)
+{
+        //change red
+    rgb_send_start();
+    //row 1
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    //row 2
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    //row 3
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    //row 4
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    //row 5
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_frame(&green[1], false);
+    rgb_send_end();
+}
+
+void loss_screen(void)
+{
+    //change red
+    rgb_send_start();
+    //row 1
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    //row 2
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    //row 3
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    //row 4
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    //row 5
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_frame(&red[1], false);
+    rgb_send_end();
+}
