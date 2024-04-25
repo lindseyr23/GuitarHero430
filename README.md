@@ -37,6 +37,12 @@ This project aims to
 * Jumper wires
 * Enameled wire
 
+### Required Packages
+* Python 3.x.x
+* Serial 3.x.x
+* python-vlc x.x.x
+* (add requirements.txt that pip installs things?)
+
 ### Schematic
 ![Schematic](./Schematic_guitarhero.png)
 
