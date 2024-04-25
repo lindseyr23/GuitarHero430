@@ -1,5 +1,5 @@
 # Guitar Hero 430
-### Rice University ELEC 327 Final Project Spring '24
+# Rice University ELEC 327 Final Project Spring '24
 
 ## Table of Contents
 1. [Project Description](#project-description)
@@ -10,8 +10,8 @@
    - [Schematic](#schematic)
    - [LED Game Display Setup Guide](#led-game-display-setup-guide)
    - [LED User Display Setup Guide](#led-user-display-setup-guide)
-   - [3D-printed Strummer]()
-   - [3d-printed LED game display]()
+   - [3D-printed Strummer](#3D-Printed-Strummer-Setup-Guide)
+   - [3d-printed LED game display](#3d-Printed-LED-game-display-Setup-Guide)
 6. [Installation](#installation)
 7. [References](#references)
 
@@ -162,6 +162,13 @@ pip install -r requirements.txt
 
 #### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
+
+
+### 3D-Printed Strummer Setup Guide
+
+
+### 3d-Printed LED game display Setup Guide
+[file](./led_display_holder.stl)
   
 ---
 
@@ -187,4 +194,4 @@ Once you have set up the boards as per the [schematic](./images/Schematic_guitar
 ## References
 
 1. **ADD GUITAR STRUM LINK HERE**
-2. - Modified code by Dr.Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
+2. - Modified code by Dr. Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
