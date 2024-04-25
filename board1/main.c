@@ -14,10 +14,11 @@
  * Green Button: 2.0 Red 2.2 Yellow 2.3 Blue 2.4
  * Strummer: 2.5
  */
-
 const unsigned int song1[] = {//Fortunate Son - Creedence Clearwater Revival
-                            0,0,0,0,0,0,0,0, //into
-                            0,0,0,0,0,0,0,0,
+//                            0,0,0,0,0,0,0,0, //into
+//                            0,0,0,0,0,0,0,0,
+//                            0,0,0,0,0,0,0,0, //into
+//                            0,0,0,0,0,0,0,0,
                             3,4,4,4,4,4,4,4, //0:07
                             2,3,3,3,3,3,3,3,
                             1,3,3,3,3,3,3,3,
@@ -100,7 +101,10 @@ const unsigned int song1[] = {//Fortunate Son - Creedence Clearwater Revival
 
 const unsigned int songLength1 = sizeof(song1) / sizeof(song1[0]);
 
-const unsigned int songLength2 = 9;
+unsigned int song2[] = {0,1,0,1,0,1,0,1,0};
+
+const unsigned int songLength2 = sizeof(song2) / sizeof(song2[0]);
+
 
 volatile unsigned int current_note;
 
@@ -211,8 +215,10 @@ void init_buttons() {
     P2IE |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // enable interrupts for these pins
 }
 
-void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) output, 1.3 (play_song2) output
-    P2DIR &= ~(BIT7); // set 2.7 to input
+void init_board_communication() { // 1.1 (accept_input) input, 2.1 (play_song1) output, 1.3 (play_song2) output
+
+    P1DIR &= ~BIT1; // set 1.1 to input
+
     P2DIR |= BIT1; // set 2.1 to output
     P1DIR |= BIT3; // set 1.3 to output
 
@@ -220,20 +226,16 @@ void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) 
     P2OUT &= ~BIT1;
     P1OUT &= ~BIT3;
 
-    P2IES &= ~BIT7; //listen for low to high transition to increment the current note
+    P1IES &= ~BIT1; //listen for low to high transition to increment the current note
+    P1IE |= BIT1; // enable interrupts for these pins
+    P1REN |= BIT1;
+    P1OUT |= BIT1; //pullup resistor for button DEBUGGING
 
-    P2IE |= BIT7; // enable interrupts for these pins
+//    P1REN |= BIT1; // Enable pull-up/pull-down resistor for P1.1
+//    P1OUT &= ~BIT1; // Set P1.1 output to low
 
-    P2REN |= BIT7;
-    P2OUT |= BIT7;
-
-    P2IN &= ~BIT7;
-
-    P2IFG &=  ~BIT7; // clear any pending interrupts
-
-
+    P1IFG &=  ~BIT1; // clear any pending interrupts
 }
-
 //global variables
 void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5);
 
@@ -265,10 +267,20 @@ int main()
 
     LcdSetPosition(1,2);
     LcdWriteString("GuitarHero 430");
+    //stop game
+    play_song1(0);
+    play_song2(0);
+
     while (1)
     {
         if (state == Intro)
         {
+            // Display the text
+            LcdSetPosition(2,1); //row, rect  start
+            LcdWriteString(" Press G or B  ");
+
+            LcdSetPosition(1,1);
+            LcdWriteString(" GuitarHero 430  ");
 
             if (user_LED_1) //if green is pressed
             {
@@ -289,12 +301,13 @@ int main()
                     {
                         play_song1(0); //starts the song
                         play_song2(0); //starts the song
+                        state = Intro;
                     }
 
                     if (strummer)
                     {
                         check_input();
-                        current_note++;
+//                        current_note++;
                     }
 
                     if (((song == 1) && (current_note == songLength1)) || ((song == 2) && (current_note == songLength2))) {
@@ -339,6 +352,26 @@ int main()
 //return 0;
 
 } //end of main
+
+
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=PORT1_VECTOR
+__interrupt void counter(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
+#else
+#error Compiler not supported!
+#endif
+{
+    // accept_input logic
+    if(P1IFG & BIT1)//checks port 1.1
+    {
+        current_note++;
+        P1IFG &= ~BIT1; // clear interrupt flag
+    }
+
+ __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
+}
 
 
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
@@ -426,12 +459,12 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
            }
            P2IFG &= ~BIT5; // clear interrupt flag for button
        }
-       // accept_input logic
-       if(P2IFG & BIT7)//checks port 2.7
-       {
-           current_note++;
-           P2IFG &= ~BIT7; // clear interrupt flag
-       }
+//       // accept_input logic
+//       if(P2IFG & BIT7)//checks port 2.7
+//       {
+//           current_note++;
+//           P2IFG &= ~BIT7; // clear interrupt flag
+//       }
 
     __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
 }

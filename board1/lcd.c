@@ -5,7 +5,6 @@
 void LcdInit()
 {
     LcdWriteCommand(LCD_INIT_BYTE, 0); 
-//    __delay_cycles(800);
     __delay_cycles(80000);
     LcdWriteCommand(LCD_INIT_BYTE, 0);
     LcdWriteCommand(LCD_INIT_BYTE, 0);
