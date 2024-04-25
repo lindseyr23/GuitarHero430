@@ -115,6 +115,8 @@ int user_LED_4;
 int button_press_detected;
 int strummer;
 int score;
+int Q=6;
+int duration_counter;
 
 volatile unsigned int curr_note;
 
@@ -226,18 +228,26 @@ void init_board_communication() { // 1.1 (accept_input) input, 2.1 (play_song1) 
     P2OUT &= ~BIT1;
     P1OUT &= ~BIT3;
 
-    P1IES &= ~BIT1; //listen for low to high transition to increment the current note
-    P1IE |= BIT1; // enable interrupts for these pins
-    P1REN |= BIT1;
-    P1OUT |= BIT1; //pullup resistor for button DEBUGGING
+//    P1IES &= ~BIT1; //listen for low to high transition to increment the current note
+//    P1IE |= BIT1; // enable interrupts for these pins
+//    P1REN |= BIT1;
+//    P1OUT |= BIT1; //pullup resistor for button DEBUGGING
 
 //    P1REN |= BIT1; // Enable pull-up/pull-down resistor for P1.1
 //    P1OUT &= ~BIT1; // Set P1.1 output to low
 
-    P1IFG &=  ~BIT1; // clear any pending interrupts
+//    P1IFG &=  ~BIT1; // clear any pending interrupts
 }
 //global variables
 void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5);
+
+void init_timerA(void)
+{
+    TA0CTL |= TACLR;
+    TA0CCTL0 = CCIE; //interrupt enable Timer 0
+    TA0CCR0 = 4000;    //set up Timer 0
+    TA0CTL |= TASSEL_1 + MC_1 + ID_0;
+}
 
 
 enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
@@ -256,8 +266,10 @@ int main()
 
     init_buttons();
     init_board_communication();
+    init_timerA();
     current_note = 0;
     score = 0;
+    duration_counter = 0;
     char game_song_text[20]; // buffer
 
     state = Intro;
@@ -287,12 +299,16 @@ int main()
                 play_song1(1); //starts the song
                 song = 1;
                 state = Game;
+                current_note = 0;
+                duration_counter = 0;
             }
             else if (user_LED_4)// if blue is pressed
             {
                 play_song2(1); //starts the song
                 song = 2;
                 state = Game;
+                current_note = 0;
+                duration_counter = 0;
             }
         }//end of intro
         else if (state == Game)
@@ -354,24 +370,23 @@ int main()
 } //end of main
 
 
-#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
-#pragma vector=PORT1_VECTOR
-__interrupt void counter(void)
-#elif defined(__GNUC__)
-void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
-#else
-#error Compiler not supported!
-#endif
-{
-    // accept_input logic
-    if(P1IFG & BIT1)//checks port 1.1
-    {
-        current_note++;
-        P1IFG &= ~BIT1; // clear interrupt flag
-    }
-
- __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
-}
+//#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+//#pragma vector=PORT1_VECTOR
+//__interrupt void counter(void)
+//#elif defined(__GNUC__)
+//void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
+//#else
+//#error Compiler not supported!
+//#endif
+//{
+//    // accept_input logic
+//    if(P1IFG & BIT1)//checks port 1.1
+//    {
+//        P1IFG &= ~BIT1; // clear interrupt flag
+//    }
+//
+// __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
+//}
 
 
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
@@ -468,3 +483,17 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
 
     __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
 }
+
+
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A(void)
+{
+    if (state == Game | state == Intro)
+    {
+        duration_counter++;
+        if (duration_counter > Q){
+            current_note++;
+            duration_counter = 0;
+        }
+    }//end of game state
+}//end of A0 ISR
