@@ -1,18 +1,5 @@
 # Guitar Hero 430
-
 ## Rice University ELEC 327 Final Project Spring '24
-## Table of Contents
-1. [Project Description](#project-description)
-2. [Team Members](#team-members)
-3. [Materials](#materials)
-4. [File Descriptions](#file-descriptions)
-5. [Setting up the Hardware](#setting-up-the-hardware)
-   - [Schematic](#schematic)
-   - [LED Game Display Setup Guide](#led-game-display-setup-guide)
-   - [LED User Display Setup Guide](#led-user-display-setup-guide)
-   - [3D-Printed Strummer & LED Game Display Case Setup Guide](#3D-Printed-Strummer-&-LED-Game-Display-Case-Setup-Guide)
-6. [Installation](#installation)
-7. [References](#references)
 
 ## Project Description 
 This project aims to recreate the experience of playing the iconic Guitar Hero using MSP430 microcontrollers. Inspired by the popular rhythm-based video game, this project combines hardware interfacing, LED visualization, audio processing, and gameplay logic to create an experience playing along with your favorite songs.
@@ -21,6 +8,20 @@ Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates 
 
 Upon starting the game, users are greeted with an introduction sequence. They can select song 1 by pressing the green button or song 2 by pressing the blue button. During gameplay, missing too many notes results in a loss sequence. However, achieving a streak of a certain number of notes resets the missed notes counter, akin to the rock meter in Guitar Hero. Successfully completing the entire song triggers a win sequence.
 
+Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3gj8zhsrb72t33z2)!
+
+## Table of Contents
+1. [Project Description](#project-description)
+2. [Team Members](#team-members)
+3. [Materials](#materials)
+4. [File Descriptions](#file-descriptions)
+5. [Setting up the Hardware](#setting-up-the-hardware)
+   - [LED Game Display Setup Guide](#led-game-display-setup-guide)
+   - [LED User Display Setup Guide](#led-user-display-setup-guide)
+   - [3D-Printed Strummer & LED Game Display Case Setup Guide](#3D-Printed-Strummer-&-LED-Game-Display-Case-Setup-Guide)
+   - [Schematic](#schematic)
+6. [Installation](#installation)
+7. [References](#references)
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
@@ -43,15 +44,11 @@ Upon starting the game, users are greeted with an introduction sequence. They ca
 
 * **Code Composer Studio (CSS)**
   - Install Code Composer Studio on two separate computers. Download it from [here](https://www.ti.com/tool/download/CCSTUDIO/12.7.0).
-  
 * **Python**
-  - This project is compatible with Python 3.11.x. Make sure you have Python 3.11.x installed on your system before installing the required packages.
-
-  To install the required Python packages, run the following command in your terminal or command prompt:
-
-```python
-pip install -r requirements.txt
-```
+  - This project is compatible with Python 3.11.x. Make sure you have Python 3.11.x installed on your system before installing the required packages. To install the required Python packages, run the following command in your terminal or command prompt:
+   ```python
+   pip install -r requirements.txt
+   ```
 ----
 ## File Descriptions
 
@@ -59,15 +56,14 @@ pip install -r requirements.txt
 
 * **Game Logic:**
   - [main.c](./board1/main.c): Handles game logic and user inputs.
- 
+    
 * **User LED Display Logic:**
   - [rgb_interface_user.c](./board1/rgb_interface_user.c): Controls RGB LEDs via SPI communication.
   - [rgb_interface_user.h](./board1/rgb_interface_user.h): Header file for RGB user interface.
-
+    
 * **Scoreboard LCD Display Logic:**
   - [i2c.c](./board1/i2c.c): Initializes and transmits data over the I2C bus.
   - [i2c.h](./board1/i2c.h): Header file for I2C communication.
-    
   - [lcd.c](./board1/lcd.c): Implements functions for interacting with an LCD display using I2C communication.
   - [lcd.h](./board1/lcd.h): Header file for LCD interface.
 
@@ -93,14 +89,10 @@ pip install -r requirements.txt
 
 ## Setting up the hardware
 
-### Schematic
-![Schematic](./images/Schematic_guitarhero.png)
-
 ### LED Game Display Setup Guide
 <div style="text-align:center">
   <img src="./images/game_led_display.jpg" alt="LED Game Display" width="25%"/>
 </div>
-
 
 #### Components Needed:
 - SK9822 LED strips
@@ -112,24 +104,19 @@ pip install -r requirements.txt
 #### Instructions:
 1. **Prepare the LED Strip:**
    - Cut five 7-LED long strips from the SK9822 LED strip.
-   
 2. **Solder Jumper Wires:**
    - For only ONE LED strip, solder four jumper wires to one end:
      - G (Ground)
      - C (Clock)
      - D (Data)
      - 5V (Power)
-   
 3. **Attach Female Connectors:**
    - (if not already present) Solder female connectors to the other end of the jumper wires for this LED strip.
-
 4. **Connect LED Strips:**
    - For the remaining four strips, connect each strip to the previous one using enameled wire:
      - Connect G to G, C to C, D to D, and 5V to 5V.
      - Hide the enameled wire connections behind the LED strips.
      - Daisy-chain the five LED strips together, ending with the jumper wires side.
-
-
 5. **Secure Connections:**
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
@@ -141,7 +128,6 @@ pip install -r requirements.txt
 <div style="text-align:center">
     <img src="./images/user_led_display.jpg" alt="LED User Display" width="25%">
 </div>
-
 #### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
@@ -150,20 +136,16 @@ pip install -r requirements.txt
 #### Instructions:
 1. **Prepare the LED Strip:**
    - Cut a 5 LED long strip from the SK9822 LED strip.
-   
 2. **Solder Jumper Wires:**
    - Solder four jumper wires to one end of the LED strip:
      - One wire for G (Ground)
      - One wire for C (Clock)
      - One wire for D (Data)
      - One wire for 5V (Power)
-   
 3. **Attach Female Connectors:**
    - (if not already present) Solder female connectors to the other end of the jumper wires.
-   
 4. **Secure Connections:**
    - Use heat shrink tubing to insulate and secure the soldered connections.
-
 #### Usage:
 - Connect the female connectors to the corresponding male connectors on your control board or microcontroller.
 
@@ -178,13 +160,16 @@ pip install -r requirements.txt
 
 3D Print the Strumbar, 2 of the End Brackets, and  the LED Display Holder from the above STL files. The Strumbar and End Brackets may need to be resized, in which case resize them both with the same ratio, ensuring that it is large enough for a button to fit within the notch but not too large so that the strumbar is unable to reach the button. We found that a width of 3 inches worked well for the Strumbar. The brackets for the strummer can be screwed onto a PCB, or taped down to a breadboard. The notch in the strummer is where the button for strumming input should be set up.
 
-The 5x7 LED Display should be taped into the 3D Printed Display Holder, with the wires going through the notch and out the back before being connected to the MSP430.
-  
+Secure the 5x7 LED display within the 3D-printed holder, with the jumper wires going through the notch and routed to the back for connection to the MSP430 acting as board 
+2. 
+
+### Schematic
+![Schematic](./images/Schematic_guitarhero.png)
 ---
 
 ## Installation
 
-Once you have set up the boards as per the [schematic](./images/Schematic_guitarhero.png)
+Once you have set up the boards as per the [schematic](./images/Schematic_guitarhero.png):
 
 1. **Install Code Composer Studio:**
  - Download and install [Code Composer Studio](https://www.ti.com/tool/download/CCSTUDIO/12.7.0) on your computer.
