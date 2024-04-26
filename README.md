@@ -87,7 +87,7 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 
 ---
 
-## Setting up the hardware:
+## Setting up the hardware
 
 ### LED Game Display Setup Guide
 <div style="text-align:center">
@@ -95,11 +95,11 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 </div>
 
 #### Components Needed:
-- SK9822 LED strips
-- Jumper wires (male-to-female)
-- Enameled wire
-- Heat shrink tubing
-- Electrical Tape
+   - SK9822 LED strips
+   - Jumper wires (male-to-female)
+   - Enameled wire
+   - Heat shrink tubing
+   - Electrical Tape
 
 #### Instructions:
 1. **Prepare the LED Strip:**
@@ -121,7 +121,7 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 #### Notes:
-- Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
+   - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
 ### LED User Display Setup Guide
 <div style="text-align:center">
@@ -129,9 +129,9 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 </div>
 
 #### Components Needed:
-- SK9822 LED strips
-- Jumper wires (male-to-female)
-- Heat shrink tubing
+   - SK9822 LED strips
+   - Jumper wires (male-to-female)
+   - Heat shrink tubing
 
 #### Instructions:
 1. **Prepare the LED Strip:**
@@ -147,7 +147,7 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 4. **Secure Connections:**
    - Use heat shrink tubing to insulate and secure the soldered connections.
 #### Notes:
-- Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
+   - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
 
 ### 3D-Printed Strummer & LED Game Display Case Setup Guide:
@@ -164,23 +164,22 @@ Secure the 5x7 LED display within the 3D-printed holder, with the jumper wires g
 ![Schematic](./images/Schematic_guitarhero.png)
 ---
 
-## Installation:
+## Installation
 
 1. **Set up the Hardware:**
-- Follow the included schematic (./images/Schematic_guitarhero.png) to set up the circuit boards for both LaunchPads.
+   - Follow the included [schematic](./images/Schematic_guitarhero.png) to set up the circuit boards for both LaunchPads.
 
-1. **Install Code Composer Studio:**
- - Download and install [Code Composer Studio](https://www.ti.com/tool/download/CCSTUDIO/12.7.0) on your computer.
+2. **Install Code Composer Studio:**
+    - Download and install [Code Composer Studio](https://www.ti.com/tool/download/CCSTUDIO/12.7.0) on your computer.
 
-2. **Create Projects for Each Board:**
-- OpenCode Composer Studio
-- Create a separate project for each board.
-- Set the target device to MSP430G2553 for each project.
+3. **Create Projects for Each Board:**
+   - OpenCode Composer Studio
+   - Create a separate project for each board.
+   - Set the target device to MSP430G2553 for each project.
 
-3. **Set up the LaunchPads:**
-- Upload the board 2 code to the LaunchPad set up as board 2.
-
-- Then, upload the board 1 code for LaunchPad set up as board 1.
+4. **Set up the LaunchPads:**
+   - Upload the board 2 code to the LaunchPad set up as board 2.
+   - Then, upload the board 1 code for LaunchPad set up as board 1.
 
 5. **Run receive_audio.py Script:**
    - On the same computer running board 2 code, run a script named "receive_audio.py".
@@ -193,9 +192,9 @@ Secure the 5x7 LED display within the 3D-printed holder, with the jumper wires g
    - Completing the entire song will trigger a win sequence!
   
 #### Note: 
-- Feel free to explore and customize the code to add more songs, difficulty levels, or even different instruments!
+   - Feel free to explore and customize the code to add more songs, difficulty levels, or even different instruments!
 ---
 
-## References:
-1. - _Strumbar - with “finger notches”_ stl file from [Byte Arts](https://www.bytearts.com/strumfixplus).
-2. - Modified code by Dr. Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
+## References
+1. _Strumbar - with “finger notches”_ stl file from [Byte Arts](https://www.bytearts.com/strumfixplus).
+2. Modified code by Dr. Joseph Young based on [I2C Display and MSP430](https://github.com/andrei-cb/I2C-Display-and-MSP430/tree/master) by Andrei-cb.
