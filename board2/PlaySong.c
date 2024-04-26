@@ -100,6 +100,26 @@ const unsigned int song1_fortunate_son[] = {//Fortunate Son - Creedence Clearwat
 
 const unsigned int songLength1 = sizeof(song1_fortunate_son) / sizeof(song1_fortunate_son[0]);
 
+
+const unsigned int song2_mississippi_queen[] = {//Mississippi Queen - Mountain
+                        0,0,0,0,0,0,0,0, //into
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,1,2,4,
+                        2,2,2,0,0,0,0,0,
+                        0,0,0,0,0,1,2,4,
+                        2,2,2,0,0,0,0,0,
+                        3,4,3,2,1,1,3,1,    //0:15
+                        0,1,2,3,4,4,2,2,
+                        1,2,3,4,1,1,2,3,
+                        3,4,3,2,1,1,2,3,
+                        5,5,0,0,0,0,0,0//0:22
+};
+
+const unsigned int songLength2 = sizeof(song2_mississippi_queen) / sizeof(song2_mississippi_queen[0]);
+
+
 void MusicInit(void){
     BCSCTL1 = CALBC1_1MHZ;
     DCOCTL = CALDCO_1MHZ;

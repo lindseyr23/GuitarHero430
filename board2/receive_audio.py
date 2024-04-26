@@ -29,7 +29,7 @@ while(1):
         curr_playing = 1
         sleep(5)
     if(readval == "Play Song 2"):
-        p = vlc.MediaPlayer("Tears_For_Fears_Everybody_Wants_To_Rule_The_World_w_Lyrics.mp3")
+        p = vlc.MediaPlayer("Guitar_Hero_3_Mississippi_Queen.mp3")
         p.play()
         curr_playing = 1
         sleep(5)

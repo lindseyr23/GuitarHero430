@@ -13,12 +13,15 @@ extern unsigned int song1_fortunate_son[];
 extern const unsigned int songLength1;//   gets calculated later
 
 unsigned int color_intro[] = {0,11,0,11,0,11,0,11,0};
-unsigned int song_2[] = {0,1,0,1,0,1,0,1,0};
+
+extern unsigned int song2_mississippi_queen[];
+extern const unsigned int songLength2;//   gets calculated later
+
 
 //note durations for each
 const unsigned int introDuration = 10;
-const unsigned int song1Duration = 6; //want every 2 notes to  be 113 bpm. beat is the eigth note
-const unsigned int song2Duration = 10;
+const unsigned int song1Duration = 6; //want every 2 notes to  be 133 bpm. beat is the eigth note
+const unsigned int song2Duration = 6; //want every 2 notes to  be ~140 bpm. beat is the eigth note
 
 extern const uint8_t green;
 extern const uint8_t red;
@@ -152,7 +155,7 @@ void shift_leds(){
             curr_note = song1_fortunate_son[current_note];
         }
         else if (play_song2 == 1){
-            curr_note = song_2[current_note];
+            curr_note = song2_mississippi_queen[current_note];
         }
         note_position = 1 + note_position;
 
@@ -438,8 +441,8 @@ int main(void)
                 counter = 0;
                 current_note = 0;
 
-                songLength = sizeof(song_2) / sizeof(song_2[0]);
-                PlaySound(song_2, songLength);
+                songLength = songLength2;
+                PlaySound(song2_mississippi_queen, songLength);
 //                songLength = sizeof(green_colors_song2) / sizeof(green_colors_song2[0]);
 //                PlaySound(green_colors_song2, red_colors_song2, yellow_colors_song2, blue_colors_song2, orange_colors_song2, songDuration_song2, songLength);
             }
