@@ -24,7 +24,7 @@ def read():
 while(1):
     readval = read()
     if(readval == "Play Song 1"):
-        p = vlc.MediaPlayer("Rock_Band_4_Fortunate_Son _Creedence_Clearwater_Revival_Full_Band_HD.mp3.mp3")
+        p = vlc.MediaPlayer("Rock_Band_4_Fortunate_Son_Creedence_Clearwater_Revival_Full_Band_HD.mp3.mp3")
         p.play()
         curr_playing = 1
         sleep(5)

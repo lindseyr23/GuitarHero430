@@ -14,6 +14,11 @@
  * Green Button: 2.0 Red 2.2 Yellow 2.3 Blue 2.4
  * Strummer: 2.5
  */
+/*
+green - 1; red - 2; yellow - 3; blue - 4;
+green/red - 5; green/yellow -6; green/blue - 7;
+red/yellow - 8; red/blue - 9; yellow/blue - 10;
+*/
 const unsigned int song1[] = {//Fortunate Son - Creedence Clearwater Revival
                            0,0,0,0,0,0,0,0, //into
                            0,0,0,0,0,0,0,0,
@@ -255,7 +260,6 @@ void play_song2(int a){// if a is 1 it starts the song, if a is 0 it stops the s
         P1OUT &= ~BIT3; //send to board2 from p1.3
     }
 }
-
 
 void init_buttons() {
     P2DIR &= ~(BIT0 + BIT2 + BIT3 + BIT4 + BIT5); // set to input
