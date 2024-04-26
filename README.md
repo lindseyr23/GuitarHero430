@@ -33,11 +33,11 @@ Upon starting the game, users are greeted with an introduction sequence. They ca
 * 2x TI LaunchPad Kit with MSP430 (MSP-EXP430G2ET)
 * 2x 330 Ω Resistors
 * 1x SunFounder I2C LCD1602 Module
+* 5x Push Buttons _(we used [Tact Tactile Push Button with Cap](https://www.amazon.com/Gikfun-12x12x7-3-Tactile-Momentary-Arduino/dp/B01E38OS7K/ref=sr_1_2?crid=1BE52GTS4MTKX&dib=eyJ2IjoiMSJ9.4zX-flfGXZr8jlDco1mWeZYpxLLG_2EWerjmDDqog71ZnI1OvLfxdG3xoDqHAJZiIj2C_4yvfYs2xRb2uH9opQckYicLsBDibrBWU3C4XSzAQVv-ejoIkZcafnErnJzBfD5Ixq346FvzEPgK0szA49GmiNLE_MU0ial_IizxfgEKaOd04b7iSfch4QCNpIzbc0g_jbnI-Agmikl8tcAXB-vn-F69y-uOJmeLCfMDBow.GyZNhAp_2xBhutbq7NcqYsb267Lm3wUAX68IgxXEko0&dib_tag=se&keywords=gikfun+12x12x7.3+mm+tact+tactile+push+button&qid=1711663032&sprefix=gikfun+12x12x7.3+mm+tact+tactile+push+button%2Caps%2C80&sr=8-2) )_
 * SK9822 LED Strips
 * Solderless Breadboard
 * Jumper wires
 * Enameled wire
-* 5x Push Buttons _[Tact Tactile Push Button with Cap](https://www.amazon.com/Gikfun-12x12x7-3-Tactile-Momentary-Arduino/dp/B01E38OS7K/ref=sr_1_2?crid=1BE52GTS4MTKX&dib=eyJ2IjoiMSJ9.4zX-flfGXZr8jlDco1mWeZYpxLLG_2EWerjmDDqog71ZnI1OvLfxdG3xoDqHAJZiIj2C_4yvfYs2xRb2uH9opQckYicLsBDibrBWU3C4XSzAQVv-ejoIkZcafnErnJzBfD5Ixq346FvzEPgK0szA49GmiNLE_MU0ial_IizxfgEKaOd04b7iSfch4QCNpIzbc0g_jbnI-Agmikl8tcAXB-vn-F69y-uOJmeLCfMDBow.GyZNhAp_2xBhutbq7NcqYsb267Lm3wUAX68IgxXEko0&dib_tag=se&keywords=gikfun+12x12x7.3+mm+tact+tactile+push+button&qid=1711663032&sprefix=gikfun+12x12x7.3+mm+tact+tactile+push+button%2Caps%2C80&sr=8-2)_
 
 ### Required Software Packages
 
