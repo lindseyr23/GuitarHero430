@@ -33,8 +33,8 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 * 2x computers 
 * 2x TI LaunchPad Kit with MSP430 ([MSP-EXP430G2ET](https://www.ti.com/lit/ug/slau144k/slau144k.pdf?ts=1714088213447&ref_url=https%253A%252F%252Fcanvas.fau.edu%252Fcourses%252F150016%252Fmodules%252Fitems%252F4495109))
 * 2x 330 Ω Resistors
-* 1x SunFounder I2C LCD1602 Module
-* 5x Push Buttons _(we used [Tact Tactile Push Button with Cap](https://www.amazon.com/Gikfun-12x12x7-3-Tactile-Momentary-Arduino/dp/B01E38OS7K/ref=sr_1_2?crid=1BE52GTS4MTKX&dib=eyJ2IjoiMSJ9.4zX-flfGXZr8jlDco1mWeZYpxLLG_2EWerjmDDqog71ZnI1OvLfxdG3xoDqHAJZiIj2C_4yvfYs2xRb2uH9opQckYicLsBDibrBWU3C4XSzAQVv-ejoIkZcafnErnJzBfD5Ixq346FvzEPgK0szA49GmiNLE_MU0ial_IizxfgEKaOd04b7iSfch4QCNpIzbc0g_jbnI-Agmikl8tcAXB-vn-F69y-uOJmeLCfMDBow.GyZNhAp_2xBhutbq7NcqYsb267Lm3wUAX68IgxXEko0&dib_tag=se&keywords=gikfun+12x12x7.3+mm+tact+tactile+push+button&qid=1711663032&sprefix=gikfun+12x12x7.3+mm+tact+tactile+push+button%2Caps%2C80&sr=8-2) )_
+* 1x SunFounder I2C LCD1602 Module _(we used [this](https://www.sunfounder.com/products/i2c-lcd1602-module))_
+* 5x Push Buttons _(we used [these](https://www.amazon.com/Gikfun-12x12x7-3-Tactile-Momentary-Arduino/dp/B01E38OS7K/ref=sr_1_2?crid=1BE52GTS4MTKX&dib=eyJ2IjoiMSJ9.4zX-flfGXZr8jlDco1mWeZYpxLLG_2EWerjmDDqog71ZnI1OvLfxdG3xoDqHAJZiIj2C_4yvfYs2xRb2uH9opQckYicLsBDibrBWU3C4XSzAQVv-ejoIkZcafnErnJzBfD5Ixq346FvzEPgK0szA49GmiNLE_MU0ial_IizxfgEKaOd04b7iSfch4QCNpIzbc0g_jbnI-Agmikl8tcAXB-vn-F69y-uOJmeLCfMDBow.GyZNhAp_2xBhutbq7NcqYsb267Lm3wUAX68IgxXEko0&dib_tag=se&keywords=gikfun+12x12x7.3+mm+tact+tactile+push+button&qid=1711663032&sprefix=gikfun+12x12x7.3+mm+tact+tactile+push+button%2Caps%2C80&sr=8-2) )_
 * SK9822 LED Strips
 * Solderless Breadboard
 * Jumper wires
