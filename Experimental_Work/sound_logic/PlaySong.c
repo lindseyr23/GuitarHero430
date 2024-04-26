@@ -3,6 +3,7 @@
 int i;
 char charreturn[] = "\r\n";
 char song1[] = "Play Song 1";
+char win[] = "Win";
 char stop[] = "Stop Song";
 char trigger[] = "start\r\n";
 void ser_output(char *str);
