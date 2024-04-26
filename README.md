@@ -151,8 +151,8 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 
 
 ### 3D-Printed Strummer & LED Game Display Case Setup Guide:
-* [Strumbar STL File](strumbar2b-v3.stl)
-* [End Bracket STL File](endbracket-v26.stl)
+* [Strumbar STL File](./stl_files/strumbar2b-v3.stl)
+* [End Bracket STL File](./stl_files/endbracket-v26.stl)
 * [LED Display Holder STL File](./led_display_holder.stl)
 
 3D Print the Strumbar, 2 of the End Brackets, and  the LED Display Holder from the above STL files. The Strumbar and End Brackets may need to be resized, in which case resize them both with the same ratio, ensuring that it is large enough for a button to fit within the notch but not too large so that the strumbar is unable to reach the button. We found that a width of 3 inches worked well for the Strumbar. The brackets for the strummer can be screwed onto a PCB, or taped down to a breadboard. The notch in the strummer is where the button for strumming input should be set up.
