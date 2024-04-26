@@ -84,7 +84,7 @@ pip install -r requirements.txt
   - [receive_audio.py](./board2/receive_audio.py): Reads in data from the COM port to trigger the MP3 files playing and stopping
   - [PlaySong.c](./board2/PlaySong.c): Sends out the information to the COM port using UART communication to trigger the python file
   - [PlaySong.h](./board2/PlaySong.h): Header file for PlaySong
-  - [Rock_Band_4_Fortunate_Son _Creedence_Clearwater_Revival_Full_Band_HD.mp3](./board2/Rock_Band_4_Fortunate_Son _Creedence_Clearwater_Revival_Full_Band_HD.mp3): Song 1
+  - [Rock_Band_4_Fortunate_Son_Creedence_Clearwater_Revival_Full_Band_HD.mp3](./board2/Rock_Band_4_Fortunate_Son_Creedence_Clearwater_Revival_Full_Band_HD.mp3): Song 1
   - [](): Song 2
   - [win_sound_effect.mp3](./board2/win_sound_effect.mp3): Winning sound effect
   - [loss_sound_effect.mp3](./board2/loss_sound_effect.mp3): Losing sound effect
