@@ -162,8 +162,12 @@ Secure the 5x7 LED display within the 3D-printed holder, with the jumper wires g
 
 ### Schematic
 ![Overall Schematic](./images/Schematic_guitarhero.png)
-![Board 1](./images/schematic_board1_b.jpg)
-![Board 2](./images/schematic_board2_b.jpg)
+
+<div style="text-align:center">
+  <img src="./images/schematic_board1_b.jpg" alt="Board 1 Schematic" width="50%"/>
+
+   <img src="./images/schematic_board2_b.jpg" alt="Board 2 Schematic" width="50%"/>
+</div>
 
 ---
 
