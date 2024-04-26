@@ -161,13 +161,27 @@ Secure the 5x7 LED display within the 3D-printed holder, with the jumper wires g
 2. 
 
 ### Schematic
-![Schematic](./images/Schematic_guitarhero.png)
+
+#### Overall Schematic:
+![Overall Schematic](./images/Schematic_guitarhero.png)
+
+#### Board 1:
+![Board 1](./images/schematic_board1_b.jpg)
+
+#### Board 2:
+![Board 2](./images/schematic_board2_b.jpg)
+
+
 ---
 
 ## Installation
 
 1. **Set up the Hardware:**
-   - Follow the included [schematic](./images/Schematic_guitarhero.png) to set up the circuit boards for both LaunchPads.
+   - Follow the schematics to set up the circuit boards for both LaunchPads.
+        -  [Overall Schematic](./images/Schematic_guitarhero.png)
+        -  [Board 1 schematic](./images/schematic_board1_b.jpg)
+        -  [Board 2 schematic](./images/schematic_board2_b.jpg)
+    
 
 2. **Install Code Composer Studio:**
     - Download and install [Code Composer Studio](https://www.ti.com/tool/download/CCSTUDIO/12.7.0) on your computer.
