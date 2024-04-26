@@ -7,7 +7,6 @@
  * main.c
  */
 
-//#define Q 10
 #define buffer 8
 
 extern unsigned int song1_fortunate_son[];
@@ -145,7 +144,7 @@ void shift_leds(){
         state = Win;
     }
     else if ((current_note < songLength-1) & ready_for_next){
-        //move to new not
+        //move to new note
         if(state == Intro){
             curr_note = color_intro[current_note];
         }
