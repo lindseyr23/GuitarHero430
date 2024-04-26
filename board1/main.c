@@ -240,29 +240,28 @@ void check_input(){
 
 void play_song1(int a){ // if a is 1 it starts the song, if a is 0 it stops the song
     if(a==1){
-        P2OUT |= BIT1; // Add code here to assign the colorset we are using
+        P2OUT |= BIT1; //send to board2 from p2.1
     }
     else{
-        P2OUT &= ~BIT1;
+        P2OUT &= ~BIT1; //send to board2 from p2.1 
     }
 }
 
-void play_song2(int a){
+void play_song2(int a){// if a is 1 it starts the song, if a is 0 it stops the song
     if(a==1){
-        P1OUT |= BIT3; // Add code here to assign the colorset we are using
+        P1OUT |= BIT3; //send to board2 from p1.3
     }
     else{
-        P1OUT &= ~BIT3;
+        P1OUT &= ~BIT3; //send to board2 from p1.3
     }
 }
+
 
 void init_buttons() {
     P2DIR &= ~(BIT0 + BIT2 + BIT3 + BIT4 + BIT5); // set to input
     P2REN |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // enable pullup/down resistors
-
     P2OUT |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // set resistors to pull up
 
-    /* Uncomment the following code if you want to use interrupts to detect button presses */
     P2IES |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // listen for high to low transitions
     P2IFG &=  ~(BIT0 + BIT2 + BIT3 + BIT4 + BIT5); // clear any pending interrupts
     P2IE |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // enable interrupts for these pins
@@ -278,16 +277,6 @@ void init_board_communication() { // 1.1 (accept_input) input, 2.1 (play_song1) 
     //initialize playsound to 0 to not play anything
     P2OUT &= ~BIT1;
     P1OUT &= ~BIT3;
-
-//    P1IES &= ~BIT1; //listen for low to high transition to increment the current note
-//    P1IE |= BIT1; // enable interrupts for these pins
-//    P1REN |= BIT1;
-//    P1OUT |= BIT1; //pullup resistor for button DEBUGGING
-
-//    P1REN |= BIT1; // Enable pull-up/pull-down resistor for P1.1
-//    P1OUT &= ~BIT1; // Set P1.1 output to low
-
-//    P1IFG &=  ~BIT1; // clear any pending interrupts
 }
 //global variables
 void set_temperature(unsigned int led1, unsigned int led2, unsigned int led3, unsigned int led4, unsigned int led5);
@@ -548,12 +537,6 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
            }
            P2IFG &= ~BIT5; // clear interrupt flag for button
        }
-//       // accept_input logic
-//       if(P2IFG & BIT7)//checks port 2.7
-//       {
-//           current_note++;
-//           P2IFG &= ~BIT7; // clear interrupt flag
-//       }
 
     __bic_SR_register_on_exit(LPM3_bits); // exit LPM3 when returning to program (clear LPM3 bits)
 }// end of port 2 ISR
@@ -569,5 +552,5 @@ __interrupt void Timer_A(void)
             current_note++; //move to the next note
             duration_counter = 0;
         }
-    }//end of game state
+    }
 }//end of A0 ISR
