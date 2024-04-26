@@ -120,7 +120,6 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 5. **Secure Connections:**
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
-
 #### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
@@ -128,6 +127,7 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
 <div style="text-align:center">
     <img src="./images/user_led_display.jpg" alt="LED User Display" width="25%">
 </div>
+
 #### Components Needed:
 - SK9822 LED strips
 - Jumper wires (male-to-female)
@@ -146,9 +146,6 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
    - (if not already present) Solder female connectors to the other end of the jumper wires.
 4. **Secure Connections:**
    - Use heat shrink tubing to insulate and secure the soldered connections.
-#### Usage:
-- Connect the female connectors to the corresponding male connectors on your control board or microcontroller.
-
 #### Notes:
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
