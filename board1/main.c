@@ -109,30 +109,28 @@ const unsigned int songLength1 = sizeof(song1) / sizeof(song1[0]);
 unsigned int song2[] = {//Mississippi Queen - Mountain
                         0,0,0,0,0,0,0,0, //into
                         0,0,0,0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,
-                        0,0,0,0,0,0,0,0,
                         0,0,0,0,0,1,2,4,
                         2,2,2,0,0,0,0,0,
                         0,0,0,0,0,1,2,4,
                         2,2,2,0,0,0,0,0,
-                        3,4,3,2,1,1,3,1,    //0:15
+                        3,4,3,2,1,1,3,1    //0:15
                         0,1,2,3,4,4,2,2,
-                        1,2,3,4,1,1,2,3,
-                        3,4,3,2,1,1,2,3,
-                        5,5,0,0,0,0,0,0, //0:22
-                        0,1,4,1,2,2,3,3, //0:24
-                        5,0,6,0,6,6,6,6,
-                        0,1,4,1,2,2,2,2,
-                        5,0,6,0,6,6,6,6,            
-                        0,1,4,1,2,2,3,3,
-                        5,0,6,0,6,6,6,6,
-                        0,1,4,1,2,2,2,2,
-                        8,0,9,9,9,9,9,9,//0:36
-                        0,2,3,2,3,3,4,4,
-                        8,0,9,9,9,9,9,9,
-                        0,0,0,2,3,2,4,4,
-                        5,0,6,0,6,6,6,6, //0:42
-                        0,1,4,1,2,2,2,2
+                        1,2,3,4,1,1,2,3
+//                        3,4,3,2,1,1,2,3,
+//                        5,5,0,0,0,0,0,0, //0:22
+//                        0,1,4,1,2,2,3,3, //0:24
+//                        5,0,6,0,6,6,6,6,
+//                        0,1,4,1,2,2,2,2,
+//                        5,0,6,0,6,6,6,6,
+//                        0,1,4,1,2,2,3,3,
+//                        5,0,6,0,6,6,6,6,
+//                        0,1,4,1,2,2,2,2,
+//                        8,0,9,9,9,9,9,9,//0:36
+//                        0,2,3,2,3,3,4,4,
+//                        8,0,9,9,9,9,9,9,
+//                        0,0,0,2,3,2,4,4,
+//                        5,0,6,0,6,6,6,6, //0:42
+//                        0,1,4,1,2,2,2,2
 
                                         //0:50 changes slightly
 };
@@ -377,6 +375,7 @@ int main()
                 state = Game;
                 current_note = 0;
                 duration_counter = 0;
+                missed_note = 0;
             }
             else if (user_LED_4)// if blue is pressed
             {
@@ -385,6 +384,7 @@ int main()
                 state = Game;
                 current_note = 0;
                 duration_counter = 0;
+                missed_note = 0;
             }
         }//end of intro
         else if (state == Game)
@@ -413,6 +413,7 @@ int main()
                     if (missed_note == 40)
                     {
                         state = Lost;
+                        missed_note = 0;
                     }
 
                     // Format score into a string for display on LCD
@@ -450,6 +451,21 @@ int main()
                         current_note = 0;
                         play_song1(0); //signals end of win
                         play_song2(0); //signals end of win
+
+                        // Clear the LCD display
+                        LcdSetPosition(1,1); //row, rect
+                        LcdWriteString("                    ");//20 character space
+                        LcdSetPosition(2,1); //row, rect
+                        LcdWriteString("                    ");//20 character space
+
+                        // Display introductory text on LCD
+                        LcdSetPosition(2,1); //row, rect  start
+                        LcdWriteString(" Press G or B  ");
+
+                        LcdSetPosition(1,1);
+                        LcdWriteString(" GuitarHero 430  ");
+
+
                         state = Intro;
                     }
                 }//end of loss state
