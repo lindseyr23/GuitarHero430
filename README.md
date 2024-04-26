@@ -10,8 +10,7 @@
    - [Schematic](#schematic)
    - [LED Game Display Setup Guide](#led-game-display-setup-guide)
    - [LED User Display Setup Guide](#led-user-display-setup-guide)
-   - [3D-printed Strummer](#3D-Printed-Strummer-Setup-Guide)
-   - [3d-printed LED game display](#3d-Printed-LED-game-display-Setup-Guide)
+   - [3D-Printed Strummer & LED Game Display Case Setup Guide](#3D-Printed-Strummer-&-LED-Game-Display-Case-Setup-Guide)
 6. [Installation](#installation)
 7. [References](#references)
 
@@ -19,6 +18,9 @@
 This project aims to recreate the experience of playing the iconic Guitar Hero using MSP430 microcontrollers. Inspired by the popular rhythm-based video game, this project combines hardware interfacing, LED visualization, audio processing, and gameplay logic to create an experience playing along with your favorite songs.
 
 Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates the Guitar Hero gameplay. One LaunchPad serves as the game controller, managing gameplay logic and capturing user input, while providing real-time feedback through an LED display. The other LaunchPad controls LED visualizations and audio output for the song.
+
+Upon starting the game, users are greeted with an introduction sequence. They can select song 1 by pressing the green button or song 2 by pressing the blue button. During gameplay, missing too many notes results in a loss sequence. However, achieving a streak of a certain number of notes resets the missed notes counter, akin to the rock meter in Guitar Hero. Successfully completing the entire song triggers a win sequence.
+
 
 ### Team Members
 - Natalia Mendiola | nm58@rice.edu
@@ -35,6 +37,7 @@ Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates 
 * Solderless Breadboard
 * Jumper wires
 * Enameled wire
+* 5x Push Buttons _[Tact Tactile Push Button with Cap](https://www.amazon.com/Gikfun-12x12x7-3-Tactile-Momentary-Arduino/dp/B01E38OS7K/ref=sr_1_2?crid=1BE52GTS4MTKX&dib=eyJ2IjoiMSJ9.4zX-flfGXZr8jlDco1mWeZYpxLLG_2EWerjmDDqog71ZnI1OvLfxdG3xoDqHAJZiIj2C_4yvfYs2xRb2uH9opQckYicLsBDibrBWU3C4XSzAQVv-ejoIkZcafnErnJzBfD5Ixq346FvzEPgK0szA49GmiNLE_MU0ial_IizxfgEKaOd04b7iSfch4QCNpIzbc0g_jbnI-Agmikl8tcAXB-vn-F69y-uOJmeLCfMDBow.GyZNhAp_2xBhutbq7NcqYsb267Lm3wUAX68IgxXEko0&dib_tag=se&keywords=gikfun+12x12x7.3+mm+tact+tactile+push+button&qid=1711663032&sprefix=gikfun+12x12x7.3+mm+tact+tactile+push+button%2Caps%2C80&sr=8-2)_
 
 ### Required Software Packages
 
@@ -45,7 +48,6 @@ Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates 
   - This project is compatible with Python 3.11.x. Make sure you have Python 3.11.x installed on your system before installing the required packages.
 
   To install the required Python packages, run the following command in your terminal or command prompt:
-
 
 ```python
 pip install -r requirements.txt
@@ -79,11 +81,13 @@ pip install -r requirements.txt
   - [rgb_interface.h](./board2/rgb_interface.h): Header file for RGB interface
 
 * **Audio:**
-  - [receive_audio.py](./board2/receive_audio.py): reads in data from the COM port to trigger the MP3 files playing and stopping
+  - [receive_audio.py](./board2/receive_audio.py): Reads in data from the COM port to trigger the MP3 files playing and stopping
   - [PlaySong.c](./board2/PlaySong.c): Sends out the information to the COM port using UART communication to trigger the python file
   - [PlaySong.h](./board2/PlaySong.h): Header file for PlaySong
-  - [Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3](./board2/Rock Band 4  Fortunate Son  Creedence Clearwater Revival  Full Band HD.mp3): Song 1
+  - [Rock_Band_4_Fortunate_Son _Creedence_Clearwater_Revival_Full_Band_HD.mp3](./board2/Rock_Band_4_Fortunate_Son _Creedence_Clearwater_Revival_Full_Band_HD.mp3): Song 1
   - [](): Song 2
+  - [win_sound_effect.mp3](./board2/win_sound_effect.mp3): Winning sound effect
+  - [loss_sound_effect.mp3](./board2/loss_sound_effect.mp3): Losing sound effect
 
 ---
 
@@ -130,6 +134,9 @@ pip install -r requirements.txt
    - Use electrical tape to secure the enameled wire connections behind the LED-facing side of the LED strips, forming a 5x7 LED rectangular shape.
    - Use heat shrink tubing to insulate and secure the jumper wire soldered connections.
 
+#### Notes:
+- Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
+
 ### LED User Display Setup Guide
 <div style="text-align:center">
     <img src="./images/user_led_display.jpg" alt="LED User Display" width="25%">
@@ -164,11 +171,10 @@ pip install -r requirements.txt
 - Handle the soldering iron and heat shrink tubing carefully to prevent injuries or damage to components.
 
 
-### 3D-Printed Strummer Setup Guide
-[Strumbar STL File](strumbar2b-v3.stl)
-[End Bracket STL File](endbracket-v26.stl)
-### 3d-Printed LED game display Setup Guide
-[LED Display Holder STL File](./led_display_holder.stl)
+### 3D-Printed Strummer & LED Game Display Case Setup Guide
+* [Strumbar STL File](strumbar2b-v3.stl)
+* [End Bracket STL File](endbracket-v26.stl)
+* [LED Display Holder STL File](./led_display_holder.stl)
 
 3D Print the Strumbar, 2 of the End Brackets, and  the LED Display Holder from the above STL files. The Strumbar and End Brackets may need to be resized, in which case resize them both with the same ratio, ensuring that it is large enough for a button to fit within the notch but not too large so that the strumbar is unable to reach the button. We found that a width of 3 inches worked well for the Strumbar. The brackets for the strummer can be screwed onto a PCB, or taped down to a breadboard. The notch in the strummer is where the button for strumming input should be set up.
 
