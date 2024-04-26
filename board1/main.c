@@ -20,9 +20,9 @@ green/red - 5; green/yellow -6; green/blue - 7;
 red/yellow - 8; red/blue - 9; yellow/blue - 10;
 */
 const unsigned int song1[] = {//Fortunate Son - Creedence Clearwater Revival
-                           0,0,0,0,0,0,0,0, //into
+                           0,0,0,0,0,0,0,0, //intro
                            0,0,0,0,0,0,0,0,
-                           0,0,0,0,0,0,0,0, //into
+                           0,0,0,0,0,0,0,0, //
                            0,0,0,0,0,0,0,0,
                             3,4,4,4,4,4,4,4, //0:07
                             2,3,3,3,3,3,3,3,
@@ -106,7 +106,36 @@ const unsigned int song1[] = {//Fortunate Son - Creedence Clearwater Revival
 
 const unsigned int songLength1 = sizeof(song1) / sizeof(song1[0]);
 
-unsigned int song2[] = {0,1,0,1,0,1,0,1,0};
+unsigned int song2[] = {//Mississippi Queen - Mountain
+                        0,0,0,0,0,0,0,0, //into
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,0,0,0,
+                        0,0,0,0,0,1,2,4,
+                        2,2,2,0,0,0,0,0,
+                        0,0,0,0,0,1,2,4,
+                        2,2,2,0,0,0,0,0,
+                        3,4,3,2,1,1,3,1,    //0:15
+                        0,1,2,3,4,4,2,2,
+                        1,2,3,4,1,1,2,3,
+                        3,4,3,2,1,1,2,3,
+                        5,5,0,0,0,0,0,0, //0:22
+                        0,1,4,1,2,2,3,3, //0:24
+                        5,0,6,0,6,6,6,6,
+                        0,1,4,1,2,2,2,2,
+                        5,0,6,0,6,6,6,6,            
+                        0,1,4,1,2,2,3,3,
+                        5,0,6,0,6,6,6,6,
+                        0,1,4,1,2,2,2,2,
+                        8,0,9,9,9,9,9,9,//0:36
+                        0,2,3,2,3,3,4,4,
+                        8,0,9,9,9,9,9,9,
+                        0,0,0,2,3,2,4,4,
+                        5,0,6,0,6,6,6,6, //0:42
+                        0,1,4,1,2,2,2,2
+
+                                        //0:50 changes slightly
+};
 
 const unsigned int songLength2 = sizeof(song2) / sizeof(song2[0]);
 
