@@ -9,13 +9,13 @@
 
 #define buffer 8
 
-extern unsigned int song1_fortunate_son[];
-extern const unsigned int songLength1;//   gets calculated later
+extern unsigned int song1_fortunate_son[]; // The array representing Fortunate Son
+extern const unsigned int songLength1;//  The length of the array
 
-unsigned int color_intro[] = {0,11,0,11,0,11,0,11,0};
+unsigned int color_intro[] = {0,11,0,11,0,11,0,11,0}; // The array representing the introduction display
 
-extern unsigned int song2_mississippi_queen[];
-extern const unsigned int songLength2;//   gets calculated later
+extern unsigned int song2_mississippi_queen[]; // The array representing Mississippi Queen
+extern const unsigned int songLength2;//   The length of the array
 
 
 //note durations for each
@@ -23,17 +23,14 @@ const unsigned int introDuration = 10;
 const unsigned int song1Duration = 6; //want every 2 notes to  be 133 bpm. beat is the eigth note
 const unsigned int song2Duration = 6; //want every 2 notes to  be ~140 bpm. beat is the eigth note
 
+// The way that the colors are represented in the screen LED Display
 extern const uint8_t green;
 extern const uint8_t red;
 extern const uint8_t yellow;
 extern const uint8_t blue;
 extern const uint8_t orange;
+// The individual LEDs in the display are all defined here
 //----------------------
-volatile unsigned int user_LED_1;
-volatile unsigned int user_LED_2;
-volatile unsigned int user_LED_3;
-volatile unsigned int user_LED_4;
-//---------
 volatile unsigned int green_next;
 volatile unsigned int g_led1;
 volatile unsigned int g_led2;
@@ -69,7 +66,7 @@ volatile unsigned int b_led4;
 volatile unsigned int b_led5;
 volatile unsigned int b_led6;
 volatile unsigned int b_led7;
-//--------- no orange ..can add if you have button
+//---------
 volatile unsigned int orange_next;
 volatile unsigned int o_led1;
 volatile unsigned int o_led2;
@@ -87,27 +84,30 @@ volatile unsigned int new_b;
 volatile unsigned int new_o;
 volatile unsigned int curr_note;
 
-unsigned int button_press_detected;
-unsigned int strummer;
-volatile unsigned int counter = 0;
+
+volatile unsigned int counter = 0; // Keeps track of Timer A so we can implement note durations
 
 
-unsigned int current_note;
-unsigned int songLength;
+unsigned int current_note; // Keeps track of current note
+unsigned int songLength; // Keeps track of the song Length
 //keeps track of notes in array
-unsigned int *note_position;
+unsigned int *note_position; // Pointer to the note position
 
 enum state_enum {Intro, Game, Lost, Win} state; // enum to describe state of system
 
 int next = 0;
 extern int ready_for_next; //flag to be ready for next
 int note_change; // flag that note change occured
-int shift_leds_flag;
-int play_song1;
-int play_song2;
-int stop_song;
+int shift_leds_flag; // flag that LEDS should be shifted
+int play_song1; // Keeps track of if song1 is playing
+int play_song2; // Keeps track of if song2 is playing
+int stop_song; // Keeps track of if we receive indication that the song should stop
+
 void next_note(int green_next, int red_next, int yellow_next, int blue_next, int orange_next)
 {
+    /*
+     * Sends the next note to the LED array
+     */
     rgb_send_start();
     set_green(g_led1, g_led2, g_led3, g_led4, g_led5, g_led6, g_led7);
     set_red(r_led1, r_led2, r_led3, r_led4, r_led5, r_led6, r_led7);
@@ -116,8 +116,9 @@ void next_note(int green_next, int red_next, int yellow_next, int blue_next, int
     set_orange(o_led1, o_led2, o_led3, o_led4, o_led5, o_led6, o_led7);
     rgb_send_end();
 }
-//----------------------
+//----------------------.
 
+// Initialization Functions
 void init_timerA(void)
 {
     TA0CTL |= TACLR;
@@ -136,13 +137,48 @@ void init_buttons() {
     P2IE |= BIT0 + BIT2 + BIT3 + BIT4 + BIT5; // enable interrupts for these pins
 }
 
+void init_board_communication() { // 2.1 (play_song1) output, 1.3 (play_song2) output
+
+    // Set up the input pins
+    P2DIR &= ~BIT1; // Set pin 2.1 to input to receive play_song1
+    P1DIR &= ~BIT3; // Set pin 1.3 to input to receive play_song2
+
+
+    // listen for low to high transition to start the songs
+    P2IES &= ~BIT1;
+    P1IES &= ~BIT3;
+
+
+
+    // enable interrupts for these pins
+    P2IE |= BIT1;
+    P1IE |= BIT3;
+
+    P2REN |= BIT1;
+    P2OUT |= BIT1;
+
+
+    // make sure it starts at low
+    P2IN &= ~BIT1;
+    P1IN &= ~BIT3;
+
+    // clear any pending interrupts
+    P2IFG &= ~BIT1;
+    P1IFG &= ~BIT3;
+
+}
+
 void shift_leds(){
+    /*
+     * Shifts the LEDs down one row
+     */
     if (state == Game & current_note >= songLength-1){
+        /*
+         * If the song ends, the player has won! Changes to that state
+         */
         StopSong();
         play_song1 = 0;
         play_song2 = 0;
-//        songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-//        PlaySound(color_intro, songLength);
         WinEffect();
         state = Win;
     }
@@ -159,7 +195,7 @@ void shift_leds(){
         }
         note_position = 1 + note_position;
 
-        switch(curr_note) { //checks if note is correct
+        switch(curr_note) { // Based on which note we are up to, defines the values for the new LEDs
             case 0: //off
                 new_g = 0;
                 new_r = 0;
@@ -245,7 +281,7 @@ void shift_leds(){
                 new_o = 1;
                 break;
         }//end of case
-
+        // Shifts all the LEDs downwards
         g_led1 = g_led2;
         g_led2 = g_led3;
         g_led3 = g_led4;
@@ -253,7 +289,6 @@ void shift_leds(){
         g_led5 = g_led6;
         g_led6 = g_led7;
         g_led7 = new_g;
-//        g_led7 = *g_note_position
 
         r_led1 = r_led2;
         r_led2 = r_led3;
@@ -262,7 +297,6 @@ void shift_leds(){
         r_led5 = r_led6;
         r_led6 = r_led7;
         r_led7 = new_r;
-//        r_led7 = *r_note_position
 
         y_led1 = y_led2;
         y_led2 = y_led3;
@@ -271,7 +305,6 @@ void shift_leds(){
         y_led5 = y_led6;
         y_led6 = y_led7;
         y_led7 = new_y;
-//        y_led7 = *y_note_position;
 
         b_led1 = b_led2;
         b_led2 = b_led3;
@@ -289,100 +322,62 @@ void shift_leds(){
         o_led5 = o_led6;
         o_led6 = o_led7;
         o_led7 = new_o;
-//        o_led7 = *o_note_position;
 
         current_note++; //move to next note of song
     } else{
-        // COULD HAVE END SONG ANIMATION? instead of looping
-        //start at beginning of song
-        note_position = note_position - current_note;
-//            g_note_position = g_note_position - current_note;
-//            r_note_position = r_note_position - current_note;
-//            y_note_position = y_note_position - current_note;
-//            b_note_position = b_note_position - current_note;
-//            o_note_position = o_note_position - current_note;
-
-//            duration_position = duration_position - current_note;
-            current_note = 0; // Reset current_note to start at the first note
+        /*
+         * The case where we have reached the end of a LED series but are not in the Game state (we want it to repeat)
+         */
+        note_position = note_position - current_note; // Reset note_position to the first note
+        current_note = 0; // Reset current_note to start at the first note
 
 
     }
 
 }
 
-void init_board_communication() { // 2.7 (accept_input) input, 2.1 (play_song1) output, 1.3 (play_song2) output
-
-    // Set up the input pins
-    P2DIR &= ~BIT1; // Set pin 2.1 to input to receive play_song1
-    P1DIR &= ~BIT3; // Set pin 1.3 to input to receive play_song2
-
-
-    // listen for low to high transition to start the songs
-    P2IES &= ~BIT1;
-    P1IES &= ~BIT3;
-
-
-
-    // enable interrupts for these pins
-    P2IE |= BIT1;
-    P1IE |= BIT3;
-
-    P2REN |= BIT1;
-    P2OUT |= BIT1;
-
-
-    // make sure it starts at low
-    P2IN &= ~BIT1;
-    P1IN &= ~BIT3;
-
-    // clear any pending interrupts
-    P2IFG &= ~BIT1;
-    P1IFG &= ~BIT3;
-
-    // Set up the output pin
-//    P2SEL &= ~BIT7; // set pin 2.7 to a GPIO pin
-//    P2DIR |= BIT7; // Set pin 2.7 to output to communicate accept_input
-//    P2OUT &= ~BIT7; // set pin2.7 to 0
-//    P2IFG &= ~BIT7;
-
-//    P1SEL &= ~BIT1;
-//    P1SEL2 &- ~BIT1;
-
-    P2DIR |= BIT5;
-    P2OUT &= ~BIT5;
-    P2IE &= ~BIT5;
-//    P2IFG &= ~BIT5;
-//    P1REN |= BIT1;
-
-}
-
 int main(void)
 {
+    // Initialize these values to 0
     play_song1 = 0;
     play_song2 = 0;
     stop_song = 0;
+    shift_leds_flag = 0;
+
+
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
+    // Call the initialization functions
     rgb_init_spi();
     init_buttons();
-
     init_board_communication();
     init_timerA();
+    MusicInit();
 
+    // Set the state to introduction
     state = Intro;
-    shift_leds_flag = 0;
+
 
     _enable_interrupts();
 
+    // Set the LEDs to the Intro sequence
     songLength = sizeof(color_intro) / sizeof(color_intro[0]);
     PlaySound(color_intro, songLength);
 
-    MusicInit();
-
     while (1){
         if (state == Win){
+            /*
+             * Win state
+             *
+             * Display the Win Screen (all green LEDs)
+             *
+             * if we receive the stop_song signal move into the intro sequence
+             */
             win_screen();
             if (stop_song == 1){//stop song sent by board_1
+                    /*
+                     * Stop any audio that may be playing, display the Intro LEDs, and change the state
+                     */
                     StopSong();
                     play_song1 = 0;
                     play_song2 = 0;
@@ -393,18 +388,35 @@ int main(void)
                 }
         }
         if (state == Lost){
+            /*
+             * Lost state
+             *
+             * Display the Lost Screen (all red LEDs)
+             *
+             * if we receive the stop_song signal move into the intro sequence
+             */
             loss_screen();
             if (stop_song == 1){//stop song sent by board_1
-                    StopSong();
-                    play_song1 = 0;
-                    play_song2 = 0;
-                    songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
-                    PlaySound(color_intro, songLength);
-                    state = Intro;
-                    stop_song = 0;
-                }
+                /*
+                 * Stop any audio that may be playing, display the Intro LEDs, and change the state
+                 */
+                StopSong();
+                play_song1 = 0;
+                play_song2 = 0;
+                songLength = sizeof((color_intro)) / sizeof((color_intro)[0]);
+                PlaySound(color_intro, songLength);
+                state = Intro;
+                stop_song = 0;
+            }
         }
         if (state == Game){
+            /*
+             * Game State
+             *
+             * If the stop_song signal is received, trigger the Lost State and stop the music
+             *
+             * Otherwise keep cycling through the notes on the LED display
+             */
             if (stop_song == 1){
                 StopSong();
                 play_song1 = 0;
@@ -420,6 +432,14 @@ int main(void)
             }
         }
         if (state == Intro){
+            /*
+             * Intro State
+             *
+             * If the signal to play_song1 or play_song2 is received, switch to the Game State,
+             * play the respective audio, and display the respective LED arrangement
+             *
+             * Otherwise keep cycling through the intro display
+             */
             next_note(green_next, red_next, yellow_next, blue_next, orange_next);
             if(shift_leds_flag){
                 shift_leds();
@@ -433,7 +453,6 @@ int main(void)
 
                 songLength = songLength1;
                 PlaySound(song1_fortunate_son, songLength);
-//                PlaySound(green_colors_song1, red_colors_song1, yellow_colors_song1, blue_colors_song1, orange_colors_song1, songDuration_song1, songLength);
             }
             else if (play_song2 == 1){
                 state = Game;
@@ -443,8 +462,6 @@ int main(void)
 
                 songLength = songLength2;
                 PlaySound(song2_mississippi_queen, songLength);
-//                songLength = sizeof(green_colors_song2) / sizeof(green_colors_song2[0]);
-//                PlaySound(green_colors_song2, red_colors_song2, yellow_colors_song2, blue_colors_song2, orange_colors_song2, songDuration_song2, songLength);
             }
         }//end of intro state
     }//end of while
@@ -455,30 +472,25 @@ int main(void)
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A(void)
 {
+    /*
+     * Uses Timer A Interrupts to control the shift_leds_flag which tells the display when to shift the LEDs downwards
+     * based on the duration of each note of the song
+     */
     if (state == Game | state == Intro)
     {
-        if (counter == 3){
-            P2OUT &= ~BIT5;
-//            P2OUT &= ~BIT7; // stop message increment_counter
-        }
         counter ++;
         int curr_durr;
         if(play_song1){
             curr_durr = song1Duration;
-//            curr_durr = songDuration_song1[current_note];
         }
         else if (play_song2){
             curr_durr = song2Duration;
-//            curr_durr = songDuration_song2[current_note];
         }
         else{
             curr_durr = introDuration;
-//            curr_durr = songDuration_intro[current_note];
         }
         if (counter > curr_durr){
             shift_leds_flag = 1;
-            P2OUT |= BIT5;
-//            P2OUT |= BIT7; // send out message increment_counter
             counter = 0;
         }
     }//end of game state
@@ -494,6 +506,10 @@ void __attribute__ ((interrupt(PORT2_VECTOR))) button (void)
 #error Compiler not supported!
 #endif
 {
+    /*
+     * Interrupts for playsong1. If the input goes from 1 to 0 the audio should stop, and if it goes from 0 to 1 the audio should start
+     * The flags are set for each of those functionalities here
+     */
         if(P2IFG & BIT1)//checks port 2.1 (playsong1)
         {
             if(P2IES & BIT1) { // falling edge detected - turning sound off
@@ -519,6 +535,10 @@ void __attribute__ ((interrupt(PORT1_VECTOR))) button (void)
 #error Compiler not supported!
 #endif
 {
+    /*
+     * Interrupts for playsong2. If the input goes from 1 to 0 the audio should stop, and if it goes from 0 to 1 the audio should start
+     * The flags are set for each of those functionalities here
+     */
         if(P1IFG & BIT3)//checks port 1.3 (play song2)
         {
             if(P1IES & BIT3){
