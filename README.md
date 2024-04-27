@@ -8,7 +8,7 @@ Using two TI LaunchPad Kits with MSP430 (MSP-EXP430G2ET), the project simulates 
 
 Upon starting the game, users are greeted with an introduction sequence. They can select song 1 by pressing the green button or song 2 by pressing the blue button. During gameplay, missing too many notes results in a loss sequence. However, achieving a streak of a certain number of notes resets the missed notes counter, akin to the rock meter in Guitar Hero. Successfully completing the entire song triggers a win sequence.
 
-Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3gj8zhsrb72t33z2)!
+Check out a demo of the project [here](https://youtu.be/caU7hopNlVo)!
 
 ## Table of Contents
 1. [Project Description](#project-description)
