@@ -81,7 +81,7 @@ Check out a demo of the project [here](https://rice.box.com/s/vop6h97dtiqrtkvd3g
   - [PlaySong.c](./board2/PlaySong.c): Sends out the information to the COM port using UART communication to trigger the python file
   - [PlaySong.h](./board2/PlaySong.h): Header file for PlaySong
   - [Rock_Band_4_Fortunate_Son_Creedence_Clearwater_Revival_Full_Band_HD.mp3](./board2/Rock_Band_4_Fortunate_Son_Creedence_Clearwater_Revival_Full_Band_HD.mp3): Song 1
-  - [](): Song 2
+  - [Guitar_Hero_3_Mississippi_Queen.mp3](./board2/Guitar_Hero_3_Mississippi_Queen): Song 2
   - [win_sound_effect.mp3](./board2/win_sound_effect.mp3): Winning sound effect
   - [loss_sound_effect.mp3](./board2/loss_sound_effect.mp3): Losing sound effect
 
